@@ -1,1 +1,1551 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Programa de Formación de Facilitadores Digitales</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --background: #f5f6f8;
+      --surface: #ffffff;
+      --surface-soft: #fafbfc;
+      --text: #17191d;
+      --muted: #656b76;
+      --faint: #9298a3;
+      --border: #e3e6eb;
+      --border-strong: #cfd4dc;
+
+      --primary: #314f9b;
+      --primary-soft: #edf1fc;
+      --primary-border: #cdd8f6;
+
+      --purple: #584398;
+      --purple-soft: #f0edfb;
+      --purple-border: #d6cef3;
+
+      --green: #276444;
+      --green-soft: #eaf5ef;
+      --green-border: #c5e2d2;
+
+      --amber: #8a5a16;
+      --amber-soft: #fdf4e4;
+      --amber-border: #eed29f;
+
+      --coral: #93452f;
+      --coral-soft: #faeee9;
+      --coral-border: #edc6b9;
+
+      --cyan: #216477;
+      --cyan-soft: #e9f5f7;
+      --cyan-border: #c3e0e6;
+
+      --radius-sm: 12px;
+      --radius-md: 18px;
+      --radius-lg: 26px;
+
+      --shadow:
+        0 1px 2px rgba(22, 27, 35, 0.03),
+        0 16px 40px rgba(22, 27, 35, 0.05);
+
+      --max-width: 1160px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      padding: 24px 18px 56px;
+      background:
+        radial-gradient(circle at top right, rgba(49, 79, 155, 0.06), transparent 28rem),
+        var(--background);
+      color: var(--text);
+      font-family: "DM Sans", sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      z-index: 100;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: var(--text);
+      color: #ffffff;
+      text-decoration: none;
+      transform: translateY(-160%);
+      transition: transform 0.2s ease;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    .page {
+      width: min(100%, var(--max-width));
+      margin: 0 auto;
+    }
+
+    .eyebrow,
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .eyebrow {
+      padding: 8px 12px;
+      background: var(--primary-soft);
+      border-color: var(--primary-border);
+      color: var(--primary);
+    }
+
+    .tag {
+      padding: 6px 9px;
+    }
+
+    .tag.primary {
+      background: var(--primary-soft);
+      border-color: var(--primary-border);
+      color: var(--primary);
+    }
+
+    .tag.purple {
+      background: var(--purple-soft);
+      border-color: var(--purple-border);
+      color: var(--purple);
+    }
+
+    .tag.green {
+      background: var(--green-soft);
+      border-color: var(--green-border);
+      color: var(--green);
+    }
+
+    .tag.amber {
+      background: var(--amber-soft);
+      border-color: var(--amber-border);
+      color: var(--amber);
+    }
+
+    .tag.coral {
+      background: var(--coral-soft);
+      border-color: var(--coral-border);
+      color: var(--coral);
+    }
+
+    .tag.cyan {
+      background: var(--cyan-soft);
+      border-color: var(--cyan-border);
+      color: var(--cyan);
+    }
+
+    .hero {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(145deg, #ffffff 0%, #fbfcff 65%, #f3f6fd 100%);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-main {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.65fr);
+      gap: 34px;
+      padding: 42px 38px 34px;
+    }
+
+    .hero h1 {
+      max-width: 760px;
+      margin-top: 17px;
+      font-size: clamp(36px, 5vw, 58px);
+      line-height: 1.04;
+      letter-spacing: -0.045em;
+    }
+
+    .hero-lead {
+      max-width: 760px;
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.75;
+    }
+
+    .hero-lead strong {
+      color: var(--text);
+    }
+
+    .hero-meta {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 11px;
+      align-content: start;
+    }
+
+    .metric {
+      min-height: 126px;
+      padding: 17px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(8px);
+    }
+
+    .metric-value {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--primary);
+      font-family: "DM Mono", monospace;
+      font-size: 28px;
+      font-weight: 500;
+      line-height: 1.1;
+    }
+
+    .metric-label {
+      display: block;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .metric-detail {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .hero-note {
+      display: flex;
+      gap: 13px;
+      align-items: flex-start;
+      padding: 19px 38px 21px;
+      border-top: 1px solid var(--border);
+      background: rgba(249, 250, 253, 0.82);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .hero-note strong {
+      color: var(--text);
+    }
+
+    .note-icon {
+      display: grid;
+      flex: 0 0 30px;
+      width: 30px;
+      height: 30px;
+      place-items: center;
+      border-radius: 10px;
+      background: var(--primary-soft);
+    }
+
+    .section-nav {
+      display: flex;
+      gap: 8px;
+      margin-top: 15px;
+      padding: 10px;
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.75);
+      scrollbar-width: thin;
+    }
+
+    .section-nav a {
+      flex: 0 0 auto;
+      padding: 8px 12px;
+      border-radius: 9px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+    }
+
+    .section-nav a:hover,
+    .section-nav a:focus-visible {
+      background: var(--primary-soft);
+      color: var(--primary);
+      outline: none;
+    }
+
+    .section {
+      margin-top: 38px;
+      scroll-margin-top: 20px;
+    }
+
+    .section-heading {
+      max-width: 830px;
+      margin-bottom: 17px;
+    }
+
+    .section-label {
+      margin-bottom: 8px;
+      color: var(--faint);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      font-size: clamp(26px, 4vw, 36px);
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+    }
+
+    .section-subtitle {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .card {
+      height: 100%;
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 {
+      margin-top: 12px;
+      font-size: 19px;
+      line-height: 1.25;
+      letter-spacing: -0.015em;
+    }
+
+    .card p {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .card-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 13px;
+      list-style: none;
+    }
+
+    .card-list li {
+      position: relative;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .card-list li::before {
+      position: absolute;
+      top: 0.65em;
+      left: 0;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--border-strong);
+      content: "";
+    }
+
+    .grid-2,
+    .grid-3,
+    .grid-4,
+    .axis-grid,
+    .learning-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .grid-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .axis-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .learning-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .axis-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .axis-card::after {
+      position: absolute;
+      right: -20px;
+      bottom: -24px;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      content: "";
+      opacity: 0.7;
+    }
+
+    .axis-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .axis-number {
+      color: var(--faint);
+      font-family: "DM Mono", monospace;
+      font-size: 12px;
+    }
+
+    .learning-card {
+      min-height: 210px;
+    }
+
+    .learning-number {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border-radius: 11px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-family: "DM Mono", monospace;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .role-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+      gap: 16px;
+    }
+
+    .role-main,
+    .role-focus {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+    }
+
+    .role-main {
+      padding: 26px;
+      background: var(--surface);
+    }
+
+    .role-main h3 {
+      margin-top: 15px;
+      font-size: 27px;
+      line-height: 1.18;
+      letter-spacing: -0.025em;
+    }
+
+    .role-main p {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .role-path {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: 10px;
+      align-items: center;
+      margin-top: 22px;
+    }
+
+    .role-step {
+      min-height: 105px;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--surface-soft);
+    }
+
+    .role-step small {
+      display: block;
+      color: var(--faint);
+      font-family: "DM Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .role-step strong {
+      display: block;
+      margin-top: 6px;
+      font-size: 14px;
+      line-height: 1.3;
+    }
+
+    .role-arrow {
+      color: var(--border-strong);
+      font-size: 20px;
+    }
+
+    .role-focus {
+      padding: 24px;
+      background: var(--primary-soft);
+      border-color: var(--primary-border);
+    }
+
+    .role-focus h3 {
+      color: var(--primary);
+      font-size: 21px;
+      line-height: 1.25;
+    }
+
+    .role-focus p {
+      margin-top: 10px;
+      color: #4e5c7e;
+      font-size: 14px;
+    }
+
+    .role-focus ul {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+      list-style: none;
+    }
+
+    .role-focus li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      color: #425174;
+      font-size: 14px;
+    }
+
+    .check {
+      display: grid;
+      flex: 0 0 23px;
+      width: 23px;
+      height: 23px;
+      place-items: center;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .course-structure {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .structure-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 250px;
+    }
+
+    .structure-icon {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      border-radius: 13px;
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      font-size: 19px;
+    }
+
+    .structure-card h3 {
+      margin-top: 15px;
+    }
+
+    .structure-card .card-list {
+      margin-top: auto;
+      padding-top: 15px;
+    }
+
+    .evaluation-layout {
+      display: grid;
+      grid-template-columns: minmax(280px, 0.34fr) minmax(0, 0.66fr);
+      gap: 16px;
+    }
+
+    .score-summary {
+      padding: 25px;
+      border: 1px solid var(--primary-border);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(150deg, #f5f7fe, #edf1fc);
+    }
+
+    .score-summary h3 {
+      font-size: 23px;
+      line-height: 1.2;
+    }
+
+    .score-summary > p {
+      margin-top: 10px;
+      color: #56617c;
+      font-size: 14px;
+    }
+
+    .score-ring {
+      display: grid;
+      width: 160px;
+      height: 160px;
+      margin: 25px auto;
+      place-items: center;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle, #f5f7fe 58%, transparent 59%),
+        conic-gradient(
+          var(--primary) 0 25%,
+          var(--purple) 25% 50%,
+          var(--green) 50% 75%,
+          var(--amber) 75% 100%
+        );
+    }
+
+    .score-ring-inner {
+      text-align: center;
+    }
+
+    .score-ring strong {
+      display: block;
+      font-family: "DM Mono", monospace;
+      font-size: 30px;
+      line-height: 1;
+    }
+
+    .score-ring span {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+
+    .score-groups {
+      display: grid;
+      gap: 10px;
+    }
+
+    .score-group {
+      padding: 13px 14px;
+      border: 1px solid rgba(49, 79, 155, 0.15);
+      border-radius: 13px;
+      background: rgba(255, 255, 255, 0.62);
+    }
+
+    .score-group-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: baseline;
+    }
+
+    .score-group strong {
+      font-size: 14px;
+    }
+
+    .score-group span {
+      color: var(--primary);
+      font-family: "DM Mono", monospace;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .score-group p {
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .table-card {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .table-head {
+      padding: 21px 22px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .table-head h3 {
+      font-size: 22px;
+      line-height: 1.2;
+    }
+
+    .table-head p {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      min-width: 700px;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th,
+    td {
+      padding: 15px 17px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: var(--surface-soft);
+      color: var(--faint);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    td {
+      color: var(--muted);
+    }
+
+    td:first-child {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .percentage {
+      color: var(--primary);
+      font-family: "DM Mono", monospace;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .evaluation-note {
+      display: flex;
+      gap: 13px;
+      margin-top: 16px;
+      padding: 18px 20px;
+      border: 1px solid var(--green-border);
+      border-radius: var(--radius-md);
+      background: var(--green-soft);
+      color: #3f6c53;
+      font-size: 14px;
+    }
+
+    .evaluation-note strong {
+      color: var(--green);
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .info-panel {
+      padding: 23px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .info-panel h3 {
+      margin-top: 12px;
+      font-size: 21px;
+      line-height: 1.2;
+    }
+
+    .info-panel dl {
+      display: grid;
+      gap: 13px;
+      margin-top: 17px;
+    }
+
+    .info-row {
+      display: grid;
+      grid-template-columns: 135px 1fr;
+      gap: 12px;
+      padding-top: 13px;
+      border-top: 1px solid var(--border);
+    }
+
+    .info-row dt {
+      color: var(--faint);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .info-row dd {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .license-code {
+      display: inline-flex;
+      margin-top: 15px;
+      padding: 9px 12px;
+      border: 1px solid var(--purple-border);
+      border-radius: 10px;
+      background: var(--purple-soft);
+      color: var(--purple);
+      font-family: "DM Mono", monospace;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .footer {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 28px;
+      align-items: end;
+      margin-top: 38px;
+      padding: 29px;
+      border-radius: var(--radius-lg);
+      background: #171a20;
+      color: #ffffff;
+    }
+
+    .footer h2 {
+      max-width: 700px;
+      font-size: clamp(25px, 4vw, 35px);
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+    }
+
+    .footer p {
+      max-width: 760px;
+      margin-top: 10px;
+      color: #c5cad3;
+      font-size: 14px;
+    }
+
+    .footer-badge {
+      min-width: 180px;
+      padding: 16px;
+      border: 1px solid #3b414d;
+      border-radius: 16px;
+      background: #20242c;
+    }
+
+    .footer-badge small {
+      display: block;
+      color: #929aaa;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .footer-badge strong {
+      display: block;
+      margin-top: 5px;
+      font-size: 15px;
+      line-height: 1.35;
+    }
+
+    @media (max-width: 1020px) {
+      .hero-main,
+      .role-panel,
+      .evaluation-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .axis-grid,
+      .learning-grid,
+      .course-structure {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .role-focus {
+        padding: 22px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      body {
+        padding: 14px 11px 36px;
+      }
+
+      .hero-main {
+        gap: 25px;
+        padding: 28px 20px 24px;
+      }
+
+      .hero-note {
+        padding: 17px 20px 19px;
+      }
+
+      .grid-2,
+      .grid-3,
+      .grid-4,
+      .axis-grid,
+      .learning-grid,
+      .course-structure,
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .role-path {
+        grid-template-columns: 1fr;
+      }
+
+      .role-arrow {
+        transform: rotate(90deg);
+        text-align: center;
+      }
+
+      .footer {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-badge {
+        min-width: 0;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .hero-meta {
+        grid-template-columns: 1fr;
+      }
+
+      .metric {
+        min-height: 0;
+      }
+
+      .card,
+      .role-main,
+      .role-focus,
+      .score-summary,
+      .info-panel,
+      .footer {
+        padding: 19px;
+      }
+
+      .info-row {
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      * {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <div class="page">
+    <header class="hero">
+      <div class="hero-main">
+        <div>
+          <span class="eyebrow">ESPOL–ESPAE · BID · Segunda cohorte</span>
+
+          <h1>Formación de Facilitadores Digitales para MIPYMES</h1>
+
+          <p class="hero-lead">
+            Espacio central de formación y consulta para los facilitadores
+            seleccionados. Reúne <strong>cápsulas de expertos, recursos prácticos,
+            guías de acompañamiento y materiales de gestión</strong> para apoyar
+            procesos de transformación digital concretos, medibles y ajustados
+            a la realidad de cada empresa.
+          </p>
+        </div>
+
+        <div class="hero-meta" aria-label="Resumen del programa">
+          <article class="metric">
+            <span class="metric-value">6</span>
+            <span class="metric-label">Ejes temáticos</span>
+            <span class="metric-detail">
+              Competencias clave para la transformación digital.
+            </span>
+          </article>
+
+          <article class="metric">
+            <span class="metric-value">4</span>
+            <span class="metric-label">Tipos de materiales</span>
+            <span class="metric-detail">
+              Formación, práctica, apoyo y gestión.
+            </span>
+          </article>
+
+          <article class="metric">
+            <span class="metric-value">100%</span>
+            <span class="metric-label">Evaluación integral</span>
+            <span class="metric-detail">
+              Teoría, prácticas, talleres y proyecto final.
+            </span>
+          </article>
+
+          <article class="metric">
+            <span class="metric-value">1</span>
+            <span class="metric-label">Insignia digital</span>
+            <span class="metric-detail">
+              Sujeta al cumplimiento de los requisitos.
+            </span>
+          </article>
+        </div>
+      </div>
+
+      <div class="hero-note">
+        <span class="note-icon" aria-hidden="true">↗</span>
+        <p>
+          <strong>Propósito central:</strong> preparar a los facilitadores para
+          traducir el conocimiento compartido por los expertos en acciones
+          aplicables dentro de las MIPYMES participantes.
+        </p>
+      </div>
+    </header>
+
+    <nav class="section-nav" aria-label="Navegación del curso">
+      <a href="#programa">Programa</a>
+      <a href="#objetivos">Objetivos</a>
+      <a href="#participantes">Participantes</a>
+      <a href="#estructura">Estructura</a>
+      <a href="#evaluacion">Evaluación</a>
+      <a href="#informacion">Información</a>
+    </nav>
+
+    <main id="contenido">
+      <section class="section" id="programa">
+        <div class="section-heading">
+          <p class="section-label">Panorama del programa</p>
+          <h2 class="section-title">
+            Seis áreas para acompañar la transformación digital
+          </h2>
+          <p class="section-subtitle">
+            La formación integra capacidades estratégicas, tecnológicas y
+            analíticas. El objetivo no es acumular conceptos, sino convertirlos
+            en decisiones y prácticas útiles para cada empresa.
+          </p>
+        </div>
+
+        <div class="axis-grid">
+          <article
+            class="card axis-card"
+            style="--accent-soft: var(--purple-soft);"
+          >
+            <span class="axis-number">01</span>
+            <h3>Inteligencia Artificial</h3>
+            <p>
+              Comprensión y aplicación de herramientas de inteligencia
+              artificial dentro del contexto de las MIPYMES.
+            </p>
+          </article>
+
+          <article
+            class="card axis-card"
+            style="--accent-soft: var(--primary-soft);"
+          >
+            <span class="axis-number">02</span>
+            <h3>Dirección estratégica y modelo de negocio</h3>
+            <p>
+              Conexión entre la transformación digital, la estrategia de la
+              empresa y su modelo de creación de valor.
+            </p>
+          </article>
+
+          <article
+            class="card axis-card"
+            style="--accent-soft: var(--cyan-soft);"
+          >
+            <span class="axis-number">03</span>
+            <h3>Herramientas digitales para MIPYMES</h3>
+            <p>
+              Uso de soluciones digitales orientadas a mejorar actividades,
+              procesos y capacidades empresariales.
+            </p>
+          </article>
+
+          <article
+            class="card axis-card"
+            style="--accent-soft: var(--coral-soft);"
+          >
+            <span class="axis-number">04</span>
+            <h3>Marketing digital</h3>
+            <p>
+              Incorporación de herramientas y prácticas digitales para apoyar
+              la presencia y gestión comercial de las empresas.
+            </p>
+          </article>
+
+          <article
+            class="card axis-card"
+            style="--accent-soft: var(--amber-soft);"
+          >
+            <span class="axis-number">05</span>
+            <h3>Seguridad digital y ciberseguridad</h3>
+            <p>
+              Desarrollo de criterios y prácticas para proteger la información
+              y reducir riesgos digitales.
+            </p>
+          </article>
+
+          <article
+            class="card axis-card"
+            style="--accent-soft: var(--green-soft);"
+          >
+            <span class="axis-number">06</span>
+            <h3>Business Analytics</h3>
+            <p>
+              Uso de información y análisis para comprender resultados y
+              respaldar decisiones empresariales.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="objetivos">
+        <div class="section-heading">
+          <p class="section-label">Objetivos de aprendizaje</p>
+          <h2 class="section-title">
+            Lo que podrá hacer el facilitador
+          </h2>
+          <p class="section-subtitle">
+            Al finalizar el curso, cada participante contará con una base común
+            para organizar su trabajo y acompañar a las empresas durante el
+            programa.
+          </p>
+        </div>
+
+        <div class="learning-grid">
+          <article class="card learning-card">
+            <span class="learning-number">01</span>
+            <h3>Comprender el programa</h3>
+            <p>
+              Reconocer sus objetivos, metodología, alcance y lógica de
+              acompañamiento.
+            </p>
+          </article>
+
+          <article class="card learning-card">
+            <span class="learning-number">02</span>
+            <h3>Organizar los materiales</h3>
+            <p>
+              Acceder y estructurar los recursos de capacitación proporcionados
+              por los expertos.
+            </p>
+          </article>
+
+          <article class="card learning-card">
+            <span class="learning-number">03</span>
+            <h3>Conectar contenido y práctica</h3>
+            <p>
+              Relacionar cada tema con las actividades que deberán desarrollar
+              las empresas participantes.
+            </p>
+          </article>
+
+          <article class="card learning-card">
+            <span class="learning-number">04</span>
+            <h3>Acompañar de forma efectiva</h3>
+            <p>
+              Guiar a las MIPYMES durante las prácticas, talleres y etapas del
+              proceso.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="participantes">
+        <div class="section-heading">
+          <p class="section-label">Perfil de participantes</p>
+          <h2 class="section-title">
+            Un curso exclusivo para facilitadores seleccionados
+          </h2>
+        </div>
+
+        <div class="role-panel">
+          <article class="role-main">
+            <span class="tag primary">Segunda cohorte</span>
+
+            <h3>El facilitador convierte conocimiento en acción</h3>
+
+            <p>
+              El curso está dirigido exclusivamente a los facilitadores
+              seleccionados para la segunda cohorte del Programa de Formación
+              de Facilitadores Digitales y Acompañamiento a MIPYMES.
+            </p>
+
+            <div class="role-path" aria-label="Cadena de acompañamiento">
+              <div class="role-step">
+                <small>Origen</small>
+                <strong>Conocimiento compartido por expertos</strong>
+              </div>
+
+              <span class="role-arrow" aria-hidden="true">→</span>
+
+              <div class="role-step">
+                <small>Vínculo</small>
+                <strong>Interpretación y guía del facilitador</strong>
+              </div>
+
+              <span class="role-arrow" aria-hidden="true">→</span>
+
+              <div class="role-step">
+                <small>Resultado</small>
+                <strong>Acciones concretas dentro de la MIPYME</strong>
+              </div>
+            </div>
+          </article>
+
+          <aside class="role-focus">
+            <h3>Responsabilidades clave</h3>
+
+            <p>
+              El acompañamiento debe mantenerse conectado con la realidad,
+              capacidad y necesidades de cada empresa.
+            </p>
+
+            <ul>
+              <li>
+                <span class="check" aria-hidden="true">✓</span>
+                <span>Explicar las actividades y prácticas del programa.</span>
+              </li>
+
+              <li>
+                <span class="check" aria-hidden="true">✓</span>
+                <span>Acompañar el desarrollo de los talleres.</span>
+              </li>
+
+              <li>
+                <span class="check" aria-hidden="true">✓</span>
+                <span>
+                  Facilitar la adopción práctica de herramientas digitales.
+                </span>
+              </li>
+
+              <li>
+                <span class="check" aria-hidden="true">✓</span>
+                <span>
+                  Promover cambios concretos, medibles y ajustados a cada
+                  empresa.
+                </span>
+              </li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section" id="estructura">
+        <div class="section-heading">
+          <p class="section-label">Estructura del curso</p>
+          <h2 class="section-title">
+            Recursos organizados para aprender y acompañar
+          </h2>
+          <p class="section-subtitle">
+            Cada sección responde a una necesidad distinta: comprender los
+            temas, preparar las prácticas, facilitar su ejecución y gestionar
+            el proceso.
+          </p>
+        </div>
+
+        <div class="course-structure">
+          <article class="card structure-card">
+            <span class="structure-icon" aria-hidden="true">▶</span>
+            <span class="tag purple">Formación</span>
+            <h3>Cápsulas temáticas</h3>
+            <p>
+              Videos grabados por expertos correspondientes a los seis ejes del
+              programa.
+            </p>
+
+            <ul class="card-list">
+              <li>Acceso asincrónico.</li>
+              <li>Contenido organizado por tema.</li>
+              <li>Base conceptual para el acompañamiento.</li>
+            </ul>
+          </article>
+
+          <article class="card structure-card">
+            <span class="structure-icon" aria-hidden="true">▤</span>
+            <span class="tag primary">Consulta</span>
+            <h3>Recursos de apoyo</h3>
+            <p>
+              Material complementario para comprender, explicar y aplicar los
+              contenidos.
+            </p>
+
+            <ul class="card-list">
+              <li>Presentaciones.</li>
+              <li>Instructivos paso a paso.</li>
+              <li>Enlaces y ejemplos.</li>
+            </ul>
+          </article>
+
+          <article class="card structure-card">
+            <span class="structure-icon" aria-hidden="true">✓</span>
+            <span class="tag green">Aplicación</span>
+            <h3>Guías de prácticas</h3>
+            <p>
+              Recursos para facilitar las actividades asincrónicas y los
+              talleres presenciales.
+            </p>
+
+            <ul class="card-list">
+              <li>Explicación de actividades.</li>
+              <li>Orientaciones de acompañamiento.</li>
+              <li>Conexión entre teoría y ejecución.</li>
+            </ul>
+          </article>
+
+          <article class="card structure-card">
+            <span class="structure-icon" aria-hidden="true">□</span>
+            <span class="tag amber">Planificación</span>
+            <h3>Materiales de gestión</h3>
+            <p>
+              Documentos para organizar el acompañamiento y dar seguimiento al
+              proceso.
+            </p>
+
+            <ul class="card-list">
+              <li>Fichas de trabajo.</li>
+              <li>Calendarios.</li>
+              <li>Documentos clave de planificación.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="evaluacion">
+        <div class="section-heading">
+          <p class="section-label">Criterios de evaluación</p>
+          <h2 class="section-title">
+            La aplicación práctica representa el 75% de la nota
+          </h2>
+          <p class="section-subtitle">
+            La evaluación combina la comprensión de los contenidos con
+            evidencias del acompañamiento y la elaboración del plan de
+            transformación digital de la MIPYME.
+          </p>
+        </div>
+
+        <div class="evaluation-layout">
+          <aside class="score-summary">
+            <h3>Composición de la calificación</h3>
+            <p>
+              Los cuatro componentes tienen el mismo peso individual, pero tres
+              de ellos se concentran en la aplicación práctica.
+            </p>
+
+            <div
+              class="score-ring"
+              role="img"
+              aria-label="Cuatro componentes de evaluación, cada uno con 25 por ciento"
+            >
+              <div class="score-ring-inner">
+                <strong>100%</strong>
+                <span>Nota final</span>
+              </div>
+            </div>
+
+            <div class="score-groups">
+              <div class="score-group">
+                <div class="score-group-head">
+                  <strong>Evaluación teórica</strong>
+                  <span>25%</span>
+                </div>
+                <p>Exámenes al finalizar cada eje temático.</p>
+              </div>
+
+              <div class="score-group">
+                <div class="score-group-head">
+                  <strong>Aplicación práctica</strong>
+                  <span>75%</span>
+                </div>
+                <p>Prácticas, talleres presenciales y proyecto final.</p>
+              </div>
+            </div>
+          </aside>
+
+          <div class="table-card">
+            <div class="table-head">
+              <h3>Estructura completa</h3>
+              <p>
+                Cada componente aporta una cuarta parte de la calificación
+                final.
+              </p>
+            </div>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Componente</th>
+                    <th>Detalle</th>
+                    <th>Porcentaje</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td>Exámenes temáticos</td>
+                    <td>
+                      Evaluación realizada al finalizar cada eje temático.
+                    </td>
+                    <td class="percentage">25%</td>
+                  </tr>
+
+                  <tr>
+                    <td>Prácticas asincrónicas</td>
+                    <td>
+                      Registro de las prácticas 2, 4, 5, 9, 10, 13, 16, 17 y
+                      18.
+                    </td>
+                    <td class="percentage">25%</td>
+                  </tr>
+
+                  <tr>
+                    <td>Talleres presenciales</td>
+                    <td>
+                      Registro del trabajo desarrollado en los talleres 1 y 2.
+                    </td>
+                    <td class="percentage">25%</td>
+                  </tr>
+
+                  <tr>
+                    <td>Proyecto final</td>
+                    <td>
+                      Entrega del plan de transformación digital de la MIPYME.
+                    </td>
+                    <td class="percentage">25%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="evaluation-note">
+          <span class="note-icon" aria-hidden="true">★</span>
+          <p>
+            <strong>Reconocimiento de finalización:</strong> cada facilitador
+            que cumpla con los requisitos establecidos obtendrá una insignia
+            digital que certifica su participación y desempeño en el proceso de
+            formación y acompañamiento.
+          </p>
+        </div>
+      </section>
+
+      <section class="section" id="informacion">
+        <div class="section-heading">
+          <p class="section-label">Información del recurso</p>
+          <h2 class="section-title">Versión y condiciones de uso</h2>
+        </div>
+
+        <div class="info-grid">
+          <article class="info-panel">
+            <span class="tag cyan">Registro de cambios</span>
+            <h3>Historial de la versión</h3>
+
+            <dl>
+              <div class="info-row">
+                <dt>Versión inicial</dt>
+                <dd>
+                  Junio de 2025, correspondiente a la primera cohorte del
+                  programa MIPYMES Digitales — Facilitadores.
+                </dd>
+              </div>
+
+              <div class="info-row">
+                <dt>Última revisión</dt>
+                <dd>Junio de 2025.</dd>
+              </div>
+            </dl>
+          </article>
+
+          <article class="info-panel">
+            <span class="tag purple">Licencia</span>
+            <h3>Uso, atribución y distribución</h3>
+
+            <p>
+              Este curso y sus materiales están protegidos bajo una licencia
+              Creative Commons Atribución-NoComercial-CompartirIgual 4.0
+              Internacional.
+            </p>
+
+            <span class="license-code">CC BY-NC-SA 4.0</span>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div>
+        <h2>
+          Acompañar la transformación digital significa convertir aprendizaje
+          en decisiones y acciones aplicables.
+        </h2>
+
+        <p>
+          Este espacio concentra los recursos necesarios para que los
+          facilitadores organicen su formación, preparen las actividades y
+          acompañen a las MIPYMES durante todo el proceso.
+        </p>
+      </div>
+
+      <div class="footer-badge">
+        <small>Programa impulsado por</small>
+        <strong>ESPOL–ESPAE y el BID</strong>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
