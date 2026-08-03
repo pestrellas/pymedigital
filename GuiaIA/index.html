@@ -1,1 +1,2084 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Inteligencia Artificial — Guía práctica para facilitadores</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --background: #f5f6f8;
+      --surface: #ffffff;
+      --surface-soft: #fafbfc;
+      --surface-dark: #171a20;
+
+      --text: #17191d;
+      --muted: #656b76;
+      --faint: #9298a3;
+
+      --border: #e3e6eb;
+      --border-strong: #cfd4dc;
+
+      --primary: #3157a4;
+      --primary-soft: #edf2fc;
+      --primary-border: #cbd8f4;
+
+      --purple: #624799;
+      --purple-soft: #f1edfb;
+      --purple-border: #d9cff2;
+
+      --green: #286247;
+      --green-soft: #eaf5ef;
+      --green-border: #c4e1d1;
+
+      --amber: #885714;
+      --amber-soft: #fcf3e3;
+      --amber-border: #edd19c;
+
+      --coral: #91432f;
+      --coral-soft: #faede8;
+      --coral-border: #ecc4b7;
+
+      --cyan: #236477;
+      --cyan-soft: #e9f5f7;
+      --cyan-border: #c2e0e6;
+
+      --radius-sm: 12px;
+      --radius-md: 18px;
+      --radius-lg: 27px;
+
+      --shadow:
+        0 1px 2px rgba(18, 23, 31, 0.03),
+        0 17px 44px rgba(18, 23, 31, 0.05);
+
+      --max-width: 1180px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      padding: 24px 18px 58px;
+      background:
+        radial-gradient(
+          circle at top right,
+          rgba(49, 87, 164, 0.07),
+          transparent 29rem
+        ),
+        var(--background);
+      color: var(--text);
+      font-family: "DM Sans", sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button,
+    summary {
+      font: inherit;
+    }
+
+    .page {
+      width: min(100%, var(--max-width));
+      margin: 0 auto;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      z-index: 100;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: var(--surface-dark);
+      color: #ffffff;
+      text-decoration: none;
+      transform: translateY(-160%);
+      transition: transform 0.2s ease;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    .eyebrow,
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.075em;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .eyebrow {
+      padding: 8px 12px;
+      background: var(--primary-soft);
+      border-color: var(--primary-border);
+      color: var(--primary);
+    }
+
+    .tag {
+      padding: 6px 9px;
+    }
+
+    .tag.primary {
+      background: var(--primary-soft);
+      border-color: var(--primary-border);
+      color: var(--primary);
+    }
+
+    .tag.purple {
+      background: var(--purple-soft);
+      border-color: var(--purple-border);
+      color: var(--purple);
+    }
+
+    .tag.green {
+      background: var(--green-soft);
+      border-color: var(--green-border);
+      color: var(--green);
+    }
+
+    .tag.amber {
+      background: var(--amber-soft);
+      border-color: var(--amber-border);
+      color: var(--amber);
+    }
+
+    .tag.coral {
+      background: var(--coral-soft);
+      border-color: var(--coral-border);
+      color: var(--coral);
+    }
+
+    .tag.cyan {
+      background: var(--cyan-soft);
+      border-color: var(--cyan-border);
+      color: var(--cyan);
+    }
+
+    .hero {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(
+          140deg,
+          #ffffff 0%,
+          #fbfcff 64%,
+          #eef3fc 100%
+        );
+      box-shadow: var(--shadow);
+    }
+
+    .hero-main {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(310px, 0.7fr);
+      gap: 36px;
+      padding: 43px 39px 35px;
+    }
+
+    .hero h1 {
+      max-width: 760px;
+      margin-top: 18px;
+      font-size: clamp(38px, 5.2vw, 61px);
+      line-height: 1.03;
+      letter-spacing: -0.047em;
+    }
+
+    .hero-lead {
+      max-width: 780px;
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.75;
+    }
+
+    .hero-lead strong {
+      color: var(--text);
+    }
+
+    .hero-summary {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 11px;
+      align-content: start;
+    }
+
+    .hero-stat {
+      min-height: 128px;
+      padding: 17px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.74);
+      backdrop-filter: blur(7px);
+    }
+
+    .hero-stat strong {
+      display: block;
+      color: var(--primary);
+      font-family: "DM Mono", monospace;
+      font-size: 28px;
+      font-weight: 500;
+      line-height: 1.1;
+    }
+
+    .hero-stat span {
+      display: block;
+      margin-top: 5px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .hero-stat small {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .hero-note {
+      display: flex;
+      gap: 13px;
+      align-items: flex-start;
+      padding: 19px 39px 21px;
+      border-top: 1px solid var(--border);
+      background: rgba(249, 250, 253, 0.85);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .hero-note strong {
+      color: var(--text);
+    }
+
+    .icon-box {
+      display: grid;
+      flex: 0 0 31px;
+      width: 31px;
+      height: 31px;
+      place-items: center;
+      border-radius: 10px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .section-nav {
+      display: flex;
+      gap: 7px;
+      margin-top: 15px;
+      padding: 10px;
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.78);
+      scrollbar-width: thin;
+    }
+
+    .section-nav a {
+      flex: 0 0 auto;
+      padding: 8px 11px;
+      border-radius: 9px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      transition:
+        color 0.2s ease,
+        background-color 0.2s ease;
+    }
+
+    .section-nav a:hover,
+    .section-nav a:focus-visible {
+      background: var(--primary-soft);
+      color: var(--primary);
+      outline: none;
+    }
+
+    .section {
+      margin-top: 40px;
+      scroll-margin-top: 20px;
+    }
+
+    .section-heading {
+      max-width: 850px;
+      margin-bottom: 18px;
+    }
+
+    .section-label {
+      margin-bottom: 8px;
+      color: var(--faint);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      font-size: clamp(27px, 4vw, 37px);
+      line-height: 1.14;
+      letter-spacing: -0.028em;
+    }
+
+    .section-subtitle {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.72;
+    }
+
+    .card {
+      height: 100%;
+      padding: 21px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 {
+      margin-top: 12px;
+      font-size: 19px;
+      line-height: 1.25;
+      letter-spacing: -0.015em;
+    }
+
+    .card p {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .grid-2,
+    .grid-3,
+    .grid-4,
+    .type-grid,
+    .application-grid,
+    .tool-grid,
+    .principle-grid,
+    .activity-grid,
+    .review-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid-3,
+    .type-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .grid-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .application-grid {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .tool-grid,
+    .principle-grid {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .activity-grid,
+    .review-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .definition-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.18fr) minmax(300px, 0.82fr);
+      gap: 16px;
+    }
+
+    .definition-main {
+      padding: 27px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .definition-main h3 {
+      margin-top: 15px;
+      font-size: 27px;
+      line-height: 1.2;
+      letter-spacing: -0.024em;
+    }
+
+    .definition-main > p {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .definition-flow {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 11px;
+      margin-top: 23px;
+    }
+
+    .definition-step {
+      padding: 15px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--surface-soft);
+    }
+
+    .definition-step small {
+      display: block;
+      color: var(--faint);
+      font-family: "DM Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .definition-step strong {
+      display: block;
+      margin-top: 6px;
+      font-size: 14px;
+      line-height: 1.3;
+    }
+
+    .definition-step p {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .definition-aside {
+      display: grid;
+      gap: 13px;
+    }
+
+    .concept-callout {
+      padding: 21px;
+      border: 1px solid;
+      border-radius: var(--radius-md);
+    }
+
+    .concept-callout h3 {
+      font-size: 19px;
+      line-height: 1.2;
+    }
+
+    .concept-callout p {
+      margin-top: 8px;
+      font-size: 14px;
+    }
+
+    .concept-callout.machine {
+      background: var(--purple-soft);
+      border-color: var(--purple-border);
+      color: var(--purple);
+    }
+
+    .concept-callout.deep {
+      background: var(--cyan-soft);
+      border-color: var(--cyan-border);
+      color: var(--cyan);
+    }
+
+    .type-card {
+      position: relative;
+      min-height: 235px;
+      overflow: hidden;
+    }
+
+    .type-card::after {
+      position: absolute;
+      right: -28px;
+      bottom: -35px;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: var(--type-accent);
+      content: "";
+      opacity: 0.72;
+    }
+
+    .type-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .type-number {
+      color: var(--faint);
+      font-family: "DM Mono", monospace;
+      font-size: 12px;
+    }
+
+    .type-focus {
+      margin-top: 14px;
+      padding: 11px 12px;
+      border-radius: 12px;
+      background: var(--green-soft);
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .application-card,
+    .tool-card,
+    .principle-card {
+      min-height: 220px;
+    }
+
+    .application-icon,
+    .tool-icon,
+    .principle-icon {
+      display: grid;
+      width: 43px;
+      height: 43px;
+      place-items: center;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: var(--surface-soft);
+      font-size: 18px;
+    }
+
+    .application-card h3,
+    .tool-card h3,
+    .principle-card h3 {
+      margin-top: 15px;
+    }
+
+    .progressive-note {
+      display: flex;
+      gap: 13px;
+      margin-top: 15px;
+      padding: 18px 20px;
+      border: 1px solid var(--green-border);
+      border-radius: var(--radius-md);
+      background: var(--green-soft);
+      color: #3f6c53;
+      font-size: 14px;
+    }
+
+    .progressive-note strong {
+      color: var(--green);
+    }
+
+    .tool-card {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tool-card p {
+      margin-bottom: 14px;
+    }
+
+    .tool-use {
+      margin-top: auto;
+      padding-top: 13px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .tool-use strong {
+      color: var(--text);
+    }
+
+    .strategy-callout {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 14px;
+      align-items: start;
+      margin-top: 16px;
+      padding: 20px;
+      border: 1px solid var(--amber-border);
+      border-radius: var(--radius-md);
+      background: var(--amber-soft);
+      color: #715226;
+    }
+
+    .strategy-callout strong {
+      color: var(--amber);
+    }
+
+    .glossary {
+      display: grid;
+      gap: 12px;
+    }
+
+    .glossary-item {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .glossary-head {
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      gap: 18px;
+      align-items: start;
+      padding: 20px;
+    }
+
+    .glossary-term {
+      color: var(--primary);
+      font-family: "DM Mono", monospace;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .glossary-description {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .prompt-comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding: 0 20px 20px 130px;
+    }
+
+    .prompt-box {
+      padding: 15px;
+      border: 1px solid;
+      border-radius: 13px;
+    }
+
+    .prompt-box small {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+
+    .prompt-box code {
+      color: var(--text);
+      font-family: "DM Mono", monospace;
+      font-size: 12px;
+      line-height: 1.6;
+      white-space: normal;
+    }
+
+    .prompt-box.weak {
+      background: var(--coral-soft);
+      border-color: var(--coral-border);
+    }
+
+    .prompt-box.weak small {
+      color: var(--coral);
+    }
+
+    .prompt-box.strong {
+      background: var(--green-soft);
+      border-color: var(--green-border);
+    }
+
+    .prompt-box.strong small {
+      color: var(--green);
+    }
+
+    .workflow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .workflow-step {
+      position: relative;
+      min-height: 145px;
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .workflow-step:not(:last-child)::after {
+      position: absolute;
+      top: 50%;
+      right: -17px;
+      z-index: 2;
+      color: var(--border-strong);
+      content: "→";
+      font-size: 19px;
+      transform: translateY(-50%);
+    }
+
+    .workflow-number {
+      color: var(--faint);
+      font-family: "DM Mono", monospace;
+      font-size: 11px;
+    }
+
+    .workflow-step h3 {
+      margin-top: 8px;
+      font-size: 15px;
+      line-height: 1.25;
+    }
+
+    .workflow-step p {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .responsibility-panel {
+      padding: 26px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .responsibility-intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 20px;
+      align-items: start;
+      margin-bottom: 20px;
+    }
+
+    .responsibility-intro h3 {
+      font-size: 26px;
+      line-height: 1.2;
+      letter-spacing: -0.022em;
+    }
+
+    .responsibility-intro p {
+      max-width: 720px;
+      margin-top: 9px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .review-badge {
+      min-width: 165px;
+      padding: 14px;
+      border: 1px solid var(--green-border);
+      border-radius: 14px;
+      background: var(--green-soft);
+    }
+
+    .review-badge small {
+      display: block;
+      color: var(--green);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .review-badge strong {
+      display: block;
+      margin-top: 5px;
+      font-size: 14px;
+      line-height: 1.3;
+    }
+
+    .principle-card {
+      box-shadow: none;
+      background: var(--surface-soft);
+    }
+
+    .faq-list,
+    .quiz-list {
+      display: grid;
+      gap: 11px;
+    }
+
+    details.faq,
+    details.quiz-item {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    details.faq summary,
+    details.quiz-item summary {
+      position: relative;
+      padding: 18px 48px 18px 20px;
+      cursor: pointer;
+      list-style: none;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    details.faq summary::-webkit-details-marker,
+    details.quiz-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details.faq summary::after,
+    details.quiz-item summary::after {
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      color: var(--faint);
+      content: "+";
+      font-family: "DM Mono", monospace;
+      font-size: 18px;
+      transform: translateY(-50%);
+    }
+
+    details.faq[open] summary::after,
+    details.quiz-item[open] summary::after {
+      content: "−";
+    }
+
+    .faq-content,
+    .quiz-content {
+      padding: 0 20px 19px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .activity-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 410px;
+    }
+
+    .activity-number {
+      display: grid;
+      width: 38px;
+      height: 38px;
+      place-items: center;
+      border-radius: 12px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-family: "DM Mono", monospace;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .activity-card h3 {
+      margin-top: 15px;
+      font-size: 21px;
+    }
+
+    .activity-card > p {
+      margin-top: 8px;
+    }
+
+    .activity-questions {
+      display: grid;
+      gap: 8px;
+      margin-top: 16px;
+      list-style: none;
+    }
+
+    .activity-questions li {
+      position: relative;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .activity-questions li::before {
+      position: absolute;
+      top: 0.62em;
+      left: 0;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--primary-border);
+      content: "";
+    }
+
+    .expected-output {
+      margin-top: auto;
+      padding: 14px;
+      border: 1px solid var(--green-border);
+      border-radius: 13px;
+      background: var(--green-soft);
+    }
+
+    .expected-output small {
+      display: block;
+      color: var(--green);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+
+    .expected-output p {
+      margin-top: 4px;
+      color: #446c56;
+      font-size: 13px;
+    }
+
+    .key-ideas {
+      display: grid;
+      gap: 10px;
+      counter-reset: key-idea;
+    }
+
+    .key-idea {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 13px;
+      align-items: center;
+      padding: 15px 17px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      counter-increment: key-idea;
+    }
+
+    .key-idea::before {
+      display: grid;
+      width: 36px;
+      height: 36px;
+      place-items: center;
+      border-radius: 11px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      content: counter(key-idea, decimal-leading-zero);
+      font-family: "DM Mono", monospace;
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    .key-idea p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .quiz-options {
+      display: grid;
+      gap: 8px;
+      margin-top: 3px;
+      list-style: none;
+    }
+
+    .quiz-options li {
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      background: var(--surface-soft);
+    }
+
+    .quiz-options strong {
+      display: inline-block;
+      width: 24px;
+      color: var(--primary);
+      font-family: "DM Mono", monospace;
+    }
+
+    .quiz-answer {
+      margin-top: 13px;
+      padding: 12px 14px;
+      border: 1px solid var(--green-border);
+      border-radius: 12px;
+      background: var(--green-soft);
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .closing {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 260px;
+      gap: 30px;
+      align-items: center;
+      margin-top: 41px;
+      padding: 31px;
+      border-radius: var(--radius-lg);
+      background: var(--surface-dark);
+      color: #ffffff;
+    }
+
+    .closing h2 {
+      max-width: 760px;
+      font-size: clamp(28px, 4vw, 39px);
+      line-height: 1.13;
+      letter-spacing: -0.029em;
+    }
+
+    .closing p {
+      max-width: 790px;
+      margin-top: 12px;
+      color: #c5cad3;
+      font-size: 14px;
+    }
+
+    .closing-idea {
+      padding: 18px;
+      border: 1px solid #3b414d;
+      border-radius: 17px;
+      background: #20242c;
+    }
+
+    .closing-idea small {
+      display: block;
+      color: #9199a8;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .closing-idea strong {
+      display: block;
+      margin-top: 7px;
+      font-size: 16px;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 1080px) {
+      .application-grid,
+      .tool-grid,
+      .principle-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .workflow {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .workflow-step:not(:last-child)::after {
+        display: none;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .hero-main,
+      .definition-layout,
+      .responsibility-intro,
+      .closing {
+        grid-template-columns: 1fr;
+      }
+
+      .type-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .prompt-comparison {
+        padding-left: 20px;
+      }
+
+      .review-badge {
+        min-width: 0;
+      }
+    }
+
+    @media (max-width: 740px) {
+      body {
+        padding: 14px 11px 38px;
+      }
+
+      .hero-main {
+        gap: 25px;
+        padding: 28px 20px 24px;
+      }
+
+      .hero-note {
+        padding: 17px 20px 19px;
+      }
+
+      .grid-2,
+      .grid-3,
+      .grid-4,
+      .activity-grid,
+      .review-grid,
+      .application-grid,
+      .tool-grid,
+      .principle-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .definition-flow,
+      .workflow {
+        grid-template-columns: 1fr;
+      }
+
+      .prompt-comparison {
+        grid-template-columns: 1fr;
+      }
+
+      .glossary-head {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .closing {
+        padding: 23px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .hero-summary {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-stat {
+        min-height: 0;
+      }
+
+      .card,
+      .definition-main,
+      .responsibility-panel {
+        padding: 19px;
+      }
+
+      .prompt-comparison {
+        padding: 0 19px 19px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      * {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <div class="page">
+    <header class="hero">
+      <div class="hero-main">
+        <div>
+          <span class="eyebrow">Guía práctica para facilitadores</span>
+
+          <h1>Inteligencia Artificial aplicada a MIPYMES</h1>
+
+          <p class="hero-lead">
+            Una introducción práctica para comprender qué es la Inteligencia
+            Artificial, cómo puede utilizarse en pequeños negocios y qué
+            criterios deben aplicarse para implementarla de forma
+            <strong>útil, progresiva y responsable</strong>.
+          </p>
+        </div>
+
+        <div class="hero-summary" aria-label="Resumen de la guía">
+          <article class="hero-stat">
+            <strong>3</strong>
+            <span>Tipos de IA</span>
+            <small>Débil, general y superinteligencia.</small>
+          </article>
+
+          <article class="hero-stat">
+            <strong>5</strong>
+            <span>Aplicaciones</span>
+            <small>Desde automatización hasta predicción.</small>
+          </article>
+
+          <article class="hero-stat">
+            <strong>5</strong>
+            <span>Herramientas</span>
+            <small>Opciones accesibles para comenzar.</small>
+          </article>
+
+          <article class="hero-stat">
+            <strong>4</strong>
+            <span>Actividades</span>
+            <small>Diagnóstico, exploración, diseño y reflexión.</small>
+          </article>
+        </div>
+      </div>
+
+      <div class="hero-note">
+        <span class="icon-box" aria-hidden="true">✦</span>
+
+        <p>
+          <strong>Idea central:</strong> usar IA no significa entregar todas las
+          decisiones a una máquina. Significa combinar nuevas herramientas con
+          mejores preguntas, revisión humana y criterio empresarial.
+        </p>
+      </div>
+    </header>
+
+    <nav class="section-nav" aria-label="Navegación de la guía">
+      <a href="#definicion">Qué es</a>
+      <a href="#tipos">Tipos</a>
+      <a href="#aplicaciones">Aplicaciones</a>
+      <a href="#herramientas">Herramientas</a>
+      <a href="#conceptos">Conceptos</a>
+      <a href="#responsabilidad">Uso responsable</a>
+      <a href="#preguntas">Preguntas frecuentes</a>
+      <a href="#actividades">Actividades</a>
+      <a href="#repaso">Repaso</a>
+    </nav>
+
+    <main id="contenido">
+      <section class="section" id="definicion">
+        <div class="section-heading">
+          <p class="section-label">01 · Fundamentos</p>
+          <h2 class="section-title">Qué es la Inteligencia Artificial</h2>
+          <p class="section-subtitle">
+            La IA agrupa tecnologías capaces de realizar tareas que normalmente
+            requieren inteligencia humana, como aprender de datos, reconocer
+            patrones, generar respuestas y analizar información.
+          </p>
+        </div>
+
+        <div class="definition-layout">
+          <article class="definition-main">
+            <span class="tag primary">Definición práctica</span>
+
+            <h3>De ejecutar instrucciones a producir resultados útiles</h3>
+
+            <p>
+              En términos sencillos, la Inteligencia Artificial permite que una
+              herramienta digital no se limite a ejecutar una orden. También
+              puede analizar información, identificar relaciones y generar
+              resultados que apoyen a una persona o empresa.
+            </p>
+
+            <div class="definition-flow">
+              <div class="definition-step">
+                <small>Entrada</small>
+                <strong>Datos o instrucciones</strong>
+                <p>La persona proporciona información, contexto o una tarea.</p>
+              </div>
+
+              <div class="definition-step">
+                <small>Procesamiento</small>
+                <strong>Análisis de información</strong>
+                <p>El sistema identifica relaciones, patrones o posibilidades.</p>
+              </div>
+
+              <div class="definition-step">
+                <small>Resultado</small>
+                <strong>Respuesta o apoyo</strong>
+                <p>Se genera un texto, análisis, clasificación o recomendación.</p>
+              </div>
+            </div>
+          </article>
+
+          <aside class="definition-aside">
+            <article class="concept-callout machine">
+              <h3>Machine Learning</h3>
+              <p>
+                Permite que los sistemas aprendan a partir de datos mediante
+                algoritmos.
+              </p>
+            </article>
+
+            <article class="concept-callout deep">
+              <h3>Deep Learning</h3>
+              <p>
+                Utiliza redes neuronales profundas para procesar información
+                más compleja.
+              </p>
+            </article>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section" id="tipos">
+        <div class="section-heading">
+          <p class="section-label">02 · Clasificación</p>
+          <h2 class="section-title">Tres formas de comprender la IA</h2>
+          <p class="section-subtitle">
+            Para el acompañamiento a MIPYMES, el interés principal está en la
+            inteligencia especializada que ya puede aplicarse a procesos
+            empresariales concretos.
+          </p>
+        </div>
+
+        <div class="type-grid">
+          <article
+            class="card type-card"
+            style="--type-accent: var(--green-soft);"
+          >
+            <span class="type-number">01</span>
+            <h3>IA débil</h3>
+            <p>
+              Está diseñada para cumplir tareas específicas, como responder
+              consultas, asistir en la redacción o apoyar la atención al
+              cliente.
+            </p>
+
+            <div class="type-focus">
+              Enfoque principal para el trabajo práctico con MIPYMES.
+            </div>
+          </article>
+
+          <article
+            class="card type-card"
+            style="--type-accent: var(--primary-soft);"
+          >
+            <span class="type-number">02</span>
+            <h3>IA general</h3>
+            <p>
+              Se refiere a una inteligencia artificial capaz de realizar
+              cualquier tarea intelectual humana.
+            </p>
+
+            <p>
+              Actualmente continúa siendo un concepto en desarrollo.
+            </p>
+          </article>
+
+          <article
+            class="card type-card"
+            style="--type-accent: var(--purple-soft);"
+          >
+            <span class="type-number">03</span>
+            <h3>Superinteligencia</h3>
+            <p>
+              Describe una inteligencia que podría superar ampliamente las
+              capacidades humanas.
+            </p>
+
+            <p>
+              Pertenece al campo de la reflexión futura y del debate
+              tecnológico.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="aplicaciones">
+        <div class="section-heading">
+          <p class="section-label">03 · Uso empresarial</p>
+          <h2 class="section-title">Aplicaciones prácticas en una MIPYME</h2>
+          <p class="section-subtitle">
+            El punto de partida no debe ser la tecnología. Debe ser un proceso
+            repetitivo, una tarea que consume demasiado tiempo o un área que
+            necesita mejorar.
+          </p>
+        </div>
+
+        <div class="application-grid">
+          <article class="card application-card">
+            <span class="application-icon" aria-hidden="true">↻</span>
+            <h3>Automatización</h3>
+            <p>
+              Apoya tareas rutinarias como responder correos, organizar
+              información, clasificar solicitudes o generar reportes.
+            </p>
+          </article>
+
+          <article class="card application-card">
+            <span class="application-icon" aria-hidden="true">✎</span>
+            <h3>Contenido</h3>
+            <p>
+              Facilita la creación de publicaciones, descripciones de productos,
+              mensajes, propuestas y documentos internos.
+            </p>
+          </article>
+
+          <article class="card application-card">
+            <span class="application-icon" aria-hidden="true">◌</span>
+            <h3>Atención al cliente</h3>
+            <p>
+              Permite responder preguntas frecuentes, orientar clientes y
+              brindar atención básica durante más horas.
+            </p>
+          </article>
+
+          <article class="card application-card">
+            <span class="application-icon" aria-hidden="true">▥</span>
+            <h3>Análisis de datos</h3>
+            <p>
+              Ayuda a interpretar ventas, ordenar bases de datos, reconocer
+              tendencias y apoyar decisiones comerciales.
+            </p>
+          </article>
+
+          <article class="card application-card">
+            <span class="application-icon" aria-hidden="true">↗</span>
+            <h3>Predicción</h3>
+            <p>
+              Puede apoyar estimaciones sobre demanda, inventario y preferencias
+              de los clientes a partir de datos históricos.
+            </p>
+          </article>
+        </div>
+
+        <div class="progressive-note">
+          <span class="icon-box" aria-hidden="true">✓</span>
+
+          <p>
+            <strong>Implementación progresiva:</strong> una MIPYME puede comenzar
+            con tareas sencillas y avanzar hacia procesos más complejos cuando
+            ya exista experiencia, información suficiente y capacidad de
+            revisión.
+          </p>
+        </div>
+      </section>
+
+      <section class="section" id="herramientas">
+        <div class="section-heading">
+          <p class="section-label">04 · Punto de partida</p>
+          <h2 class="section-title">Herramientas accesibles para comenzar</h2>
+          <p class="section-subtitle">
+            Existen opciones de bajo costo o con versiones gratuitas que
+            permiten explorar distintos usos de IA y automatización.
+          </p>
+        </div>
+
+        <div class="tool-grid">
+          <article class="card tool-card">
+            <span class="tool-icon" aria-hidden="true">C</span>
+            <h3>ChatGPT</h3>
+            <p>
+              Permite generar textos, ideas, resúmenes, análisis y respuestas a
+              partir de instrucciones o preguntas.
+            </p>
+
+            <div class="tool-use">
+              <strong>Uso inicial:</strong> redacción, ideas y análisis.
+            </div>
+          </article>
+
+          <article class="card tool-card">
+            <span class="tool-icon" aria-hidden="true">N</span>
+            <h3>Notion AI</h3>
+            <p>
+              Ayuda a organizar información, redactar documentos y resumir
+              contenidos.
+            </p>
+
+            <div class="tool-use">
+              <strong>Uso inicial:</strong> documentación y organización.
+            </div>
+          </article>
+
+          <article class="card tool-card">
+            <span class="tool-icon" aria-hidden="true">Z</span>
+            <h3>Zapier</h3>
+            <p>
+              Permite automatizar procesos conectando diferentes aplicaciones.
+            </p>
+
+            <div class="tool-use">
+              <strong>Uso inicial:</strong> automatización entre herramientas.
+            </div>
+          </article>
+
+          <article class="card tool-card">
+            <span class="tool-icon" aria-hidden="true">n8</span>
+            <h3>n8n</h3>
+            <p>
+              Permite crear flujos de trabajo automatizados y conectar
+              herramientas digitales.
+            </p>
+
+            <div class="tool-use">
+              <strong>Uso inicial:</strong> diseño de workflows.
+            </div>
+          </article>
+
+          <article class="card tool-card">
+            <span class="tool-icon" aria-hidden="true">R</span>
+            <h3>Replit</h3>
+            <p>
+              Permite crear aplicaciones simples desde la nube sin instalar
+              programas en la computadora.
+            </p>
+
+            <div class="tool-use">
+              <strong>Uso inicial:</strong> creación de soluciones simples.
+            </div>
+          </article>
+        </div>
+
+        <div class="strategy-callout">
+          <span class="icon-box" aria-hidden="true">!</span>
+
+          <p>
+            <strong>No usar IA por moda.</strong> Primero se identifica una
+            necesidad concreta y después se selecciona la herramienta que mejor
+            responde a esa necesidad.
+          </p>
+        </div>
+      </section>
+
+      <section class="section" id="conceptos">
+        <div class="section-heading">
+          <p class="section-label">05 · Lenguaje esencial</p>
+          <h2 class="section-title">Conceptos clave para comprender la IA</h2>
+          <p class="section-subtitle">
+            Estos términos ayudan a explicar cómo se construyen instrucciones,
+            automatizaciones e intercambios de información entre herramientas.
+          </p>
+        </div>
+
+        <div class="glossary">
+          <article class="glossary-item">
+            <div class="glossary-head">
+              <span class="glossary-term">Prompt</span>
+
+              <p class="glossary-description">
+                Es la instrucción que una persona escribe para que la IA genere
+                una respuesta. Mientras más claro sea el prompt, mejores
+                resultados pueden obtenerse.
+              </p>
+            </div>
+
+            <div class="prompt-comparison">
+              <div class="prompt-box weak">
+                <small>Prompt poco claro</small>
+                <code>“Haz un análisis de mi empresa.”</code>
+              </div>
+
+              <div class="prompt-box strong">
+                <small>Prompt más claro</small>
+                <code>
+                  “Actúa como asesor empresarial. Analiza una MIPYME dedicada a
+                  la venta de ropa en Guayaquil y propón tres estrategias para
+                  mejorar su atención al cliente usando herramientas digitales.”
+                </code>
+              </div>
+            </div>
+          </article>
+
+          <article class="glossary-item">
+            <div class="glossary-head">
+              <span class="glossary-term">Workflow</span>
+
+              <p class="glossary-description">
+                Es un flujo de trabajo compuesto por varios pasos. Puede
+                combinar una acción inicial, una herramienta de IA, una revisión
+                humana y una respuesta final.
+              </p>
+            </div>
+          </article>
+
+          <article class="glossary-item">
+            <div class="glossary-head">
+              <span class="glossary-term">Conector</span>
+
+              <p class="glossary-description">
+                Es una herramienta que permite enlazar diferentes aplicaciones
+                dentro de un flujo de trabajo, como un formulario, una base de
+                datos y un correo automático.
+              </p>
+            </div>
+          </article>
+
+          <article class="glossary-item">
+            <div class="glossary-head">
+              <span class="glossary-term">Modelo generativo</span>
+
+              <p class="glossary-description">
+                Es un modelo de IA capaz de crear contenido nuevo, como texto,
+                imágenes, audio, ideas o código.
+              </p>
+            </div>
+          </article>
+
+          <article class="glossary-item">
+            <div class="glossary-head">
+              <span class="glossary-term">API</span>
+
+              <p class="glossary-description">
+                Es una vía de comunicación entre aplicaciones que permite a
+                distintos sistemas intercambiar información.
+              </p>
+            </div>
+          </article>
+        </div>
+
+        <div class="workflow" aria-label="Ejemplo de workflow con inteligencia artificial">
+          <article class="workflow-step">
+            <span class="workflow-number">01</span>
+            <h3>Acción inicial</h3>
+            <p>Una persona envía una consulta o completa un formulario.</p>
+          </article>
+
+          <article class="workflow-step">
+            <span class="workflow-number">02</span>
+            <h3>Conector</h3>
+            <p>La información pasa a otra aplicación o sistema.</p>
+          </article>
+
+          <article class="workflow-step">
+            <span class="workflow-number">03</span>
+            <h3>Herramienta de IA</h3>
+            <p>La IA clasifica, analiza o genera una propuesta.</p>
+          </article>
+
+          <article class="workflow-step">
+            <span class="workflow-number">04</span>
+            <h3>Revisión humana</h3>
+            <p>Una persona verifica la calidad y pertinencia del resultado.</p>
+          </article>
+
+          <article class="workflow-step">
+            <span class="workflow-number">05</span>
+            <h3>Respuesta final</h3>
+            <p>El contenido validado se entrega al cliente o al proceso.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="responsabilidad">
+        <div class="section-heading">
+          <p class="section-label">06 · Criterios de implementación</p>
+          <h2 class="section-title">Uso responsable de la Inteligencia Artificial</h2>
+          <p class="section-subtitle">
+            La IA puede cometer errores, generar información incompleta o
+            reproducir sesgos. Su uso debe incluir control, protección de datos
+            y validación.
+          </p>
+        </div>
+
+        <div class="responsibility-panel">
+          <div class="responsibility-intro">
+            <div>
+              <h3>La responsabilidad no se puede automatizar</h3>
+              <p>
+                La tecnología apoya el proceso, pero la persona conserva la
+                responsabilidad de revisar, interpretar y decidir cómo se
+                utilizarán los resultados.
+              </p>
+            </div>
+
+            <div class="review-badge">
+              <small>Regla transversal</small>
+              <strong>Revisar antes de utilizar, decidir o publicar.</strong>
+            </div>
+          </div>
+
+          <div class="principle-grid">
+            <article class="card principle-card">
+              <span class="principle-icon" aria-hidden="true">◉</span>
+              <h3>Supervisión humana</h3>
+              <p>
+                La IA es una herramienta de apoyo, no una autoridad absoluta.
+              </p>
+            </article>
+
+            <article class="card principle-card">
+              <span class="principle-icon" aria-hidden="true">▣</span>
+              <h3>Protección de datos</h3>
+              <p>
+                No se debe ingresar información sensible sin conocer las
+                políticas de privacidad.
+              </p>
+            </article>
+
+            <article class="card principle-card">
+              <span class="principle-icon" aria-hidden="true">◎</span>
+              <h3>Transparencia</h3>
+              <p>
+                Es recomendable informar cuando un cliente es atendido con apoyo
+                de IA.
+              </p>
+            </article>
+
+            <article class="card principle-card">
+              <span class="principle-icon" aria-hidden="true">≠</span>
+              <h3>Prevención de sesgos</h3>
+              <p>
+                Los resultados deben revisarse para evitar exclusión,
+                discriminación o respuestas injustas.
+              </p>
+            </article>
+
+            <article class="card principle-card">
+              <span class="principle-icon" aria-hidden="true">✓</span>
+              <h3>Validación</h3>
+              <p>
+                La información debe comprobarse antes de respaldar decisiones
+                empresariales.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="preguntas">
+        <div class="section-heading">
+          <p class="section-label">07 · Preguntas frecuentes</p>
+          <h2 class="section-title">Dudas comunes antes de comenzar</h2>
+        </div>
+
+        <div class="faq-list">
+          <details class="faq" open>
+            <summary>¿La IA reemplaza el trabajo humano?</summary>
+
+            <div class="faq-content">
+              <p>
+                No necesariamente. Puede automatizar ciertas tareas, pero el
+                criterio humano sigue siendo necesario para interpretar,
+                decidir, corregir y orientar los procesos.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq">
+            <summary>¿Qué pasa si la IA se equivoca?</summary>
+
+            <div class="faq-content">
+              <p>
+                Toda respuesta debe ser validada por una persona, especialmente
+                cuando se utilizará para tomar decisiones importantes.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq">
+            <summary>¿Es seguro usar Zapier, n8n o Replit?</summary>
+
+            <div class="faq-content">
+              <p>
+                Son herramientas reconocidas, pero es necesario revisar sus
+                políticas de privacidad, configurar correctamente los accesos y
+                evitar compartir información sensible sin control.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq">
+            <summary>¿Cuánto tiempo toma aprender a usar IA?</summary>
+
+            <div class="faq-content">
+              <p>
+                Las tareas básicas pueden aprenderse en pocas semanas. Los usos
+                avanzados requieren práctica, formación continua y
+                acompañamiento técnico.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq">
+            <summary>¿Puedo usar IA para automatizar promociones?</summary>
+
+            <div class="faq-content">
+              <p>
+                Sí. Puede apoyar campañas, segmentación, redacción de mensajes y
+                automatización de envíos, siempre que exista revisión humana y
+                respeto por los datos de los clientes.
+              </p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section class="section" id="actividades">
+        <div class="section-heading">
+          <p class="section-label">08 · Aprender haciendo</p>
+          <h2 class="section-title">Actividades de aprendizaje</h2>
+          <p class="section-subtitle">
+            Las actividades avanzan desde la identificación de oportunidades
+            hasta el diseño de un flujo y la reflexión sobre sus riesgos.
+          </p>
+        </div>
+
+        <div class="activity-grid">
+          <article class="card activity-card">
+            <span class="activity-number">01</span>
+            <h3>Diagnóstico de oportunidades</h3>
+            <p>
+              Selecciona una empresa real o emprendimiento e identifica tres
+              procesos repetitivos, lentos o ineficientes.
+            </p>
+
+            <ul class="activity-questions">
+              <li>¿Qué problema existe actualmente?</li>
+              <li>¿Cómo podría ayudar una herramienta de IA?</li>
+              <li>¿Qué beneficio tendría para la empresa?</li>
+            </ul>
+
+            <div class="expected-output">
+              <small>Producto esperado</small>
+              <p>
+                Tabla con tres procesos y una posible solución con IA para cada
+                uno.
+              </p>
+            </div>
+          </article>
+
+          <article class="card activity-card">
+            <span class="activity-number">02</span>
+            <h3>Exploración de herramientas</h3>
+            <p>
+              Prueba una herramienta como ChatGPT, Notion AI, Zapier o n8n en
+              una tarea sencilla.
+            </p>
+
+            <ul class="activity-questions">
+              <li>¿Qué herramienta utilizaste?</li>
+              <li>¿Qué tarea realizaste?</li>
+              <li>¿Qué resultado obtuviste?</li>
+              <li>¿Qué dificultad encontraste?</li>
+              <li>¿Cómo podría utilizarse en una MIPYME?</li>
+            </ul>
+
+            <div class="expected-output">
+              <small>Producto esperado</small>
+              <p>Breve informe sobre la experiencia realizada.</p>
+            </div>
+          </article>
+
+          <article class="card activity-card">
+            <span class="activity-number">03</span>
+            <h3>Diseño de un workflow simple</h3>
+            <p>
+              Elige un proceso de atención al cliente, como responder consultas
+              sobre precios, horarios, productos o disponibilidad.
+            </p>
+
+            <ul class="activity-questions">
+              <li>Mensaje inicial del cliente.</li>
+              <li>Uso de una herramienta de IA.</li>
+              <li>Clasificación o generación de respuesta.</li>
+              <li>Revisión humana, si corresponde.</li>
+              <li>Respuesta final al cliente.</li>
+            </ul>
+
+            <div class="expected-output">
+              <small>Producto esperado</small>
+              <p>Diagrama sencillo del flujo de trabajo.</p>
+            </div>
+          </article>
+
+          <article class="card activity-card">
+            <span class="activity-number">04</span>
+            <h3>Reflexión sobre ética y riesgos</h3>
+            <p>
+              Analiza los posibles riesgos del workflow diseñado en la actividad
+              anterior.
+            </p>
+
+            <ul class="activity-questions">
+              <li>¿Qué dato sensible podría estar involucrado?</li>
+              <li>¿Qué error podría cometer la IA?</li>
+              <li>¿Cómo se puede reducir ese riesgo?</li>
+              <li>
+                ¿Qué mensaje debería darse al cliente sobre el uso de IA?
+              </li>
+            </ul>
+
+            <div class="expected-output">
+              <small>Producto esperado</small>
+              <p>Un párrafo de reflexión final.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="ideas">
+        <div class="section-heading">
+          <p class="section-label">09 · Síntesis</p>
+          <h2 class="section-title">Ideas clave para recordar</h2>
+        </div>
+
+        <div class="key-ideas">
+          <article class="key-idea">
+            <p>
+              La Inteligencia Artificial es una herramienta de apoyo, no un
+              reemplazo total del criterio humano.
+            </p>
+          </article>
+
+          <article class="key-idea">
+            <p>
+              Una MIPYME puede empezar con tareas sencillas antes de avanzar a
+              procesos más complejos.
+            </p>
+          </article>
+
+          <article class="key-idea">
+            <p>
+              La calidad de los datos influye directamente en la calidad de los
+              resultados.
+            </p>
+          </article>
+
+          <article class="key-idea">
+            <p>
+              Un buen prompt debe incluir contexto, objetivo y formato esperado.
+            </p>
+          </article>
+
+          <article class="key-idea">
+            <p>
+              Los resultados generados por IA siempre deben ser revisados.
+            </p>
+          </article>
+
+          <article class="key-idea">
+            <p>
+              El uso responsable requiere ética, transparencia y protección de
+              datos.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="repaso">
+        <div class="section-heading">
+          <p class="section-label">10 · Comprobación</p>
+          <h2 class="section-title">Preguntas de repaso</h2>
+          <p class="section-subtitle">
+            Selecciona cada pregunta para revisar las opciones y consultar su
+            respuesta correcta.
+          </p>
+        </div>
+
+        <div class="quiz-list">
+          <details class="quiz-item">
+            <summary>
+              Pregunta 1 · ¿Qué opción describe mejor a la IA generativa?
+            </summary>
+
+            <div class="quiz-content">
+              <ul class="quiz-options">
+                <li><strong>A.</strong> Copia respuestas exactas de internet.</li>
+                <li>
+                  <strong>B.</strong> Crea contenido nuevo a partir de
+                  instrucciones.
+                </li>
+                <li>
+                  <strong>C.</strong> Solo sirve para cálculos matemáticos.
+                </li>
+                <li>
+                  <strong>D.</strong> No requiere supervisión humana.
+                </li>
+              </ul>
+
+              <div class="quiz-answer">Respuesta correcta: B.</div>
+            </div>
+          </details>
+
+          <details class="quiz-item">
+            <summary>
+              Pregunta 2 · ¿Qué mejora la calidad de una respuesta generada por
+              IA?
+            </summary>
+
+            <div class="quiz-content">
+              <ul class="quiz-options">
+                <li><strong>A.</strong> Escribir sin contexto.</li>
+                <li><strong>B.</strong> Usar palabras difíciles.</li>
+                <li>
+                  <strong>C.</strong> Definir claramente el objetivo y el
+                  contexto.
+                </li>
+                <li>
+                  <strong>D.</strong> Pedir respuestas automáticas sin revisión.
+                </li>
+              </ul>
+
+              <div class="quiz-answer">Respuesta correcta: C.</div>
+            </div>
+          </details>
+
+          <details class="quiz-item">
+            <summary>
+              Pregunta 3 · ¿Cuál es el flujo correcto para usar contenido
+              generado con IA?
+            </summary>
+
+            <div class="quiz-content">
+              <ul class="quiz-options">
+                <li>
+                  <strong>A.</strong> La IA genera y publica automáticamente.
+                </li>
+                <li>
+                  <strong>B.</strong> La IA genera, una persona revisa y luego
+                  se publica.
+                </li>
+                <li>
+                  <strong>C.</strong> La persona publica sin revisar.
+                </li>
+                <li>
+                  <strong>D.</strong> La IA toma todas las decisiones.
+                </li>
+              </ul>
+
+              <div class="quiz-answer">Respuesta correcta: B.</div>
+            </div>
+          </details>
+
+          <details class="quiz-item">
+            <summary>
+              Pregunta 4 · ¿Por qué es importante validar los resultados?
+            </summary>
+
+            <div class="quiz-content">
+              <ul class="quiz-options">
+                <li><strong>A.</strong> Porque la IA nunca se equivoca.</li>
+                <li>
+                  <strong>B.</strong> Porque puede generar información
+                  incorrecta o incompleta.
+                </li>
+                <li>
+                  <strong>C.</strong> Porque no se puede editar el contenido.
+                </li>
+                <li>
+                  <strong>D.</strong> Porque siempre reemplaza al ser humano.
+                </li>
+              </ul>
+
+              <div class="quiz-answer">Respuesta correcta: B.</div>
+            </div>
+          </details>
+        </div>
+      </section>
+    </main>
+
+    <footer class="closing">
+      <div>
+        <h2>
+          La clave no es solamente conocer la tecnología, sino utilizarla de
+          manera práctica, ética y útil.
+        </h2>
+
+        <p>
+          La Inteligencia Artificial puede mejorar procesos, ahorrar tiempo,
+          fortalecer la atención al cliente y apoyar decisiones. Su valor
+          depende de la calidad de las preguntas, la revisión de los resultados
+          y la capacidad de aplicar criterio humano.
+        </p>
+      </div>
+
+      <aside class="closing-idea">
+        <small>Principio final</small>
+        <strong>
+          Tecnología + revisión humana + responsabilidad.
+        </strong>
+      </aside>
+    </footer>
+  </div>
+</body>
+</html>
