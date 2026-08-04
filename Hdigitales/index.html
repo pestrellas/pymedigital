@@ -1,1 +1,1708 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Herramientas digitales para MIPYMES</title>
+  <meta
+    name="description"
+    content="Módulo formativo sobre CRM, WhatsApp Business API, automatización, canales digitales, colaboración y seguridad para MIPYMES."
+  >
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #f5f6f8;
+      --surface: #ffffff;
+      --surface-soft: #fafbfc;
+      --surface-dark: #17201c;
+
+      --text: #17201c;
+      --muted: #66716b;
+      --faint: #929c96;
+
+      --border: #e2e7e4;
+      --border-strong: #cbd4cf;
+
+      --green: #236c4c;
+      --green-soft: #e8f4ee;
+      --green-border: #bedbc9;
+
+      --blue: #225e8d;
+      --blue-soft: #eaf3fa;
+      --blue-border: #bfd8eb;
+
+      --purple: #5b4c91;
+      --purple-soft: #f0edfa;
+      --purple-border: #d2caed;
+
+      --amber: #886019;
+      --amber-soft: #fbf2df;
+      --amber-border: #ead09c;
+
+      --coral: #934c37;
+      --coral-soft: #faece7;
+      --coral-border: #ebc3b6;
+
+      --radius-sm: 12px;
+      --radius-md: 18px;
+      --radius-lg: 26px;
+
+      --shadow:
+        0 18px 50px rgba(23, 32, 28, 0.06),
+        0 2px 8px rgba(23, 32, 28, 0.03);
+
+      --max-width: 1180px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(35, 108, 76, 0.07), transparent 28%),
+        var(--bg);
+      color: var(--text);
+      font-family: "DM Sans", sans-serif;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      width: min(calc(100% - 32px), var(--max-width));
+      margin: 0 auto;
+      padding: 24px 0 56px;
+    }
+
+    .eyebrow,
+    .section-label,
+    .card-label,
+    .metric-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border: 1px solid var(--green-border);
+      border-radius: 999px;
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .eyebrow-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .hero {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(248, 251, 249, 0.96)),
+        var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-top {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(310px, 0.65fr);
+      gap: 42px;
+      padding: 46px 44px 34px;
+    }
+
+    .hero h1 {
+      max-width: 760px;
+      margin-top: 18px;
+      font-size: clamp(2.35rem, 5vw, 4.4rem);
+      line-height: 0.98;
+      letter-spacing: -0.055em;
+    }
+
+    .hero-lead {
+      max-width: 780px;
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .hero-summary {
+      align-self: stretch;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .hero-summary h2 {
+      font-size: 1.15rem;
+      line-height: 1.3;
+    }
+
+    .hero-summary p {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .summary-list {
+      display: grid;
+      gap: 9px;
+      margin-top: 18px;
+    }
+
+    .summary-list div {
+      display: flex;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .summary-list span {
+      flex: 0 0 auto;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--green-soft);
+      color: var(--green);
+      font-size: 0.72rem;
+      font-weight: 700;
+      line-height: 22px;
+      text-align: center;
+    }
+
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--border);
+      background: var(--surface-soft);
+    }
+
+    .metric {
+      min-height: 116px;
+      padding: 22px 24px;
+      border-right: 1px solid var(--border);
+    }
+
+    .metric:last-child {
+      border-right: 0;
+    }
+
+    .metric-label {
+      color: var(--faint);
+    }
+
+    .metric-value {
+      margin-top: 6px;
+      font-size: 1.08rem;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 8px 30px rgba(23, 32, 28, 0.035);
+    }
+
+    .nav a {
+      padding: 8px 12px;
+      border-radius: 10px;
+      color: var(--muted);
+      font-size: 0.84rem;
+      font-weight: 600;
+      transition:
+        background 0.2s ease,
+        color 0.2s ease;
+    }
+
+    .nav a:hover {
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .section {
+      padding-top: 70px;
+      scroll-margin-top: 20px;
+    }
+
+    .section-head {
+      max-width: 820px;
+      margin-bottom: 22px;
+    }
+
+    .section-label {
+      margin-bottom: 10px;
+      color: var(--green);
+    }
+
+    .section-title {
+      font-size: clamp(1.9rem, 3.4vw, 3rem);
+      line-height: 1.08;
+      letter-spacing: -0.035em;
+    }
+
+    .section-description {
+      margin-top: 13px;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .grid-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .card-body {
+      padding: 22px;
+    }
+
+    .card-label {
+      display: inline-flex;
+      padding: 6px 9px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+
+    .label-green {
+      border-color: var(--green-border);
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .label-blue {
+      border-color: var(--blue-border);
+      background: var(--blue-soft);
+      color: var(--blue);
+    }
+
+    .label-purple {
+      border-color: var(--purple-border);
+      background: var(--purple-soft);
+      color: var(--purple);
+    }
+
+    .label-amber {
+      border-color: var(--amber-border);
+      background: var(--amber-soft);
+      color: var(--amber);
+    }
+
+    .label-coral {
+      border-color: var(--coral-border);
+      background: var(--coral-soft);
+      color: var(--coral);
+    }
+
+    .card h3 {
+      font-size: 1.18rem;
+      line-height: 1.28;
+    }
+
+    .card p {
+      margin-top: 9px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .justification-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.6fr);
+      gap: 18px;
+    }
+
+    .editorial-panel {
+      padding: 28px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .editorial-panel p {
+      color: var(--muted);
+    }
+
+    .editorial-panel p + p {
+      margin-top: 16px;
+    }
+
+    .problem-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .problem-item {
+      padding: 17px;
+      border: 1px solid var(--coral-border);
+      border-radius: 15px;
+      background: var(--coral-soft);
+    }
+
+    .problem-item strong {
+      display: block;
+      color: var(--coral);
+      font-size: 0.95rem;
+    }
+
+    .problem-item span {
+      display: block;
+      margin-top: 4px;
+      color: #765d55;
+      font-size: 0.84rem;
+    }
+
+    .callout {
+      display: flex;
+      gap: 14px;
+      margin-top: 18px;
+      padding: 19px 20px;
+      border: 1px solid var(--green-border);
+      border-radius: var(--radius-md);
+      background: var(--green-soft);
+    }
+
+    .callout-icon {
+      flex: 0 0 auto;
+      width: 36px;
+      height: 36px;
+      border-radius: 11px;
+      background: var(--green);
+      color: #ffffff;
+      font-weight: 700;
+      line-height: 36px;
+      text-align: center;
+    }
+
+    .callout strong {
+      display: block;
+      color: var(--green);
+    }
+
+    .callout p {
+      margin-top: 3px;
+      color: #4a6759;
+      font-size: 0.9rem;
+    }
+
+    .objectives {
+      counter-reset: objective;
+    }
+
+    .objective {
+      min-height: 190px;
+      padding: 22px;
+    }
+
+    .objective::before {
+      counter-increment: objective;
+      content: counter(objective, decimal-leading-zero);
+      display: block;
+      margin-bottom: 28px;
+      color: var(--green);
+      font-family: "DM Mono", monospace;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .objective h3 {
+      font-size: 1.03rem;
+      line-height: 1.4;
+    }
+
+    .topic-stack {
+      display: grid;
+      gap: 16px;
+    }
+
+    .topic-card {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .topic-intro {
+      padding: 26px;
+      border-right: 1px solid var(--border);
+      background: var(--surface-soft);
+    }
+
+    .topic-number {
+      display: inline-block;
+      margin-bottom: 18px;
+      color: var(--faint);
+      font-family: "DM Mono", monospace;
+      font-size: 0.78rem;
+    }
+
+    .topic-intro h3 {
+      font-size: 1.35rem;
+      line-height: 1.2;
+    }
+
+    .topic-intro p {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .topic-content {
+      padding: 26px;
+    }
+
+    .content-list {
+      display: grid;
+      gap: 13px;
+      list-style: none;
+    }
+
+    .content-list li {
+      position: relative;
+      padding-left: 22px;
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    .content-list li::before {
+      content: "";
+      position: absolute;
+      top: 0.62em;
+      left: 0;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+
+    .content-list strong {
+      color: var(--text);
+    }
+
+    .ecosystem {
+      margin-top: 18px;
+      padding: 28px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: var(--surface-dark);
+      color: #ffffff;
+      box-shadow: var(--shadow);
+    }
+
+    .ecosystem-head {
+      max-width: 760px;
+    }
+
+    .ecosystem-head .section-label {
+      color: #9ed1b7;
+    }
+
+    .ecosystem-head h3 {
+      font-size: 1.65rem;
+      line-height: 1.2;
+    }
+
+    .ecosystem-head p {
+      margin-top: 9px;
+      color: #b8c2bd;
+      font-size: 0.92rem;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(7, auto);
+      align-items: stretch;
+      justify-content: center;
+      gap: 11px;
+      margin-top: 28px;
+    }
+
+    .flow-node {
+      display: flex;
+      min-width: 138px;
+      min-height: 118px;
+      flex-direction: column;
+      justify-content: center;
+      padding: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.065);
+    }
+
+    .flow-node span {
+      color: #97aaa0;
+      font-family: "DM Mono", monospace;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+    }
+
+    .flow-node strong {
+      margin-top: 8px;
+      font-size: 0.95rem;
+      line-height: 1.25;
+    }
+
+    .flow-node small {
+      margin-top: 5px;
+      color: #b8c2bd;
+      font-size: 0.74rem;
+    }
+
+    .flow-arrow {
+      align-self: center;
+      color: #77ad91;
+      font-size: 1.25rem;
+    }
+
+    .principle-banner {
+      margin-top: 16px;
+      padding: 18px 20px;
+      border: 1px solid rgba(158, 209, 183, 0.28);
+      border-radius: 15px;
+      background: rgba(35, 108, 76, 0.22);
+      color: #d7e9df;
+      font-size: 0.9rem;
+    }
+
+    .principle-banner strong {
+      color: #ffffff;
+    }
+
+    .method-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+      gap: 18px;
+    }
+
+    .hours-panel {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .hour-card {
+      min-height: 170px;
+      padding: 21px;
+      border-radius: 16px;
+    }
+
+    .hour-card.primary {
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .hour-card.secondary {
+      background: var(--blue-soft);
+      color: var(--blue);
+    }
+
+    .hour-number {
+      display: block;
+      font-size: 3.5rem;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.06em;
+    }
+
+    .hour-card strong {
+      display: block;
+      margin-top: 10px;
+      font-size: 1rem;
+    }
+
+    .hour-card p {
+      margin-top: 7px;
+      color: currentColor;
+      font-size: 0.85rem;
+      opacity: 0.82;
+    }
+
+    .method-items {
+      display: grid;
+      gap: 11px;
+      margin-top: 14px;
+    }
+
+    .method-item {
+      display: flex;
+      gap: 13px;
+      padding: 15px 16px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--surface-soft);
+    }
+
+    .method-item span {
+      flex: 0 0 auto;
+      width: 29px;
+      height: 29px;
+      border-radius: 9px;
+      background: var(--purple-soft);
+      color: var(--purple);
+      font-family: "DM Mono", monospace;
+      font-size: 0.7rem;
+      line-height: 29px;
+      text-align: center;
+    }
+
+    .method-item strong {
+      display: block;
+      font-size: 0.92rem;
+    }
+
+    .method-item p {
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .virtual-classroom {
+      padding: 25px;
+      border: 1px solid var(--purple-border);
+      border-radius: var(--radius-md);
+      background: var(--purple-soft);
+    }
+
+    .virtual-classroom h3 {
+      color: var(--purple);
+      font-size: 1.25rem;
+    }
+
+    .virtual-classroom p {
+      margin-top: 10px;
+      color: #665d85;
+      font-size: 0.92rem;
+    }
+
+    .virtual-classroom .platform {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      margin-top: 24px;
+      padding: 16px;
+      border: 1px solid rgba(91, 76, 145, 0.18);
+      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.54);
+    }
+
+    .platform-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: var(--purple);
+      color: #ffffff;
+      font-weight: 700;
+      line-height: 42px;
+      text-align: center;
+    }
+
+    .platform strong {
+      display: block;
+      color: var(--text);
+    }
+
+    .platform span {
+      color: #665d85;
+      font-size: 0.8rem;
+    }
+
+    .requirements {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .requirement {
+      display: flex;
+      min-height: 142px;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .requirement-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      font-family: "DM Mono", monospace;
+      font-size: 0.74rem;
+      font-weight: 500;
+      line-height: 42px;
+      text-align: center;
+    }
+
+    .requirement strong {
+      display: block;
+      margin-top: 22px;
+      font-size: 0.98rem;
+    }
+
+    .evaluation-layout {
+      display: grid;
+      grid-template-columns: 310px minmax(0, 1fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .evaluation-total {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 26px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .donut {
+      position: relative;
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      background:
+        conic-gradient(
+          var(--green) 0 40%,
+          var(--blue) 40% 80%,
+          var(--purple) 80% 100%
+        );
+    }
+
+    .donut::after {
+      content: "";
+      position: absolute;
+      inset: 29px;
+      border-radius: 50%;
+      background: var(--surface);
+    }
+
+    .donut-center {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      display: grid;
+      place-content: center;
+    }
+
+    .donut-center strong {
+      font-size: 2.15rem;
+      line-height: 1;
+    }
+
+    .donut-center span {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.76rem;
+      text-transform: uppercase;
+    }
+
+    .evaluation-total p {
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 0.87rem;
+    }
+
+    .evaluation-items {
+      display: grid;
+      gap: 12px;
+    }
+
+    .evaluation-item {
+      display: grid;
+      grid-template-columns: 70px minmax(0, 1fr);
+      align-items: center;
+      gap: 18px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .evaluation-percentage {
+      font-size: 1.7rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+    }
+
+    .evaluation-item:nth-child(1) .evaluation-percentage {
+      color: var(--green);
+    }
+
+    .evaluation-item:nth-child(2) .evaluation-percentage {
+      color: var(--blue);
+    }
+
+    .evaluation-item:nth-child(3) .evaluation-percentage {
+      color: var(--purple);
+    }
+
+    .evaluation-item h3 {
+      font-size: 1rem;
+    }
+
+    .evaluation-item p {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    .footer {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 28px;
+      align-items: end;
+      margin-top: 72px;
+      padding: 34px;
+      border-radius: var(--radius-lg);
+      background: var(--surface-dark);
+      color: #ffffff;
+    }
+
+    .footer .section-label {
+      color: #9ed1b7;
+    }
+
+    .footer h2 {
+      max-width: 780px;
+      font-size: clamp(1.65rem, 3vw, 2.45rem);
+      line-height: 1.15;
+      letter-spacing: -0.035em;
+    }
+
+    .footer p {
+      max-width: 800px;
+      margin-top: 12px;
+      color: #b8c2bd;
+      font-size: 0.93rem;
+    }
+
+    .footer-badge {
+      padding: 10px 13px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 999px;
+      color: #d8e4dd;
+      font-family: "DM Mono", monospace;
+      font-size: 0.72rem;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 1020px) {
+      .hero-top,
+      .justification-layout,
+      .method-layout,
+      .evaluation-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-metrics,
+      .grid-4,
+      .requirements {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .metric:nth-child(2) {
+        border-right: 0;
+      }
+
+      .metric:nth-child(-n + 2) {
+        border-bottom: 1px solid var(--border);
+      }
+
+      .grid-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .topic-card {
+        grid-template-columns: 220px minmax(0, 1fr);
+      }
+
+      .flow {
+        grid-template-columns: 1fr;
+        justify-content: stretch;
+      }
+
+      .flow-node {
+        min-width: 0;
+        min-height: auto;
+      }
+
+      .flow-arrow {
+        transform: rotate(90deg);
+        justify-self: center;
+      }
+
+      .evaluation-total {
+        min-height: 320px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .page {
+        width: min(calc(100% - 22px), var(--max-width));
+        padding-top: 12px;
+      }
+
+      .hero-top {
+        gap: 28px;
+        padding: 30px 22px 24px;
+      }
+
+      .hero h1 {
+        font-size: 2.7rem;
+      }
+
+      .hero-metrics,
+      .grid-2,
+      .grid-3,
+      .grid-4,
+      .requirements,
+      .hours-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .metric {
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .metric:last-child {
+        border-bottom: 0;
+      }
+
+      .topic-card {
+        grid-template-columns: 1fr;
+      }
+
+      .topic-intro {
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .section {
+        padding-top: 54px;
+      }
+
+      .objective {
+        min-height: 0;
+      }
+
+      .evaluation-item {
+        grid-template-columns: 62px minmax(0, 1fr);
+        gap: 12px;
+      }
+
+      .footer {
+        grid-template-columns: 1fr;
+        padding: 26px 22px;
+      }
+
+      .footer-badge {
+        width: fit-content;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .hero h1 {
+        font-size: 2.25rem;
+      }
+
+      .hero-lead {
+        font-size: 1rem;
+      }
+
+      .editorial-panel,
+      .ecosystem,
+      .virtual-classroom {
+        padding: 21px;
+      }
+
+      .topic-intro,
+      .topic-content {
+        padding: 21px;
+      }
+
+      .donut {
+        width: 164px;
+        height: 164px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <header class="hero">
+      <div class="hero-top">
+        <div>
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            Módulo formativo
+          </div>
+
+          <h1>Herramientas digitales para MIPYMES</h1>
+
+          <p class="hero-lead">
+            Criterios, plataformas y prácticas para organizar la comunicación,
+            la gestión comercial, la colaboración y la seguridad digital de una
+            pequeña o mediana empresa.
+          </p>
+        </div>
+
+        <aside class="hero-summary">
+          <div>
+            <h2>Una base digital conectada, no una colección de aplicaciones.</h2>
+            <p>
+              El módulo prepara al facilitador para orientar la digitalización
+              inicial de una MIPYME con orden, visión estratégica y herramientas
+              prácticas.
+            </p>
+          </div>
+
+          <div class="summary-list">
+            <div>
+              <span>01</span>
+              CRM y seguimiento comercial
+            </div>
+            <div>
+              <span>02</span>
+              Canales, automatización e IA
+            </div>
+            <div>
+              <span>03</span>
+              Colaboración, TI y seguridad
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="hero-metrics" aria-label="Resumen del módulo">
+        <div class="metric">
+          <div class="metric-label">Duración en clase</div>
+          <div class="metric-value">6 horas</div>
+        </div>
+
+        <div class="metric">
+          <div class="metric-label">Trabajo autónomo</div>
+          <div class="metric-value">2 horas</div>
+        </div>
+
+        <div class="metric">
+          <div class="metric-label">Objetivos</div>
+          <div class="metric-value">8 resultados de aprendizaje</div>
+        </div>
+
+        <div class="metric">
+          <div class="metric-label">Enfoque</div>
+          <div class="metric-value">Digitalización inicial</div>
+        </div>
+      </div>
+    </header>
+
+    <nav class="nav" aria-label="Navegación del módulo">
+      <a href="#justificacion">Justificación</a>
+      <a href="#objetivos">Objetivos</a>
+      <a href="#contenidos">Contenidos</a>
+      <a href="#ecosistema">Ecosistema</a>
+      <a href="#metodologia">Metodología</a>
+      <a href="#requisitos">Requisitos</a>
+      <a href="#evaluacion">Evaluación</a>
+    </nav>
+
+    <section class="section" id="justificacion">
+      <div class="section-head">
+        <div class="section-label">Justificación del módulo</div>
+        <h2 class="section-title">
+          La digitalización necesita criterio antes que más herramientas
+        </h2>
+        <p class="section-description">
+          Las MIPYMES dependen diariamente de medios digitales para comunicarse,
+          vender y colaborar. El problema aparece cuando esas herramientas se
+          utilizan sin conexión, estructura o reglas mínimas.
+        </p>
+      </div>
+
+      <div class="justification-layout">
+        <article class="editorial-panel">
+          <p>
+            La mayoría de pequeñas y medianas empresas utiliza herramientas
+            digitales de manera desordenada o fragmentada. Esto puede generar
+            pérdida de información, mala atención al cliente y procesos
+            ineficientes.
+          </p>
+
+          <p>
+            El módulo prepara al facilitador para dominar el ecosistema digital
+            básico que toda MIPYME necesita: CRM, WhatsApp Business API,
+            automatización, WordPress, canales digitales, colaboración y
+            seguridad mínima viable.
+          </p>
+
+          <p>
+            Con este conocimiento podrá orientar estratégicamente a la empresa,
+            conectar sus herramientas y acelerar su proceso inicial de
+            digitalización.
+          </p>
+
+          <div class="callout">
+            <div class="callout-icon">✓</div>
+            <div>
+              <strong>Propósito central</strong>
+              <p>
+                Aportar criterio, visión y herramientas prácticas para construir
+                una operación digital más ordenada, conectada y sostenible.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <aside class="problem-list" aria-label="Errores frecuentes">
+          <div class="problem-item">
+            <strong>“Trabajar todo por WhatsApp”</strong>
+            <span>
+              La información queda distribuida entre conversaciones y personas.
+            </span>
+          </div>
+
+          <div class="problem-item">
+            <strong>“Usar seis canales sin CRM”</strong>
+            <span>
+              Los contactos y oportunidades no tienen un seguimiento centralizado.
+            </span>
+          </div>
+
+          <div class="problem-item">
+            <strong>“Tener páginas sin seguridad”</strong>
+            <span>
+              La presencia digital existe, pero sin controles mínimos de protección.
+            </span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="objetivos">
+      <div class="section-head">
+        <div class="section-label">Objetivos de aprendizaje</div>
+        <h2 class="section-title">
+          Qué podrá hacer el participante al finalizar
+        </h2>
+        <p class="section-description">
+          Los resultados combinan comprensión conceptual, análisis de
+          herramientas y capacidad de orientación práctica para MIPYMES.
+        </p>
+      </div>
+
+      <div class="grid grid-4 objectives">
+        <article class="card objective">
+          <h3>
+            Explicar la función, estructura y beneficios de un CRM en una MIPYME.
+          </h3>
+        </article>
+
+        <article class="card objective">
+          <h3>
+            Diferenciar un CRM de un ERP y reconocer cuándo es necesario cada uno.
+          </h3>
+        </article>
+
+        <article class="card objective">
+          <h3>
+            Comprender el rol de WhatsApp Business API dentro de la gestión comercial.
+          </h3>
+        </article>
+
+        <article class="card objective">
+          <h3>
+            Identificar los canales digitales esenciales y cómo se conectan entre sí.
+          </h3>
+        </article>
+
+        <article class="card objective">
+          <h3>
+            Comprender la automatización moderna y el rol emergente de la IA en los flujos operativos.
+          </h3>
+        </article>
+
+        <article class="card objective">
+          <h3>
+            Analizar herramientas de colaboración y gestión de TI adecuadas para MIPYMES.
+          </h3>
+        </article>
+
+        <article class="card objective">
+          <h3>
+            Orientar a la empresa en prácticas mínimas de seguridad digital y orden operativo.
+          </h3>
+        </article>
+
+        <article class="card objective">
+          <h3>
+            Evaluar LMS, gestores de proyectos y sistemas de certificación digital.
+          </h3>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="contenidos">
+      <div class="section-head">
+        <div class="section-label">Contenidos principales</div>
+        <h2 class="section-title">
+          Tres capacidades para construir una operación digital ordenada
+        </h2>
+        <p class="section-description">
+          El contenido avanza desde la gestión comercial y los canales de
+          contacto hasta la colaboración interna, el soporte y la seguridad.
+        </p>
+      </div>
+
+      <div class="topic-stack">
+        <article class="topic-card">
+          <div class="topic-intro">
+            <span class="topic-number">BLOQUE 01</span>
+            <div class="card-label label-green">Gestión comercial</div>
+            <h3>CRM + WhatsApp como canal principal de contacto</h3>
+            <p>
+              Una estructura para registrar contactos, organizar oportunidades y
+              dar seguimiento a cada interacción comercial.
+            </p>
+          </div>
+
+          <div class="topic-content">
+            <ul class="content-list">
+              <li>
+                <strong>Fundamentos del CRM:</strong> definición, leads, pipeline y seguimiento.
+              </li>
+              <li>
+                <strong>Modelos disponibles:</strong> soluciones SaaS y de código abierto.
+              </li>
+              <li>
+                <strong>Tipos de CRM:</strong> operativo, analítico y colaborativo.
+              </li>
+              <li>
+                <strong>CRM frente a ERP:</strong> diferencias y momento adecuado para utilizar cada sistema.
+              </li>
+              <li>
+                <strong>WhatsApp Business:</strong> diferencia entre la aplicación normal y WhatsApp Business API.
+              </li>
+              <li>
+                <strong>Integración:</strong> justificación de conectar WhatsApp Business API con el CRM.
+              </li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="topic-card">
+          <div class="topic-intro">
+            <span class="topic-number">BLOQUE 02</span>
+            <div class="card-label label-blue">Flujo operativo</div>
+            <h3>Canales digitales + automatización + IA</h3>
+            <p>
+              Una arquitectura básica para captar contactos, centralizar datos y
+              automatizar tareas repetitivas.
+            </p>
+          </div>
+
+          <div class="topic-content">
+            <ul class="content-list">
+              <li>
+                <strong>WhatsApp y Meta:</strong> verificación y uso del canal dentro de la operación digital.
+              </li>
+              <li>
+                <strong>WordPress:</strong> plataforma base para una presencia digital mínima.
+              </li>
+              <li>
+                <strong>Protección y medición:</strong> plugins de seguridad y analítica.
+              </li>
+              <li>
+                <strong>Conexión centralizada:</strong> WordPress → CRM → WhatsApp.
+              </li>
+              <li>
+                <strong>Automatización:</strong> Zapier, n8n y Make.
+              </li>
+              <li>
+                <strong>Procesos automatizables:</strong> registro de leads, mensajes automáticos y seguimiento.
+              </li>
+              <li>
+                <strong>Criterio de canales:</strong> comenzar con pocos canales bien conectados.
+              </li>
+              <li>
+                <strong>Error frecuente:</strong> operar múltiples canales sin un CRM central.
+              </li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="topic-card">
+          <div class="topic-intro">
+            <span class="topic-number">BLOQUE 03</span>
+            <div class="card-label label-purple">Operación interna</div>
+            <h3>Colaboración, gestión de TI y otras herramientas</h3>
+            <p>
+              Herramientas para coordinar equipos, gestionar solicitudes y
+              sostener controles operativos básicos.
+            </p>
+          </div>
+
+          <div class="topic-content">
+            <ul class="content-list">
+              <li>
+                <strong>Suites de productividad:</strong> Google Workspace y Microsoft 365.
+              </li>
+              <li>
+                <strong>Herramientas Microsoft:</strong> Outlook, OneDrive y Teams.
+              </li>
+              <li>
+                <strong>Equivalencias:</strong> comparación funcional entre los ecosistemas de Google y Microsoft.
+              </li>
+              <li>
+                <strong>IA ofimática:</strong> uso de asistentes dentro del trabajo cotidiano.
+              </li>
+              <li>
+                <strong>Gestión de TI:</strong> mesas de ayuda o helpdesk.
+              </li>
+              <li>
+                <strong>Controles mínimos:</strong> accesos, respaldos y seguridad digital básica.
+              </li>
+              <li>
+                <strong>Gestión y formación:</strong> Trello, Microsoft Planner y plataformas LMS.
+              </li>
+              <li>
+                <strong>Reconocimiento:</strong> certificación y badges digitales.
+              </li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="ecosistema">
+      <div class="section-head">
+        <div class="section-label">Arquitectura recomendada</div>
+        <h2 class="section-title">
+          De canales aislados a un flujo digital conectado
+        </h2>
+        <p class="section-description">
+          El objetivo no es utilizar la mayor cantidad de plataformas, sino
+          construir una secuencia simple en la que cada herramienta cumpla una
+          función clara.
+        </p>
+      </div>
+
+      <div class="ecosystem">
+        <div class="ecosystem-head">
+          <div class="section-label">Flujo de referencia</div>
+          <h3>Captar, registrar, responder y dar seguimiento</h3>
+          <p>
+            WordPress, el CRM, WhatsApp y las herramientas de automatización
+            forman una base operativa común para la gestión comercial.
+          </p>
+        </div>
+
+        <div class="flow" aria-label="Flujo digital de referencia">
+          <div class="flow-node">
+            <span>Entrada</span>
+            <strong>WordPress</strong>
+            <small>Presencia y formularios</small>
+          </div>
+
+          <div class="flow-arrow">→</div>
+
+          <div class="flow-node">
+            <span>Registro</span>
+            <strong>CRM</strong>
+            <small>Leads y pipeline</small>
+          </div>
+
+          <div class="flow-arrow">→</div>
+
+          <div class="flow-node">
+            <span>Contacto</span>
+            <strong>WhatsApp</strong>
+            <small>Atención y mensajes</small>
+          </div>
+
+          <div class="flow-arrow">→</div>
+
+          <div class="flow-node">
+            <span>Orquestación</span>
+            <strong>n8n · Make · Zapier</strong>
+            <small>Automatización y seguimiento</small>
+          </div>
+        </div>
+
+        <div class="principle-banner">
+          <strong>Principio del módulo:</strong>
+          pocos canales bien conectados producen más orden que múltiples
+          canales operando sin una fuente central de información.
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="metodologia">
+      <div class="section-head">
+        <div class="section-label">Metodología</div>
+        <h2 class="section-title">
+          Aprendizaje combinado: comprensión, participación y práctica
+        </h2>
+        <p class="section-description">
+          El módulo combina trabajo en clase con actividades autónomas
+          relacionadas directamente con los contenidos revisados.
+        </p>
+      </div>
+
+      <div class="method-layout">
+        <div>
+          <div class="hours-panel">
+            <article class="hour-card primary">
+              <span class="hour-number">6</span>
+              <strong>Horas de clase</strong>
+              <p>
+                Espacio principal para explicación, discusión y actividades grupales.
+              </p>
+            </article>
+
+            <article class="hour-card secondary">
+              <span class="hour-number">2</span>
+              <strong>Horas de trabajo autónomo</strong>
+              <p>
+                Tiempo dedicado a prácticas relacionadas con el módulo.
+              </p>
+            </article>
+          </div>
+
+          <div class="method-items">
+            <article class="method-item">
+              <span>01</span>
+              <div>
+                <strong>Participación en clase</strong>
+                <p>Interacción activa durante el desarrollo del módulo.</p>
+              </div>
+            </article>
+
+            <article class="method-item">
+              <span>02</span>
+              <div>
+                <strong>Lectura y revisión de contenido</strong>
+                <p>Consulta de materiales relacionados con las herramientas estudiadas.</p>
+              </div>
+            </article>
+
+            <article class="method-item">
+              <span>03</span>
+              <div>
+                <strong>Prácticas grupales</strong>
+                <p>Aplicación colaborativa de los conceptos y herramientas del módulo.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <aside class="virtual-classroom">
+          <div class="card-label label-purple">Canal principal</div>
+          <h3>Aula Virtual</h3>
+          <p>
+            Es el principal medio de comunicación del curso y el espacio
+            utilizado para entregar trabajos y tareas.
+          </p>
+
+          <div class="platform">
+            <div class="platform-icon">AV</div>
+            <div>
+              <strong>Comunicación y entregas</strong>
+              <span>Materiales, trabajos, tareas y seguimiento del curso.</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="requisitos">
+      <div class="section-head">
+        <div class="section-label">Requisitos técnicos</div>
+        <h2 class="section-title">
+          Lo necesario para participar en el módulo
+        </h2>
+        <p class="section-description">
+          El acceso al curso requiere dispositivos, conectividad y cuentas
+          digitales básicas.
+        </p>
+      </div>
+
+      <div class="requirements">
+        <article class="requirement">
+          <div class="requirement-icon">PC</div>
+          <strong>Laptop</strong>
+        </article>
+
+        <article class="requirement">
+          <div class="requirement-icon">NET</div>
+          <strong>Conexión a internet</strong>
+        </article>
+
+        <article class="requirement">
+          <div class="requirement-icon">GM</div>
+          <strong>Cuenta de Gmail</strong>
+        </article>
+
+        <article class="requirement">
+          <div class="requirement-icon">ZM</div>
+          <strong>Cuenta de Zoom</strong>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="evaluacion">
+      <div class="section-head">
+        <div class="section-label">Evaluación</div>
+        <h2 class="section-title">
+          Cómo se distribuye la calificación del módulo
+        </h2>
+        <p class="section-description">
+          La evaluación integra participación, comprobación de conocimientos y
+          aplicación práctica.
+        </p>
+      </div>
+
+      <div class="evaluation-layout">
+        <aside class="evaluation-total">
+          <div class="donut" aria-label="Distribución total de la evaluación">
+            <div class="donut-center">
+              <strong>100%</strong>
+              <span>Evaluación</span>
+            </div>
+          </div>
+
+          <p>
+            Tres componentes complementarios para valorar el proceso de aprendizaje.
+          </p>
+        </aside>
+
+        <div class="evaluation-items">
+          <article class="evaluation-item">
+            <div class="evaluation-percentage">40%</div>
+            <div>
+              <h3>Asistencia y participación en clase</h3>
+              <p>
+                Presencia e involucramiento durante las actividades del módulo.
+              </p>
+            </div>
+          </article>
+
+          <article class="evaluation-item">
+            <div class="evaluation-percentage">40%</div>
+            <div>
+              <h3>Examen del módulo</h3>
+              <p>
+                Comprobación de los conocimientos y conceptos revisados.
+              </p>
+            </div>
+          </article>
+
+          <article class="evaluation-item">
+            <div class="evaluation-percentage">20%</div>
+            <div>
+              <h3>Entrega de prácticas</h3>
+              <p>
+                Aplicación de los contenidos mediante los ejercicios asignados.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div>
+        <div class="section-label">Resultado esperado</div>
+        <h2>
+          Orientar a una MIPYME para que sus herramientas digitales trabajen como un sistema.
+        </h2>
+        <p>
+          El módulo proporciona una base para conectar la atención al cliente,
+          el seguimiento comercial, la automatización, la colaboración y la
+          seguridad mínima dentro de una operación más clara y eficiente.
+        </p>
+      </div>
+
+      <div class="footer-badge">MIPYMES · Módulo digital</div>
+    </footer>
+  </main>
+</body>
+</html>
