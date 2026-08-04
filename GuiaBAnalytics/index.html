@@ -1,1 +1,2693 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Business Analytics — Guía práctica para el facilitador</title>
+
+  <meta
+    name="description"
+    content="Guía práctica para facilitadores sobre Business Intelligence y Business Analytics en MIPYMES: datos, analítica, ETL, KPIs, dashboards y toma de decisiones."
+  >
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #f4f6f5;
+      --surface: #ffffff;
+      --surface-soft: #fafbfa;
+      --surface-dark: #17201d;
+
+      --text: #18201d;
+      --muted: #65706a;
+      --faint: #929b96;
+
+      --border: #e0e5e2;
+      --border-strong: #c7d0cb;
+
+      --teal: #226f67;
+      --teal-soft: #e6f3f1;
+      --teal-border: #b9d9d4;
+
+      --blue: #2c6390;
+      --blue-soft: #eaf3f9;
+      --blue-border: #bdd6e8;
+
+      --green: #34704f;
+      --green-soft: #eaf4ee;
+      --green-border: #bfdac9;
+
+      --purple: #5d4c8e;
+      --purple-soft: #f0edfa;
+      --purple-border: #d1c8eb;
+
+      --amber: #8a611b;
+      --amber-soft: #fbf2df;
+      --amber-border: #e9cf99;
+
+      --coral: #944c39;
+      --coral-soft: #faece7;
+      --coral-border: #eac0b2;
+
+      --radius-sm: 12px;
+      --radius-md: 18px;
+      --radius-lg: 28px;
+
+      --shadow:
+        0 18px 48px rgba(24, 32, 29, 0.055),
+        0 2px 8px rgba(24, 32, 29, 0.025);
+
+      --max-width: 1180px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(
+          circle at 8% 0%,
+          rgba(34, 111, 103, 0.09),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 96% 10%,
+          rgba(44, 99, 144, 0.065),
+          transparent 24%
+        ),
+        var(--bg);
+      color: var(--text);
+      font-family: "DM Sans", sans-serif;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      width: min(calc(100% - 32px), var(--max-width));
+      margin: 0 auto;
+      padding: 24px 0 64px;
+    }
+
+    .eyebrow,
+    .section-label,
+    .tag,
+    .mini-label,
+    .number-label {
+      font-size: 0.71rem;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 7px 12px;
+      border: 1px solid var(--teal-border);
+      border-radius: 999px;
+      background: var(--teal-soft);
+      color: var(--teal);
+    }
+
+    .eyebrow-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .hero {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.99),
+          rgba(247, 251, 250, 0.97)
+        );
+      box-shadow: var(--shadow);
+    }
+
+    .hero-main {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(310px, 0.65fr);
+      gap: 42px;
+      padding: 48px 44px 36px;
+    }
+
+    .hero h1 {
+      max-width: 880px;
+      margin-top: 18px;
+      font-size: clamp(2.45rem, 5.2vw, 4.75rem);
+      line-height: 0.98;
+      letter-spacing: -0.06em;
+    }
+
+    .hero-lead {
+      max-width: 830px;
+      margin-top: 23px;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .hero-side {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 23px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.76);
+    }
+
+    .hero-side h2 {
+      font-size: 1.24rem;
+      line-height: 1.28;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-side p {
+      margin-top: 9px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .hero-list {
+      display: grid;
+      gap: 9px;
+    }
+
+    .hero-list div {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 10px 11px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--surface-soft);
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    .hero-list span {
+      flex: 0 0 auto;
+      width: 24px;
+      height: 24px;
+      border-radius: 8px;
+      background: var(--teal-soft);
+      color: var(--teal);
+      font-family: "DM Mono", monospace;
+      font-size: 0.66rem;
+      line-height: 24px;
+      text-align: center;
+    }
+
+    .hero-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      border-top: 1px solid var(--border);
+      background: var(--surface-soft);
+    }
+
+    .hero-stat {
+      min-height: 112px;
+      padding: 21px 22px;
+      border-right: 1px solid var(--border);
+    }
+
+    .hero-stat:last-child {
+      border-right: 0;
+    }
+
+    .mini-label {
+      color: var(--faint);
+    }
+
+    .hero-stat strong {
+      display: block;
+      margin-top: 7px;
+      font-size: 1.03rem;
+      line-height: 1.28;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 18px;
+      padding: 11px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.84);
+      box-shadow: 0 9px 28px rgba(24, 32, 29, 0.035);
+    }
+
+    .nav a {
+      padding: 8px 11px;
+      border-radius: 10px;
+      color: var(--muted);
+      font-size: 0.81rem;
+      font-weight: 600;
+      transition:
+        color 0.2s ease,
+        background 0.2s ease;
+    }
+
+    .nav a:hover {
+      background: var(--teal-soft);
+      color: var(--teal);
+    }
+
+    .section {
+      padding-top: 72px;
+      scroll-margin-top: 20px;
+    }
+
+    .section-head {
+      max-width: 880px;
+      margin-bottom: 23px;
+    }
+
+    .section-label {
+      margin-bottom: 9px;
+      color: var(--teal);
+    }
+
+    .section-title {
+      font-size: clamp(1.95rem, 3.6vw, 3.15rem);
+      line-height: 1.07;
+      letter-spacing: -0.04em;
+    }
+
+    .section-description {
+      margin-top: 13px;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .grid-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .card {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .card-body {
+      padding: 22px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 9px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+
+    .tag-teal {
+      border-color: var(--teal-border);
+      background: var(--teal-soft);
+      color: var(--teal);
+    }
+
+    .tag-blue {
+      border-color: var(--blue-border);
+      background: var(--blue-soft);
+      color: var(--blue);
+    }
+
+    .tag-green {
+      border-color: var(--green-border);
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .tag-purple {
+      border-color: var(--purple-border);
+      background: var(--purple-soft);
+      color: var(--purple);
+    }
+
+    .tag-amber {
+      border-color: var(--amber-border);
+      background: var(--amber-soft);
+      color: var(--amber);
+    }
+
+    .tag-coral {
+      border-color: var(--coral-border);
+      background: var(--coral-soft);
+      color: var(--coral);
+    }
+
+    .card h3 {
+      font-size: 1.18rem;
+      line-height: 1.28;
+      letter-spacing: -0.015em;
+    }
+
+    .card p {
+      margin-top: 9px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .intro-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(300px, 0.7fr);
+      gap: 18px;
+    }
+
+    .editorial-panel {
+      padding: 29px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .editorial-panel p {
+      color: var(--muted);
+    }
+
+    .editorial-panel p + p {
+      margin-top: 15px;
+    }
+
+    .editorial-panel .lead-line {
+      color: var(--text);
+      font-size: 1.15rem;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+
+    .question-stack {
+      display: grid;
+      gap: 10px;
+    }
+
+    .business-question {
+      padding: 15px 16px;
+      border: 1px solid var(--blue-border);
+      border-radius: 14px;
+      background: var(--blue-soft);
+      color: #506d82;
+      font-size: 0.87rem;
+      font-weight: 600;
+    }
+
+    .callout {
+      display: flex;
+      gap: 14px;
+      margin-top: 18px;
+      padding: 19px 20px;
+      border: 1px solid var(--teal-border);
+      border-radius: var(--radius-md);
+      background: var(--teal-soft);
+    }
+
+    .callout-icon {
+      flex: 0 0 auto;
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      background: var(--teal);
+      color: #ffffff;
+      font-weight: 700;
+      line-height: 38px;
+      text-align: center;
+    }
+
+    .callout strong {
+      display: block;
+      color: var(--teal);
+    }
+
+    .callout p {
+      margin-top: 3px;
+      color: #4d6d68;
+      font-size: 0.88rem;
+    }
+
+    .data-journey {
+      padding: 30px;
+      border-radius: var(--radius-lg);
+      background: var(--surface-dark);
+      color: #ffffff;
+      box-shadow: var(--shadow);
+    }
+
+    .data-journey .section-label {
+      color: #95d3cc;
+    }
+
+    .data-journey h3 {
+      max-width: 850px;
+      font-size: 1.75rem;
+      line-height: 1.18;
+      letter-spacing: -0.03em;
+    }
+
+    .data-journey > p {
+      max-width: 820px;
+      margin-top: 10px;
+      color: #bbc5c0;
+      font-size: 0.91rem;
+    }
+
+    .journey-flow {
+      display: grid;
+      grid-template-columns: repeat(7, auto);
+      align-items: stretch;
+      justify-content: center;
+      gap: 11px;
+      margin-top: 29px;
+    }
+
+    .journey-node {
+      display: flex;
+      min-width: 170px;
+      min-height: 138px;
+      flex-direction: column;
+      justify-content: center;
+      padding: 17px;
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .journey-node span {
+      color: #91a49e;
+      font-family: "DM Mono", monospace;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+    }
+
+    .journey-node strong {
+      margin-top: 7px;
+      font-size: 1rem;
+    }
+
+    .journey-node small {
+      margin-top: 5px;
+      color: #bbc5c0;
+      font-size: 0.72rem;
+    }
+
+    .journey-arrow {
+      align-self: center;
+      color: #7eb9b1;
+      font-size: 1.25rem;
+    }
+
+    .journey-rule {
+      margin-top: 18px;
+      padding: 17px 19px;
+      border: 1px solid rgba(149, 211, 204, 0.25);
+      border-radius: 14px;
+      background: rgba(34, 111, 103, 0.22);
+      color: #e3f0ed;
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    .level-card {
+      min-height: 290px;
+    }
+
+    .level-question {
+      display: inline-flex;
+      margin-top: 17px;
+      padding: 9px 11px;
+      border-radius: 10px;
+      font-family: "DM Mono", monospace;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    .level-card:nth-child(1) .level-question {
+      background: var(--blue-soft);
+      color: var(--blue);
+    }
+
+    .level-card:nth-child(2) .level-question {
+      background: var(--amber-soft);
+      color: var(--amber);
+    }
+
+    .level-card:nth-child(3) .level-question {
+      background: var(--purple-soft);
+      color: var(--purple);
+    }
+
+    .level-card:nth-child(4) .level-question {
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .feature-list {
+      display: grid;
+      gap: 11px;
+      margin-top: 16px;
+      list-style: none;
+    }
+
+    .feature-list li {
+      position: relative;
+      padding-left: 21px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .feature-list li::before {
+      content: "";
+      position: absolute;
+      top: 0.62em;
+      left: 0;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--teal);
+    }
+
+    .feature-list strong {
+      color: var(--text);
+    }
+
+    .comparison-table {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 17px 19px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: var(--surface-soft);
+      color: var(--faint);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    td {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    td strong {
+      color: var(--text);
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .source-layout {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .source-card {
+      min-height: 370px;
+    }
+
+    .source-card .feature-list {
+      margin-top: 18px;
+    }
+
+    .example-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .example-pill {
+      padding: 7px 10px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--surface-soft);
+      color: var(--muted);
+      font-size: 0.76rem;
+      font-weight: 600;
+    }
+
+    .dispersion-panel {
+      margin-top: 18px;
+      padding: 29px;
+      border: 1px solid var(--amber-border);
+      border-radius: var(--radius-lg);
+      background: var(--amber-soft);
+    }
+
+    .dispersion-panel h3 {
+      color: var(--amber);
+      font-size: 1.45rem;
+      line-height: 1.2;
+    }
+
+    .dispersion-panel > p {
+      margin-top: 9px;
+      color: #755f3b;
+    }
+
+    .dispersion-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .dispersion-item {
+      padding: 14px;
+      border: 1px solid rgba(138, 97, 27, 0.16);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    .dispersion-item span {
+      color: var(--amber);
+      font-family: "DM Mono", monospace;
+      font-size: 0.66rem;
+      text-transform: uppercase;
+    }
+
+    .dispersion-item strong {
+      display: block;
+      margin-top: 7px;
+      font-size: 0.86rem;
+    }
+
+    .etl-layout {
+      display: grid;
+      grid-template-columns: repeat(5, auto);
+      align-items: stretch;
+      justify-content: center;
+      gap: 13px;
+      margin-top: 20px;
+    }
+
+    .etl-step {
+      min-width: 230px;
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .etl-step span {
+      color: var(--faint);
+      font-family: "DM Mono", monospace;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+    }
+
+    .etl-step h3 {
+      margin-top: 19px;
+      font-size: 1.25rem;
+    }
+
+    .etl-step p {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    .etl-arrow {
+      align-self: center;
+      color: var(--teal);
+      font-size: 1.25rem;
+    }
+
+    .quality-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 13px;
+      margin-top: 18px;
+    }
+
+    .quality-item {
+      padding: 17px;
+      border: 1px solid var(--coral-border);
+      border-radius: 14px;
+      background: var(--coral-soft);
+    }
+
+    .quality-item strong {
+      display: block;
+      color: var(--coral);
+      font-size: 0.9rem;
+    }
+
+    .quality-item p {
+      margin-top: 4px;
+      color: #755b53;
+      font-size: 0.81rem;
+    }
+
+    .dashboard-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+      gap: 18px;
+    }
+
+    .dashboard-preview {
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .dashboard-bar {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .dashboard-bar strong {
+      font-size: 1rem;
+    }
+
+    .dashboard-bar span {
+      color: var(--faint);
+      font-family: "DM Mono", monospace;
+      font-size: 0.68rem;
+    }
+
+    .dashboard-kpis {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .dashboard-kpi {
+      padding: 15px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: var(--surface-soft);
+    }
+
+    .dashboard-kpi span {
+      color: var(--faint);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+    }
+
+    .dashboard-kpi strong {
+      display: block;
+      margin-top: 7px;
+      font-size: 1.35rem;
+      letter-spacing: -0.04em;
+    }
+
+    .chart-area {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(170px, 0.7fr);
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .line-chart,
+    .ranking {
+      min-height: 225px;
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--surface-soft);
+    }
+
+    .chart-title {
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 11px;
+      height: 145px;
+      margin-top: 21px;
+      padding: 0 7px;
+      border-bottom: 1px solid var(--border-strong);
+    }
+
+    .bar {
+      flex: 1;
+      min-width: 18px;
+      border-radius: 6px 6px 0 0;
+      background: linear-gradient(180deg, var(--teal), #5fa69e);
+    }
+
+    .bar:nth-child(1) {
+      height: 38%;
+    }
+
+    .bar:nth-child(2) {
+      height: 54%;
+    }
+
+    .bar:nth-child(3) {
+      height: 46%;
+    }
+
+    .bar:nth-child(4) {
+      height: 74%;
+    }
+
+    .bar:nth-child(5) {
+      height: 66%;
+    }
+
+    .bar:nth-child(6) {
+      height: 88%;
+    }
+
+    .ranking-list {
+      display: grid;
+      gap: 9px;
+      margin-top: 17px;
+    }
+
+    .ranking-item {
+      display: grid;
+      grid-template-columns: 22px minmax(0, 1fr);
+      gap: 8px;
+      align-items: center;
+      padding: 8px 9px;
+      border-radius: 9px;
+      background: var(--surface);
+      color: var(--muted);
+      font-size: 0.75rem;
+    }
+
+    .ranking-item span {
+      color: var(--teal);
+      font-family: "DM Mono", monospace;
+      font-size: 0.68rem;
+    }
+
+    .dashboard-rules {
+      display: grid;
+      gap: 11px;
+    }
+
+    .dashboard-rule {
+      padding: 17px;
+      border: 1px solid var(--green-border);
+      border-radius: 14px;
+      background: var(--green-soft);
+    }
+
+    .dashboard-rule strong {
+      display: block;
+      color: var(--green);
+      font-size: 0.91rem;
+    }
+
+    .dashboard-rule p {
+      margin-top: 4px;
+      color: #526d5e;
+      font-size: 0.81rem;
+    }
+
+    .kpi-tabs {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .kpi-group {
+      min-height: 340px;
+      padding: 21px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .kpi-group h3 {
+      margin-top: 4px;
+      font-size: 1.15rem;
+    }
+
+    .kpi-group:nth-child(1) h3 {
+      color: var(--teal);
+    }
+
+    .kpi-group:nth-child(2) h3 {
+      color: var(--blue);
+    }
+
+    .kpi-group:nth-child(3) h3 {
+      color: var(--purple);
+    }
+
+    .kpi-group:nth-child(4) h3 {
+      color: var(--green);
+    }
+
+    .implementation {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      background: var(--surface-dark);
+      color: #ffffff;
+      box-shadow: var(--shadow);
+    }
+
+    .implementation-side {
+      display: grid;
+      place-content: center;
+      min-height: 390px;
+      padding: 28px;
+      border-right: 1px solid rgba(255, 255, 255, 0.12);
+      background:
+        radial-gradient(
+          circle at center,
+          rgba(34, 111, 103, 0.36),
+          transparent 62%
+        );
+      text-align: center;
+    }
+
+    .implementation-side strong {
+      font-size: 6.5rem;
+      line-height: 0.9;
+      letter-spacing: -0.08em;
+    }
+
+    .implementation-side span {
+      margin-top: 14px;
+      color: #b7d4cf;
+      font-family: "DM Mono", monospace;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+    }
+
+    .implementation-content {
+      padding: 31px;
+    }
+
+    .implementation-content .section-label {
+      color: #95d3cc;
+    }
+
+    .implementation-content h3 {
+      font-size: 1.7rem;
+      line-height: 1.2;
+    }
+
+    .implementation-content > p {
+      margin-top: 10px;
+      color: #bbc5c0;
+      font-size: 0.9rem;
+    }
+
+    .implementation-steps {
+      display: grid;
+      gap: 10px;
+      margin-top: 22px;
+      counter-reset: implementation;
+    }
+
+    .implementation-step {
+      display: grid;
+      grid-template-columns: 35px minmax(0, 1fr);
+      gap: 11px;
+      padding: 13px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.055);
+    }
+
+    .implementation-step::before {
+      counter-increment: implementation;
+      content: counter(implementation, decimal-leading-zero);
+      color: #95d3cc;
+      font-family: "DM Mono", monospace;
+      font-size: 0.69rem;
+    }
+
+    .implementation-step strong {
+      display: block;
+      color: #f0f1ef;
+      font-size: 0.84rem;
+    }
+
+    .implementation-step p {
+      margin-top: 3px;
+      color: #bbc5c0;
+      font-size: 0.77rem;
+    }
+
+    .facilitator-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 13px;
+      margin-top: 18px;
+    }
+
+    .facilitator-action {
+      padding: 18px;
+      border: 1px solid var(--teal-border);
+      border-radius: 14px;
+      background: var(--teal-soft);
+    }
+
+    .facilitator-action span {
+      color: var(--teal);
+      font-family: "DM Mono", monospace;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+    }
+
+    .facilitator-action strong {
+      display: block;
+      margin-top: 12px;
+      font-size: 0.92rem;
+    }
+
+    .capsule {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(290px, 0.75fr);
+      gap: 18px;
+    }
+
+    .capsule-main {
+      padding: 29px;
+      border: 1px solid var(--teal-border);
+      border-radius: var(--radius-md);
+      background: var(--teal-soft);
+    }
+
+    .capsule-main h3 {
+      color: var(--teal);
+      font-size: 1.5rem;
+      line-height: 1.2;
+    }
+
+    .capsule-main > p {
+      margin-top: 11px;
+      color: #4f6f69;
+    }
+
+    .practice-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 21px;
+    }
+
+    .practice {
+      display: flex;
+      gap: 11px;
+      padding: 12px 13px;
+      border: 1px solid rgba(34, 111, 103, 0.14);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.55);
+      color: #4d6c66;
+      font-size: 0.84rem;
+    }
+
+    .practice span {
+      flex: 0 0 auto;
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .capsule-side {
+      display: grid;
+      gap: 11px;
+    }
+
+    .capsule-card {
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .capsule-card span {
+      color: var(--faint);
+      font-family: "DM Mono", monospace;
+      font-size: 0.67rem;
+      text-transform: uppercase;
+    }
+
+    .capsule-card strong {
+      display: block;
+      margin-top: 9px;
+      font-size: 0.96rem;
+      line-height: 1.34;
+    }
+
+    .activities {
+      counter-reset: activity;
+    }
+
+    .activity {
+      min-height: 430px;
+    }
+
+    .activity::before {
+      counter-increment: activity;
+      content: "ACTIVIDAD " counter(activity, decimal-leading-zero);
+      display: block;
+      padding: 15px 20px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface-soft);
+      color: var(--faint);
+      font-family: "DM Mono", monospace;
+      font-size: 0.68rem;
+    }
+
+    .activity-objective {
+      margin-top: 16px;
+      padding: 13px;
+      border: 1px solid var(--blue-border);
+      border-radius: 12px;
+      background: var(--blue-soft);
+    }
+
+    .activity-objective strong {
+      display: block;
+      color: var(--blue);
+      font-size: 0.77rem;
+      text-transform: uppercase;
+    }
+
+    .activity-objective p {
+      margin-top: 4px;
+      color: #526f83;
+      font-size: 0.81rem;
+    }
+
+    .product {
+      margin-top: 16px;
+      padding-top: 15px;
+      border-top: 1px solid var(--border);
+    }
+
+    .product strong {
+      color: var(--green);
+      font-size: 0.77rem;
+      text-transform: uppercase;
+    }
+
+    .product p {
+      margin-top: 4px;
+    }
+
+    .final-panel {
+      margin-top: 72px;
+      padding: 35px;
+      border-radius: var(--radius-lg);
+      background: var(--surface-dark);
+      color: #ffffff;
+      box-shadow: var(--shadow);
+    }
+
+    .final-panel .section-label {
+      color: #95d3cc;
+    }
+
+    .final-panel h2 {
+      max-width: 940px;
+      font-size: clamp(1.75rem, 3.5vw, 2.9rem);
+      line-height: 1.12;
+      letter-spacing: -0.04em;
+    }
+
+    .final-panel p {
+      max-width: 880px;
+      margin-top: 13px;
+      color: #bbc5c0;
+      font-size: 0.92rem;
+    }
+
+    .final-rule {
+      margin-top: 24px;
+      padding: 17px 19px;
+      border: 1px solid rgba(149, 211, 204, 0.25);
+      border-radius: 14px;
+      background: rgba(34, 111, 103, 0.24);
+      color: #e4f0ed;
+      font-size: 0.94rem;
+      font-weight: 600;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      margin-top: 30px;
+      padding: 20px 4px 0;
+      color: var(--faint);
+      font-size: 0.75rem;
+    }
+
+    @media (max-width: 1080px) {
+      .hero-main,
+      .intro-layout,
+      .dashboard-layout,
+      .capsule {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-strip,
+      .grid-4,
+      .kpi-tabs,
+      .dispersion-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .grid-3,
+      .quality-grid,
+      .facilitator-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .journey-flow {
+        grid-template-columns: 1fr;
+        justify-content: stretch;
+      }
+
+      .journey-node {
+        min-width: 0;
+        min-height: auto;
+      }
+
+      .journey-arrow {
+        justify-self: center;
+        transform: rotate(90deg);
+      }
+
+      .etl-layout {
+        grid-template-columns: 1fr;
+        justify-content: stretch;
+      }
+
+      .etl-step {
+        min-width: 0;
+      }
+
+      .etl-arrow {
+        justify-self: center;
+        transform: rotate(90deg);
+      }
+
+      .implementation {
+        grid-template-columns: 220px minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 820px) {
+      .source-layout,
+      .grid-2,
+      .grid-3,
+      .grid-4,
+      .kpi-tabs,
+      .quality-grid,
+      .facilitator-grid,
+      .dispersion-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .implementation {
+        grid-template-columns: 1fr;
+      }
+
+      .implementation-side {
+        min-height: 220px;
+        border-right: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      .chart-area {
+        grid-template-columns: 1fr;
+      }
+
+      .dashboard-kpis {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .page {
+        width: min(calc(100% - 22px), var(--max-width));
+        padding-top: 12px;
+      }
+
+      .hero-main {
+        padding: 31px 22px 25px;
+      }
+
+      .hero h1 {
+        font-size: 2.25rem;
+      }
+
+      .hero-lead {
+        font-size: 0.99rem;
+      }
+
+      .hero-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-stat {
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .hero-stat:last-child {
+        border-bottom: 0;
+      }
+
+      .section {
+        padding-top: 55px;
+      }
+
+      .editorial-panel,
+      .data-journey,
+      .capsule-main,
+      .final-panel {
+        padding: 23px;
+      }
+
+      .source-card,
+      .level-card,
+      .activity {
+        min-height: 0;
+      }
+
+      .footer {
+        flex-direction: column;
+        gap: 7px;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .hero-side,
+      .card-body,
+      .implementation-content {
+        padding: 19px;
+      }
+
+      .implementation-side strong {
+        font-size: 5rem;
+      }
+
+      th,
+      td {
+        padding: 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <header class="hero">
+      <div class="hero-main">
+        <div>
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            Guía práctica para el facilitador
+          </div>
+
+          <h1>Business Analytics</h1>
+
+          <p class="hero-lead">
+            Una guía para ayudar a las MIPYMES a transformar datos dispersos en
+            información, conocimiento y decisiones que mejoren su operación.
+          </p>
+        </div>
+
+        <aside class="hero-side">
+          <div>
+            <h2>El análisis comienza con una pregunta del negocio.</h2>
+            <p>
+              La herramienta viene después. Primero se identifica qué necesita
+              comprender la empresa y qué datos pueden responderlo.
+            </p>
+          </div>
+
+          <div class="hero-list">
+            <div>
+              <span>01</span>
+              Organizar la información disponible
+            </div>
+
+            <div>
+              <span>02</span>
+              Definir pocos indicadores relevantes
+            </div>
+
+            <div>
+              <span>03</span>
+              Convertir hallazgos en acciones
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="hero-strip">
+        <div class="hero-stat">
+          <div class="mini-label">Proceso central</div>
+          <strong>Datos → información → conocimiento → decisión</strong>
+        </div>
+
+        <div class="hero-stat">
+          <div class="mini-label">Preparación</div>
+          <strong>Extracción, transformación y carga</strong>
+        </div>
+
+        <div class="hero-stat">
+          <div class="mini-label">Visualización</div>
+          <strong>KPIs, gráficos y dashboards</strong>
+        </div>
+
+        <div class="hero-stat">
+          <div class="mini-label">Resultado</div>
+          <strong>Decisiones basadas en evidencia</strong>
+        </div>
+      </div>
+    </header>
+
+    <nav class="nav" aria-label="Navegación de la guía">
+      <a href="#bi">Qué es BI</a>
+      <a href="#proceso">Datos y conocimiento</a>
+      <a href="#analitica">Tipos de analítica</a>
+      <a href="#fuentes">Fuentes</a>
+      <a href="#etl">ETL</a>
+      <a href="#dashboards">Dashboards</a>
+      <a href="#kpis">KPIs</a>
+      <a href="#aplicacion">Aplicación</a>
+      <a href="#capsula">Cápsula</a>
+      <a href="#actividades">Actividades</a>
+    </nav>
+
+    <section class="section" id="bi">
+      <div class="section-head">
+        <div class="section-label">Business Intelligence</div>
+
+        <h2 class="section-title">
+          Comprender qué ocurre, por qué ocurre y qué hacer
+        </h2>
+
+        <p class="section-description">
+          Business Intelligence reúne procesos, metodologías y herramientas para
+          transformar datos en información útil para la toma de decisiones.
+        </p>
+      </div>
+
+      <div class="intro-layout">
+        <article class="editorial-panel">
+          <p class="lead-line">
+            El propósito del BI no es acumular datos, sino utilizarlos para comprender mejor el negocio.
+          </p>
+
+          <p>
+            Una MIPYME puede analizar información de ventas, clientes, inventario,
+            campañas de marketing, costos y canales de atención.
+          </p>
+
+          <p>
+            Al organizar esa información, la empresa puede detectar oportunidades,
+            optimizar recursos y reducir la dependencia de decisiones improvisadas.
+          </p>
+
+          <p>
+            La experiencia y la intuición continúan siendo valiosas, pero el
+            análisis de datos permite reducir incertidumbre y fundamentar mejor las acciones.
+          </p>
+
+          <div class="callout">
+            <div class="callout-icon">→</div>
+
+            <div>
+              <strong>De la intuición a la evidencia</strong>
+              <p>
+                El objetivo es complementar la experiencia empresarial con
+                información organizada y verificable.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <aside class="question-stack">
+          <div class="business-question">
+            ¿Qué productos se venden más?
+          </div>
+
+          <div class="business-question">
+            ¿Qué clientes compran con mayor frecuencia?
+          </div>
+
+          <div class="business-question">
+            ¿Qué canales generan mejores resultados?
+          </div>
+
+          <div class="business-question">
+            ¿Qué problemas operativos afectan las ventas?
+          </div>
+
+          <div class="business-question">
+            ¿Qué decisiones pueden tomarse con base en datos?
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="proceso">
+      <div class="section-head">
+        <div class="section-label">Datos, información y conocimiento</div>
+
+        <h2 class="section-title">
+          Los datos adquieren valor cuando se interpretan
+        </h2>
+
+        <p class="section-description">
+          Los registros básicos de la operación deben organizarse y analizarse
+          antes de convertirse en conocimiento útil para la empresa.
+        </p>
+      </div>
+
+      <div class="grid grid-3">
+        <article class="card">
+          <div class="card-body">
+            <div class="tag tag-blue">Nivel 01</div>
+            <h3>Datos</h3>
+            <p>
+              Registros básicos generados por las actividades diarias.
+            </p>
+
+            <ul class="feature-list">
+              <li>Fecha de una venta.</li>
+              <li>Monto de una factura.</li>
+              <li>Cantidad de productos vendidos.</li>
+              <li>Número de clientes atendidos.</li>
+              <li>Nivel de inventario.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-body">
+            <div class="tag tag-teal">Nivel 02</div>
+            <h3>Información</h3>
+            <p>
+              Datos ordenados o agrupados para responder preguntas concretas.
+            </p>
+
+            <ul class="feature-list">
+              <li>Ventas totales del mes.</li>
+              <li>Productos más vendidos.</li>
+              <li>Clientes frecuentes.</li>
+              <li>Stock disponible por producto.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-body">
+            <div class="tag tag-green">Nivel 03</div>
+            <h3>Conocimiento</h3>
+            <p>
+              Interpretación de la información dentro del contexto del negocio.
+            </p>
+
+            <ul class="feature-list">
+              <li>Productos con mayor rentabilidad.</li>
+              <li>Clientes que aportan más ingresos.</li>
+              <li>Campañas con mejores resultados.</li>
+              <li>Problemas que afectan la operación.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+
+      <div class="data-journey" style="margin-top:18px;">
+        <div class="section-label">Proceso básico del BI</div>
+
+        <h3>
+          Convertir registros dispersos en una acción empresarial
+        </h3>
+
+        <p>
+          Cada etapa añade contexto y utilidad hasta llegar a una decisión que
+          puede ejecutarse y revisarse.
+        </p>
+
+        <div class="journey-flow" aria-label="Proceso de Business Intelligence">
+          <div class="journey-node">
+            <span>Etapa 01</span>
+            <strong>Datos</strong>
+            <small>Registros de la operación</small>
+          </div>
+
+          <div class="journey-arrow">→</div>
+
+          <div class="journey-node">
+            <span>Etapa 02</span>
+            <strong>Información</strong>
+            <small>Datos ordenados</small>
+          </div>
+
+          <div class="journey-arrow">→</div>
+
+          <div class="journey-node">
+            <span>Etapa 03</span>
+            <strong>Conocimiento</strong>
+            <small>Interpretación y contexto</small>
+          </div>
+
+          <div class="journey-arrow">→</div>
+
+          <div class="journey-node">
+            <span>Etapa 04</span>
+            <strong>Decisión</strong>
+            <small>Acción fundamentada</small>
+          </div>
+        </div>
+
+        <div class="journey-rule">
+          El valor no está en tener datos, sino en convertirlos en decisiones útiles.
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="analitica">
+      <div class="section-head">
+        <div class="section-label">Tipos de analítica</div>
+
+        <h2 class="section-title">
+          Cuatro preguntas para comprender y actuar
+        </h2>
+
+        <p class="section-description">
+          Cada nivel de analítica responde una pregunta diferente y permite que la
+          empresa avance progresivamente hacia una gestión más estratégica.
+        </p>
+      </div>
+
+      <div class="grid grid-4">
+        <article class="card level-card">
+          <div class="card-body">
+            <div class="tag tag-blue">Descriptiva</div>
+            <h3>Observar resultados</h3>
+            <div class="level-question">¿Qué ocurrió?</div>
+
+            <ul class="feature-list">
+              <li>Ventas del mes.</li>
+              <li>Clientes atendidos.</li>
+              <li>Productos más vendidos.</li>
+              <li>Facturación por canal.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="card level-card">
+          <div class="card-body">
+            <div class="tag tag-amber">Diagnóstica</div>
+            <h3>Comprender causas</h3>
+            <div class="level-question">¿Por qué ocurrió?</div>
+
+            <ul class="feature-list">
+              <li>Caída de ventas.</li>
+              <li>Baja rotación.</li>
+              <li>Campañas sin resultados.</li>
+              <li>Desempeño de canales.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="card level-card">
+          <div class="card-body">
+            <div class="tag tag-purple">Predictiva</div>
+            <h3>Estimar tendencias</h3>
+            <div class="level-question">¿Qué podría ocurrir?</div>
+
+            <ul class="feature-list">
+              <li>Proyección de ventas.</li>
+              <li>Predicción de demanda.</li>
+              <li>Probabilidad de compra.</li>
+              <li>Temporadas de consumo.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="card level-card">
+          <div class="card-body">
+            <div class="tag tag-green">Prescriptiva</div>
+            <h3>Recomendar acciones</h3>
+            <div class="level-question">¿Qué deberíamos hacer?</div>
+
+            <ul class="feature-list">
+              <li>Productos que promocionar.</li>
+              <li>Clientes que priorizar.</li>
+              <li>Inventario que reforzar.</li>
+              <li>Campañas que optimizar.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+
+      <div class="comparison-table" style="margin-top:18px;">
+        <table>
+          <thead>
+            <tr>
+              <th>Tipo de analítica</th>
+              <th>Pregunta principal</th>
+              <th>Propósito</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td><strong>Descriptiva</strong></td>
+              <td>¿Qué ocurrió?</td>
+              <td>Mostrar el desempeño pasado o actual.</td>
+            </tr>
+
+            <tr>
+              <td><strong>Diagnóstica</strong></td>
+              <td>¿Por qué ocurrió?</td>
+              <td>Identificar causas y factores relacionados.</td>
+            </tr>
+
+            <tr>
+              <td><strong>Predictiva</strong></td>
+              <td>¿Qué podría ocurrir?</td>
+              <td>Estimar comportamientos o tendencias futuras.</td>
+            </tr>
+
+            <tr>
+              <td><strong>Prescriptiva</strong></td>
+              <td>¿Qué deberíamos hacer?</td>
+              <td>Sugerir acciones para mejorar resultados.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section" id="fuentes">
+      <div class="section-head">
+        <div class="section-label">Fuentes de datos</div>
+
+        <h2 class="section-title">
+          Identificar dónde vive la información
+        </h2>
+
+        <p class="section-description">
+          Antes de crear indicadores o dashboards, la empresa debe reconocer qué
+          datos produce internamente y qué información obtiene de su entorno.
+        </p>
+      </div>
+
+      <div class="source-layout">
+        <article class="card source-card">
+          <div class="card-body">
+            <div class="tag tag-teal">Fuentes internas</div>
+            <h3>Datos generados por el negocio</h3>
+
+            <ul class="feature-list">
+              <li>Sistemas contables.</li>
+              <li>Sistemas de facturación.</li>
+              <li>Sistemas ERP.</li>
+              <li>Sistemas CRM.</li>
+              <li>Hojas de cálculo.</li>
+              <li>Sistemas de inventario.</li>
+              <li>Registros de ventas.</li>
+              <li>Bases de datos de clientes.</li>
+            </ul>
+
+            <div class="example-cloud">
+              <span class="example-pill">Ventas por producto</span>
+              <span class="example-pill">Historial de compras</span>
+              <span class="example-pill">Cuentas por cobrar</span>
+              <span class="example-pill">Costos operativos</span>
+              <span class="example-pill">Clientes activos</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card source-card">
+          <div class="card-body">
+            <div class="tag tag-blue">Fuentes externas</div>
+            <h3>Datos procedentes del entorno</h3>
+
+            <ul class="feature-list">
+              <li>Redes sociales.</li>
+              <li>Sitios web.</li>
+              <li>Plataformas de comercio electrónico.</li>
+              <li>Estudios de mercado.</li>
+              <li>Reportes sectoriales.</li>
+              <li>Estadísticas públicas.</li>
+              <li>Datos de campañas digitales.</li>
+            </ul>
+
+            <div class="example-cloud">
+              <span class="example-pill">Opiniones de clientes</span>
+              <span class="example-pill">Tráfico web</span>
+              <span class="example-pill">Interacciones</span>
+              <span class="example-pill">Tendencias de consumo</span>
+              <span class="example-pill">Resultados de campañas</span>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="dispersion-panel">
+        <h3>El desafío de la dispersión</h3>
+
+        <p>
+          Cuando cada área almacena información en un sistema diferente, resulta
+          difícil construir una visión completa del negocio.
+        </p>
+
+        <div class="dispersion-grid">
+          <div class="dispersion-item">
+            <span>Ventas</span>
+            <strong>Sistema de facturación</strong>
+          </div>
+
+          <div class="dispersion-item">
+            <span>Clientes</span>
+            <strong>CRM o hoja de cálculo</strong>
+          </div>
+
+          <div class="dispersion-item">
+            <span>Campañas</span>
+            <strong>Redes sociales</strong>
+          </div>
+
+          <div class="dispersion-item">
+            <span>Costos</span>
+            <strong>Sistema contable</strong>
+          </div>
+
+          <div class="dispersion-item">
+            <span>Inventario</span>
+            <strong>Archivo independiente</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="etl">
+      <div class="section-head">
+        <div class="section-label">Preparación e integración</div>
+
+        <h2 class="section-title">
+          Limpiar antes de analizar
+        </h2>
+
+        <p class="section-description">
+          Los datos deben estar completos, consistentes y organizados para evitar
+          conclusiones equivocadas.
+        </p>
+      </div>
+
+      <div class="grid grid-2">
+        <article class="card">
+          <div class="card-body">
+            <div class="tag tag-coral">Problemas frecuentes</div>
+            <h3>Errores que afectan el análisis</h3>
+
+            <ul class="feature-list">
+              <li>Registros duplicados.</li>
+              <li>Datos incompletos.</li>
+              <li>Fechas mal registradas.</li>
+              <li>Nombres escritos de formas distintas.</li>
+              <li>Códigos de producto inconsistentes.</li>
+              <li>Información dispersa en varios archivos.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-body">
+            <div class="tag tag-green">Preparación</div>
+            <h3>Acciones necesarias</h3>
+
+            <ul class="feature-list">
+              <li>Recopilar información.</li>
+              <li>Corregir errores.</li>
+              <li>Eliminar duplicados.</li>
+              <li>Completar datos faltantes.</li>
+              <li>Unificar formatos.</li>
+              <li>Integrar diferentes sistemas.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+
+      <div class="etl-layout" aria-label="Proceso ETL">
+        <article class="etl-step">
+          <span>Etapa 01</span>
+          <h3>Extracción</h3>
+          <p>
+            Obtener datos desde facturación, CRM, hojas de cálculo, web o sistemas contables.
+          </p>
+        </article>
+
+        <div class="etl-arrow">→</div>
+
+        <article class="etl-step">
+          <span>Etapa 02</span>
+          <h3>Transformación</h3>
+          <p>
+            Limpiar, ordenar, corregir formatos, agrupar y calcular indicadores.
+          </p>
+        </article>
+
+        <div class="etl-arrow">→</div>
+
+        <article class="etl-step">
+          <span>Etapa 03</span>
+          <h3>Carga</h3>
+          <p>
+            Almacenar los datos preparados en hojas, dashboards, bases o plataformas de BI.
+          </p>
+        </article>
+      </div>
+
+      <div class="quality-grid">
+        <article class="quality-item">
+          <strong>Estándares</strong>
+          <p>Definir reglas para registrar información.</p>
+        </article>
+
+        <article class="quality-item">
+          <strong>Revisión</strong>
+          <p>Evaluar periódicamente la calidad de los datos.</p>
+        </article>
+
+        <article class="quality-item">
+          <strong>Validación</strong>
+          <p>Comprobar la información antes de analizarla.</p>
+        </article>
+
+        <article class="quality-item">
+          <strong>Actualización</strong>
+          <p>Mantener las bases de datos al día.</p>
+        </article>
+
+        <article class="quality-item">
+          <strong>Simplicidad</strong>
+          <p>Usar formatos claros y fáciles de mantener.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="dashboards">
+      <div class="section-head">
+        <div class="section-label">Visualización y dashboards</div>
+
+        <h2 class="section-title">
+          Presentar lo importante de forma comprensible
+        </h2>
+
+        <p class="section-description">
+          Un dashboard combina gráficos, tablas e indicadores para facilitar una
+          lectura rápida del desempeño.
+        </p>
+      </div>
+
+      <div class="dashboard-layout">
+        <article class="dashboard-preview">
+          <div class="dashboard-bar">
+            <strong>Panel de desempeño comercial</strong>
+            <span>Vista demostrativa</span>
+          </div>
+
+          <div class="dashboard-kpis">
+            <div class="dashboard-kpi">
+              <span>Ventas mensuales</span>
+              <strong>$24.8K</strong>
+            </div>
+
+            <div class="dashboard-kpi">
+              <span>Clientes activos</span>
+              <strong>186</strong>
+            </div>
+
+            <div class="dashboard-kpi">
+              <span>Pedidos cumplidos</span>
+              <strong>92%</strong>
+            </div>
+          </div>
+
+          <div class="chart-area">
+            <div class="line-chart">
+              <div class="chart-title">Comparación por periodo</div>
+
+              <div class="bars" aria-hidden="true">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+              </div>
+            </div>
+
+            <div class="ranking">
+              <div class="chart-title">Productos principales</div>
+
+              <div class="ranking-list">
+                <div class="ranking-item">
+                  <span>01</span>
+                  Producto A
+                </div>
+
+                <div class="ranking-item">
+                  <span>02</span>
+                  Producto B
+                </div>
+
+                <div class="ranking-item">
+                  <span>03</span>
+                  Producto C
+                </div>
+
+                <div class="ranking-item">
+                  <span>04</span>
+                  Producto D
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <aside class="dashboard-rules">
+          <article class="dashboard-rule">
+            <strong>Claro</strong>
+            <p>Debe entenderse con rapidez.</p>
+          </article>
+
+          <article class="dashboard-rule">
+            <strong>Relevante</strong>
+            <p>Solo incluye indicadores importantes.</p>
+          </article>
+
+          <article class="dashboard-rule">
+            <strong>Actualizado</strong>
+            <p>Utiliza datos recientes.</p>
+          </article>
+
+          <article class="dashboard-rule">
+            <strong>Comparativo</strong>
+            <p>Permite observar cambios en el tiempo.</p>
+          </article>
+
+          <article class="dashboard-rule">
+            <strong>Accionable</strong>
+            <p>Ayuda a identificar una decisión o siguiente paso.</p>
+          </article>
+        </aside>
+      </div>
+
+      <div class="grid grid-3" style="margin-top:18px;">
+        <article class="card">
+          <div class="card-body">
+            <div class="tag tag-blue">Visualizaciones</div>
+            <h3>Formatos comunes</h3>
+
+            <ul class="feature-list">
+              <li>Gráficos de barras.</li>
+              <li>Gráficos de líneas.</li>
+              <li>Tablas.</li>
+              <li>Indicadores numéricos.</li>
+              <li>Comparaciones por periodo.</li>
+              <li>Rankings.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-body">
+            <div class="tag tag-teal">Información</div>
+            <h3>Contenido posible</h3>
+
+            <ul class="feature-list">
+              <li>Ventas mensuales.</li>
+              <li>Productos más vendidos.</li>
+              <li>Clientes principales.</li>
+              <li>Ventas por canal.</li>
+              <li>Rotación de inventario.</li>
+              <li>Margen de rentabilidad.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-body">
+            <div class="tag tag-green">Buenas prácticas</div>
+            <h3>Diseño funcional</h3>
+
+            <ul class="feature-list">
+              <li>Utilizar gráficos simples.</li>
+              <li>Evitar exceso de información.</li>
+              <li>Mostrar indicadores importantes.</li>
+              <li>Comparar periodos.</li>
+              <li>Mantener colores consistentes.</li>
+              <li>Destacar lo más relevante.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="kpis">
+      <div class="section-head">
+        <div class="section-label">Indicadores clave</div>
+
+        <h2 class="section-title">
+          Medir lo que ayuda a decidir
+        </h2>
+
+        <p class="section-description">
+          Los KPIs permiten evaluar desempeño, detectar oportunidades y corregir
+          problemas antes de que generen un mayor impacto.
+        </p>
+      </div>
+
+      <div class="kpi-tabs">
+        <article class="kpi-group">
+          <div class="tag tag-teal">Comerciales</div>
+          <h3>Ventas y crecimiento</h3>
+
+          <ul class="feature-list">
+            <li>Ventas totales.</li>
+            <li>Ventas por producto.</li>
+            <li>Ventas por canal.</li>
+            <li>Tasa de crecimiento.</li>
+            <li>Clientes nuevos.</li>
+          </ul>
+        </article>
+
+        <article class="kpi-group">
+          <div class="tag tag-blue">Clientes</div>
+          <h3>Relación y valor</h3>
+
+          <ul class="feature-list">
+            <li>Clientes activos.</li>
+            <li>Frecuencia de compra.</li>
+            <li>Valor promedio de compra.</li>
+            <li>Tasa de retención.</li>
+            <li>Clientes con mayor volumen.</li>
+          </ul>
+        </article>
+
+        <article class="kpi-group">
+          <div class="tag tag-purple">Operativos</div>
+          <h3>Procesos y productividad</h3>
+
+          <ul class="feature-list">
+            <li>Rotación de inventario.</li>
+            <li>Tiempo promedio de entrega.</li>
+            <li>Cumplimiento de pedidos.</li>
+            <li>Productividad del equipo.</li>
+            <li>Productos con baja rotación.</li>
+          </ul>
+        </article>
+
+        <article class="kpi-group">
+          <div class="tag tag-green">Financieros</div>
+          <h3>Costos y rentabilidad</h3>
+
+          <ul class="feature-list">
+            <li>Ingresos.</li>
+            <li>Costos operativos.</li>
+            <li>Margen de utilidad.</li>
+            <li>Rentabilidad por producto.</li>
+            <li>Flujo de caja.</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="callout">
+        <div class="callout-icon">KPI</div>
+
+        <div>
+          <strong>No se trata de medir todo</strong>
+          <p>
+            Se deben seleccionar los indicadores que realmente apoyan las
+            decisiones prioritarias de la empresa.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="aplicacion">
+      <div class="section-head">
+        <div class="section-label">Aplicación práctica</div>
+
+        <h2 class="section-title">
+          Cómo iniciar Business Intelligence en una MIPYME
+        </h2>
+
+        <p class="section-description">
+          El proceso debe comenzar con las decisiones del negocio y no con la
+          selección de una plataforma.
+        </p>
+      </div>
+
+      <div class="implementation">
+        <div class="implementation-side">
+          <strong>5</strong>
+          <span>Pasos de implementación</span>
+        </div>
+
+        <div class="implementation-content">
+          <div class="section-label">Ruta básica</div>
+
+          <h3>Comenzar con preguntas y herramientas sencillas</h3>
+
+          <p>
+            La empresa puede avanzar utilizando información disponible y
+            construyendo análisis progresivamente.
+          </p>
+
+          <div class="implementation-steps">
+            <article class="implementation-step">
+              <div>
+                <strong>Identificar decisiones clave</strong>
+                <p>
+                  Definir qué productos, clientes, canales, inventarios o campañas
+                  necesita comprender la empresa.
+                </p>
+              </div>
+            </article>
+
+            <article class="implementation-step">
+              <div>
+                <strong>Reconocer las fuentes de datos</strong>
+                <p>
+                  Localizar la información en facturación, hojas, CRM, redes,
+                  plataformas y sistemas contables.
+                </p>
+              </div>
+            </article>
+
+            <article class="implementation-step">
+              <div>
+                <strong>Definir indicadores</strong>
+                <p>
+                  Seleccionar ventas, productos, clientes, valor promedio o
+                  rotación según las decisiones.
+                </p>
+              </div>
+            </article>
+
+            <article class="implementation-step">
+              <div>
+                <strong>Crear visualizaciones simples</strong>
+                <p>
+                  Utilizar Excel, Google Sheets, Looker Studio, Power BI o
+                  dashboards básicos.
+                </p>
+              </div>
+            </article>
+
+            <article class="implementation-step">
+              <div>
+                <strong>Analizar y tomar decisiones</strong>
+                <p>
+                  Convertir los hallazgos en acciones sobre promoción, inventario,
+                  productos complementarios o campañas.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-head" style="margin-top:32px;">
+        <div class="section-label">Rol del facilitador</div>
+
+        <h2 class="section-title">
+          Acompañar el primer uso estratégico de los datos
+        </h2>
+      </div>
+
+      <div class="facilitator-grid">
+        <article class="facilitator-action">
+          <span>01</span>
+          <strong>Identificar preguntas clave del negocio.</strong>
+        </article>
+
+        <article class="facilitator-action">
+          <span>02</span>
+          <strong>Reconocer las fuentes disponibles.</strong>
+        </article>
+
+        <article class="facilitator-action">
+          <span>03</span>
+          <strong>Definir indicadores relevantes.</strong>
+        </article>
+
+        <article class="facilitator-action">
+          <span>04</span>
+          <strong>Organizar información básica.</strong>
+        </article>
+
+        <article class="facilitator-action">
+          <span>05</span>
+          <strong>Promover el uso de dashboards.</strong>
+        </article>
+
+        <article class="facilitator-action">
+          <span>06</span>
+          <strong>Fomentar decisiones basadas en datos.</strong>
+        </article>
+      </div>
+
+      <div class="callout">
+        <div class="callout-icon">✓</div>
+
+        <div>
+          <strong>Resultado esperado</strong>
+          <p>
+            La empresa no necesita convertirse en experta en analítica. Debe
+            comenzar a utilizar mejor la información que ya genera.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="capsula">
+      <div class="section-head">
+        <div class="section-label">Cápsula educativa</div>
+
+        <h2 class="section-title">
+          Qué debe recordar el participante
+        </h2>
+
+        <p class="section-description">
+          Una síntesis del proceso, los tipos de análisis y las buenas prácticas
+          trabajadas durante el módulo.
+        </p>
+      </div>
+
+      <div class="capsule">
+        <article class="capsule-main">
+          <h3>BI es una forma de gestión basada en información</h3>
+
+          <p>
+            No se limita a una tecnología. Utiliza datos para comprender el
+            negocio y tomar decisiones informadas.
+          </p>
+
+          <div class="practice-list">
+            <div class="practice">
+              <span>✓</span>
+              Identificar primero las decisiones clave.
+            </div>
+
+            <div class="practice">
+              <span>✓</span>
+              Utilizar los datos disponibles.
+            </div>
+
+            <div class="practice">
+              <span>✓</span>
+              Limpiar y ordenar la información.
+            </div>
+
+            <div class="practice">
+              <span>✓</span>
+              Definir pocos indicadores relevantes.
+            </div>
+
+            <div class="practice">
+              <span>✓</span>
+              Crear dashboards simples.
+            </div>
+
+            <div class="practice">
+              <span>✓</span>
+              Revisar los datos periódicamente.
+            </div>
+
+            <div class="practice">
+              <span>✓</span>
+              Tomar decisiones con base en evidencia.
+            </div>
+          </div>
+        </article>
+
+        <aside class="capsule-side">
+          <article class="capsule-card">
+            <span>Proceso</span>
+            <strong>Datos → información → conocimiento → decisión</strong>
+          </article>
+
+          <article class="capsule-card">
+            <span>Descriptivo</span>
+            <strong>Muestra qué ocurrió.</strong>
+          </article>
+
+          <article class="capsule-card">
+            <span>Diagnóstico</span>
+            <strong>Explica por qué ocurrió.</strong>
+          </article>
+
+          <article class="capsule-card">
+            <span>Predictivo</span>
+            <strong>Estima qué podría ocurrir.</strong>
+          </article>
+
+          <article class="capsule-card">
+            <span>Prescriptivo</span>
+            <strong>Sugiere qué hacer.</strong>
+          </article>
+
+          <article class="capsule-card">
+            <span>Herramientas</span>
+            <strong>Excel, Sheets, Looker Studio, Power BI y sistemas existentes.</strong>
+          </article>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="actividades">
+      <div class="section-head">
+        <div class="section-label">Actividades prácticas</div>
+
+        <h2 class="section-title">
+          Aplicar el análisis en una empresa real o simulada
+        </h2>
+
+        <p class="section-description">
+          Los ejercicios permiten identificar información, definir indicadores,
+          limpiar datos y construir una visualización básica.
+        </p>
+      </div>
+
+      <div class="grid grid-2 activities">
+        <article class="card activity">
+          <div class="card-body">
+            <div class="tag tag-teal">Datos</div>
+            <h3>Identificación de datos del negocio</h3>
+
+            <div class="activity-objective">
+              <strong>Objetivo</strong>
+              <p>
+                Reconocer qué datos genera una MIPYME durante su operación diaria.
+              </p>
+            </div>
+
+            <ul class="feature-list">
+              <li>Elegir una empresa real o simulada.</li>
+              <li>Identificar al menos tres fuentes.</li>
+              <li>Describir la información de cada fuente.</li>
+              <li>Indicar si se usa para tomar decisiones.</li>
+            </ul>
+
+            <div class="product">
+              <strong>Producto esperado</strong>
+              <p>Documento breve con las fuentes identificadas.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="card activity">
+          <div class="card-body">
+            <div class="tag tag-blue">Indicadores</div>
+            <h3>Definición de KPIs</h3>
+
+            <div class="activity-objective">
+              <strong>Objetivo</strong>
+              <p>
+                Definir indicadores para monitorear el desempeño de la empresa.
+              </p>
+            </div>
+
+            <ul class="feature-list">
+              <li>Identificar tres decisiones importantes.</li>
+              <li>Definir qué datos ayudarían.</li>
+              <li>Proponer al menos tres KPIs.</li>
+              <li>Justificar cada indicador.</li>
+            </ul>
+
+            <div class="product">
+              <strong>Producto esperado</strong>
+              <p>Lista de KPIs acompañada de su justificación.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="card activity">
+          <div class="card-body">
+            <div class="tag tag-coral">Calidad</div>
+            <h3>Limpieza básica de datos</h3>
+
+            <div class="activity-objective">
+              <strong>Objetivo</strong>
+              <p>
+                Comprender cómo la calidad de los datos afecta el análisis.
+              </p>
+            </div>
+
+            <ul class="feature-list">
+              <li>Revisar una tabla de ventas, clientes o inventario.</li>
+              <li>Identificar errores y duplicados.</li>
+              <li>Corregir información incompleta.</li>
+              <li>Explicar el impacto de los errores.</li>
+            </ul>
+
+            <div class="product">
+              <strong>Producto esperado</strong>
+              <p>Tabla corregida y reflexión breve.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="card activity">
+          <div class="card-body">
+            <div class="tag tag-purple">Visualización</div>
+            <h3>Diseño de un dashboard simple</h3>
+
+            <div class="activity-objective">
+              <strong>Objetivo</strong>
+              <p>
+                Visualizar información clave del negocio.
+              </p>
+            </div>
+
+            <ul class="feature-list">
+              <li>Seleccionar tres indicadores.</li>
+              <li>Organizar los datos en una hoja.</li>
+              <li>Crear gráficos simples.</li>
+              <li>Explicar las decisiones posibles.</li>
+            </ul>
+
+            <div class="product">
+              <strong>Producto esperado</strong>
+              <p>Dashboard básico acompañado de una interpretación.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <footer class="final-panel">
+      <div class="section-label">Conclusión de la guía</div>
+
+      <h2>
+        La analítica convierte la información cotidiana en una herramienta de gestión.
+      </h2>
+
+      <p>
+        Una MIPYME puede comenzar con hojas de cálculo, reportes existentes y
+        pocos indicadores. Lo importante es organizar la información, revisarla
+        periódicamente y utilizarla para decidir.
+      </p>
+
+      <div class="final-rule">
+        El primer paso no es construir un dashboard. Es definir qué decisión
+        necesita mejorar la empresa.
+      </div>
+    </footer>
+
+    <div class="footer">
+      <span>Business Analytics</span>
+      <span>Guía práctica para el facilitador</span>
+    </div>
+  </main>
+</body>
+</html>
