@@ -1,1 +1,2196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Marketing Digital para MIPYMES</title>
+
+  <meta
+    name="description"
+    content="Módulo práctico de marketing digital para MIPYMES: estrategia, inteligencia artificial, contenidos, embudos, automatización, métricas y plan de acción."
+  >
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #f6f5f2;
+      --surface: #ffffff;
+      --surface-soft: #fbfaf8;
+      --surface-dark: #181a18;
+
+      --text: #191a18;
+      --muted: #696b66;
+      --faint: #999b95;
+
+      --border: #e5e3dd;
+      --border-strong: #cdc9c0;
+
+      --purple: #5d4a92;
+      --purple-soft: #f0edfa;
+      --purple-border: #d3caef;
+
+      --blue: #246392;
+      --blue-soft: #eaf3fa;
+      --blue-border: #bfd8eb;
+
+      --green: #2f6b4e;
+      --green-soft: #e9f4ee;
+      --green-border: #c0dccb;
+
+      --amber: #8a6019;
+      --amber-soft: #fbf1dc;
+      --amber-border: #ead09a;
+
+      --coral: #985039;
+      --coral-soft: #faece7;
+      --coral-border: #edc1b3;
+
+      --pink: #8e456d;
+      --pink-soft: #f8eaf2;
+      --pink-border: #e6bfd4;
+
+      --radius-sm: 12px;
+      --radius-md: 18px;
+      --radius-lg: 28px;
+
+      --shadow:
+        0 18px 50px rgba(25, 26, 24, 0.055),
+        0 2px 8px rgba(25, 26, 24, 0.025);
+
+      --max-width: 1180px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(
+          circle at 8% 0%,
+          rgba(93, 74, 146, 0.09),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 96% 12%,
+          rgba(36, 99, 146, 0.07),
+          transparent 24%
+        ),
+        var(--bg);
+      color: var(--text);
+      font-family: "DM Sans", sans-serif;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      width: min(calc(100% - 32px), var(--max-width));
+      margin: 0 auto;
+      padding: 24px 0 64px;
+    }
+
+    .eyebrow,
+    .section-label,
+    .tag,
+    .mini-label,
+    .step-number {
+      font-size: 0.71rem;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 7px 12px;
+      border: 1px solid var(--purple-border);
+      border-radius: 999px;
+      background: var(--purple-soft);
+      color: var(--purple);
+    }
+
+    .eyebrow-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .hero {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.99),
+          rgba(250, 248, 253, 0.97)
+        );
+      box-shadow: var(--shadow);
+    }
+
+    .hero-main {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(310px, 0.65fr);
+      gap: 42px;
+      padding: 48px 44px 36px;
+    }
+
+    .hero h1 {
+      max-width: 820px;
+      margin-top: 18px;
+      font-size: clamp(2.6rem, 5.4vw, 4.9rem);
+      line-height: 0.98;
+      letter-spacing: -0.06em;
+    }
+
+    .hero-lead {
+      max-width: 800px;
+      margin-top: 23px;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .hero-side {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 23px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.76);
+    }
+
+    .hero-side h2 {
+      font-size: 1.25rem;
+      line-height: 1.28;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-side p {
+      margin-top: 9px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .hero-benefits {
+      display: grid;
+      gap: 9px;
+    }
+
+    .hero-benefit {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 10px 11px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--surface-soft);
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    .hero-benefit span {
+      flex: 0 0 auto;
+      width: 24px;
+      height: 24px;
+      border-radius: 8px;
+      background: var(--purple-soft);
+      color: var(--purple);
+      font-family: "DM Mono", monospace;
+      font-size: 0.66rem;
+      line-height: 24px;
+      text-align: center;
+    }
+
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      border-top: 1px solid var(--border);
+      background: var(--surface-soft);
+    }
+
+    .hero-metric {
+      min-height: 112px;
+      padding: 21px 22px;
+      border-right: 1px solid var(--border);
+    }
+
+    .hero-metric:last-child {
+      border-right: 0;
+    }
+
+    .mini-label {
+      color: var(--faint);
+    }
+
+    .hero-metric strong {
+      display: block;
+      margin-top: 7px;
+      font-size: 1.05rem;
+      line-height: 1.25;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 18px;
+      padding: 11px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.84);
+      box-shadow: 0 9px 28px rgba(25, 26, 24, 0.035);
+    }
+
+    .nav a {
+      padding: 8px 11px;
+      border-radius: 10px;
+      color: var(--muted);
+      font-size: 0.81rem;
+      font-weight: 600;
+      transition:
+        background 0.2s ease,
+        color 0.2s ease;
+    }
+
+    .nav a:hover {
+      background: var(--purple-soft);
+      color: var(--purple);
+    }
+
+    .section {
+      padding-top: 72px;
+      scroll-margin-top: 20px;
+    }
+
+    .section-head {
+      max-width: 850px;
+      margin-bottom: 23px;
+    }
+
+    .section-label {
+      margin-bottom: 9px;
+      color: var(--purple);
+    }
+
+    .section-title {
+      font-size: clamp(1.95rem, 3.6vw, 3.15rem);
+      line-height: 1.07;
+      letter-spacing: -0.04em;
+    }
+
+    .section-description {
+      margin-top: 13px;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .grid-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .card {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .card-body {
+      padding: 22px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 9px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+
+    .tag-purple {
+      border-color: var(--purple-border);
+      background: var(--purple-soft);
+      color: var(--purple);
+    }
+
+    .tag-blue {
+      border-color: var(--blue-border);
+      background: var(--blue-soft);
+      color: var(--blue);
+    }
+
+    .tag-green {
+      border-color: var(--green-border);
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .tag-amber {
+      border-color: var(--amber-border);
+      background: var(--amber-soft);
+      color: var(--amber);
+    }
+
+    .tag-coral {
+      border-color: var(--coral-border);
+      background: var(--coral-soft);
+      color: var(--coral);
+    }
+
+    .tag-pink {
+      border-color: var(--pink-border);
+      background: var(--pink-soft);
+      color: var(--pink);
+    }
+
+    .card h3 {
+      font-size: 1.18rem;
+      line-height: 1.28;
+      letter-spacing: -0.015em;
+    }
+
+    .card p {
+      margin-top: 9px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .justification-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.65fr);
+      gap: 18px;
+    }
+
+    .editorial-panel {
+      padding: 29px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .editorial-panel p {
+      color: var(--muted);
+    }
+
+    .editorial-panel p + p {
+      margin-top: 15px;
+    }
+
+    .editorial-panel .lead-line {
+      color: var(--text);
+      font-size: 1.15rem;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+
+    .outcome-stack {
+      display: grid;
+      gap: 11px;
+    }
+
+    .outcome-item {
+      padding: 17px;
+      border: 1px solid var(--purple-border);
+      border-radius: 15px;
+      background: var(--purple-soft);
+    }
+
+    .outcome-item strong {
+      display: block;
+      color: var(--purple);
+      font-size: 0.94rem;
+    }
+
+    .outcome-item span {
+      display: block;
+      margin-top: 4px;
+      color: #6b6189;
+      font-size: 0.83rem;
+    }
+
+    .callout {
+      display: flex;
+      gap: 14px;
+      margin-top: 18px;
+      padding: 19px 20px;
+      border: 1px solid var(--purple-border);
+      border-radius: var(--radius-md);
+      background: var(--purple-soft);
+    }
+
+    .callout-icon {
+      flex: 0 0 auto;
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      background: var(--purple);
+      color: #ffffff;
+      font-weight: 700;
+      line-height: 38px;
+      text-align: center;
+    }
+
+    .callout strong {
+      display: block;
+      color: var(--purple);
+    }
+
+    .callout p {
+      margin-top: 3px;
+      color: #5f567c;
+      font-size: 0.88rem;
+    }
+
+    .objectives {
+      counter-reset: objective;
+    }
+
+    .objective {
+      min-height: 205px;
+      padding: 22px;
+    }
+
+    .objective::before {
+      counter-increment: objective;
+      content: counter(objective, decimal-leading-zero);
+      display: block;
+      margin-bottom: 28px;
+      color: var(--purple);
+      font-family: "DM Mono", monospace;
+      font-size: 0.76rem;
+      font-weight: 500;
+    }
+
+    .objective h3 {
+      font-size: 1.02rem;
+      line-height: 1.42;
+    }
+
+    .journey {
+      padding: 29px;
+      border-radius: var(--radius-lg);
+      background: var(--surface-dark);
+      color: #ffffff;
+      box-shadow: var(--shadow);
+    }
+
+    .journey .section-label {
+      color: #c3b6ec;
+    }
+
+    .journey h3 {
+      font-size: 1.7rem;
+      line-height: 1.2;
+      letter-spacing: -0.025em;
+    }
+
+    .journey > p {
+      max-width: 800px;
+      margin-top: 9px;
+      color: #bfc2bc;
+      font-size: 0.91rem;
+    }
+
+    .journey-flow {
+      display: grid;
+      grid-template-columns: repeat(11, auto);
+      align-items: stretch;
+      justify-content: center;
+      gap: 9px;
+      margin-top: 28px;
+    }
+
+    .journey-node {
+      display: flex;
+      min-width: 130px;
+      min-height: 120px;
+      flex-direction: column;
+      justify-content: center;
+      padding: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .journey-node span {
+      color: #9fa39d;
+      font-family: "DM Mono", monospace;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+    }
+
+    .journey-node strong {
+      margin-top: 7px;
+      font-size: 0.94rem;
+      line-height: 1.24;
+    }
+
+    .journey-node small {
+      margin-top: 5px;
+      color: #bfc2bc;
+      font-size: 0.72rem;
+    }
+
+    .journey-arrow {
+      align-self: center;
+      color: #ad9ee1;
+      font-size: 1.2rem;
+    }
+
+    .content-stack {
+      display: grid;
+      gap: 16px;
+    }
+
+    .content-block {
+      display: grid;
+      grid-template-columns: 250px minmax(0, 1fr);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .content-side {
+      padding: 27px;
+      border-right: 1px solid var(--border);
+      background: var(--surface-soft);
+    }
+
+    .content-side .step-number {
+      color: var(--faint);
+      font-family: "DM Mono", monospace;
+    }
+
+    .content-side h3 {
+      margin-top: 19px;
+      font-size: 1.4rem;
+      line-height: 1.18;
+      letter-spacing: -0.025em;
+    }
+
+    .content-side p {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.87rem;
+    }
+
+    .content-main {
+      padding: 27px;
+    }
+
+    .feature-list {
+      display: grid;
+      gap: 12px;
+      list-style: none;
+    }
+
+    .feature-list li {
+      position: relative;
+      padding-left: 22px;
+      color: var(--muted);
+      font-size: 0.91rem;
+    }
+
+    .feature-list li::before {
+      content: "";
+      position: absolute;
+      top: 0.62em;
+      left: 0;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--purple);
+    }
+
+    .feature-list strong {
+      color: var(--text);
+    }
+
+    .exercise {
+      margin-top: 19px;
+      padding: 16px 17px;
+      border: 1px solid var(--green-border);
+      border-radius: 14px;
+      background: var(--green-soft);
+    }
+
+    .exercise strong {
+      display: block;
+      color: var(--green);
+      font-size: 0.88rem;
+    }
+
+    .exercise p {
+      margin-top: 5px;
+      color: #4f6d5d;
+      font-size: 0.84rem;
+    }
+
+    .quote {
+      margin-top: 18px;
+      padding: 17px 18px;
+      border-left: 3px solid var(--purple);
+      border-radius: 0 13px 13px 0;
+      background: var(--purple-soft);
+      color: #5d5478;
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .tool-card {
+      min-height: 158px;
+      padding: 19px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .tool-card span {
+      display: inline-flex;
+      padding: 5px 8px;
+      border-radius: 8px;
+      background: var(--surface-soft);
+      color: var(--faint);
+      font-family: "DM Mono", monospace;
+      font-size: 0.66rem;
+      text-transform: uppercase;
+    }
+
+    .tool-card strong {
+      display: block;
+      margin-top: 21px;
+      font-size: 1rem;
+    }
+
+    .tool-card p {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 0.79rem;
+    }
+
+    .metrics-layout {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    .metric-card {
+      padding: 23px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .metric-card .metric-code {
+      color: var(--faint);
+      font-family: "DM Mono", monospace;
+      font-size: 0.72rem;
+    }
+
+    .metric-card h3 {
+      margin-top: 22px;
+      font-size: 1.5rem;
+      line-height: 1.15;
+    }
+
+    .metric-card p {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    .metric-card:nth-child(1) h3 {
+      color: var(--green);
+    }
+
+    .metric-card:nth-child(2) h3 {
+      color: var(--blue);
+    }
+
+    .metric-card:nth-child(3) h3 {
+      color: var(--pink);
+    }
+
+    .plan-panel {
+      display: grid;
+      grid-template-columns: 250px minmax(0, 1fr);
+      overflow: hidden;
+      margin-top: 18px;
+      border-radius: var(--radius-lg);
+      background: var(--surface-dark);
+      color: #ffffff;
+      box-shadow: var(--shadow);
+    }
+
+    .plan-number {
+      display: grid;
+      place-content: center;
+      min-height: 290px;
+      padding: 28px;
+      border-right: 1px solid rgba(255, 255, 255, 0.12);
+      background:
+        radial-gradient(
+          circle at center,
+          rgba(93, 74, 146, 0.35),
+          transparent 62%
+        );
+      text-align: center;
+    }
+
+    .plan-number strong {
+      display: block;
+      font-size: 6.5rem;
+      line-height: 0.9;
+      letter-spacing: -0.08em;
+    }
+
+    .plan-number span {
+      margin-top: 14px;
+      color: #c8c0df;
+      font-family: "DM Mono", monospace;
+      font-size: 0.73rem;
+      text-transform: uppercase;
+    }
+
+    .plan-content {
+      padding: 30px;
+    }
+
+    .plan-content .section-label {
+      color: #c3b6ec;
+    }
+
+    .plan-content h3 {
+      font-size: 1.65rem;
+      line-height: 1.2;
+    }
+
+    .plan-content > p {
+      margin-top: 10px;
+      color: #bfc2bc;
+      font-size: 0.9rem;
+    }
+
+    .plan-elements {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .plan-element {
+      padding: 13px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.055);
+      color: #e3e4e0;
+      font-size: 0.82rem;
+    }
+
+    .method-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(310px, 0.85fr);
+      gap: 18px;
+    }
+
+    .hours {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .hour-card {
+      min-height: 190px;
+      padding: 22px;
+      border-radius: var(--radius-md);
+    }
+
+    .hour-card.primary {
+      border: 1px solid var(--purple-border);
+      background: var(--purple-soft);
+      color: var(--purple);
+    }
+
+    .hour-card.secondary {
+      border: 1px solid var(--blue-border);
+      background: var(--blue-soft);
+      color: var(--blue);
+    }
+
+    .hour-number {
+      display: block;
+      font-size: 3.7rem;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.07em;
+    }
+
+    .hour-card strong {
+      display: block;
+      margin-top: 12px;
+      font-size: 1rem;
+    }
+
+    .hour-card p {
+      margin-top: 7px;
+      font-size: 0.84rem;
+      opacity: 0.82;
+    }
+
+    .method-items {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .method-item {
+      display: flex;
+      gap: 13px;
+      padding: 15px 16px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--surface);
+    }
+
+    .method-item span {
+      flex: 0 0 auto;
+      width: 29px;
+      height: 29px;
+      border-radius: 9px;
+      background: var(--green-soft);
+      color: var(--green);
+      font-family: "DM Mono", monospace;
+      font-size: 0.68rem;
+      line-height: 29px;
+      text-align: center;
+    }
+
+    .method-item strong {
+      display: block;
+      font-size: 0.91rem;
+    }
+
+    .method-item p {
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 0.81rem;
+    }
+
+    .virtual-classroom {
+      padding: 25px;
+      border: 1px solid var(--amber-border);
+      border-radius: var(--radius-md);
+      background: var(--amber-soft);
+    }
+
+    .virtual-classroom h3 {
+      color: var(--amber);
+      font-size: 1.25rem;
+    }
+
+    .virtual-classroom p {
+      margin-top: 10px;
+      color: #755f3b;
+      font-size: 0.9rem;
+    }
+
+    .platform-box {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      margin-top: 23px;
+      padding: 16px;
+      border: 1px solid rgba(138, 96, 25, 0.18);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.52);
+    }
+
+    .platform-icon {
+      flex: 0 0 auto;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: var(--amber);
+      color: #ffffff;
+      font-weight: 700;
+      line-height: 42px;
+      text-align: center;
+    }
+
+    .platform-box strong {
+      display: block;
+      color: var(--text);
+    }
+
+    .platform-box span {
+      color: #755f3b;
+      font-size: 0.79rem;
+    }
+
+    .requirements {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .requirement {
+      display: flex;
+      min-height: 145px;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .requirement-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      font-family: "DM Mono", monospace;
+      font-size: 0.72rem;
+      font-weight: 500;
+      line-height: 42px;
+      text-align: center;
+    }
+
+    .requirement strong {
+      display: block;
+      margin-top: 22px;
+      font-size: 0.98rem;
+    }
+
+    .accounts-panel {
+      margin-top: 15px;
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .accounts-panel h3 {
+      font-size: 1.05rem;
+    }
+
+    .account-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 15px;
+    }
+
+    .account {
+      padding: 8px 11px;
+      border: 1px solid var(--purple-border);
+      border-radius: 999px;
+      background: var(--purple-soft);
+      color: var(--purple);
+      font-size: 0.79rem;
+      font-weight: 600;
+    }
+
+    .evaluation-layout {
+      display: grid;
+      grid-template-columns: 310px minmax(0, 1fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .evaluation-total {
+      display: flex;
+      min-height: 340px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 26px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .donut {
+      position: relative;
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      background:
+        conic-gradient(
+          var(--purple) 0 40%,
+          var(--blue) 40% 80%,
+          var(--green) 80% 100%
+        );
+    }
+
+    .donut::after {
+      content: "";
+      position: absolute;
+      inset: 29px;
+      border-radius: 50%;
+      background: var(--surface);
+    }
+
+    .donut-center {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      display: grid;
+      place-content: center;
+    }
+
+    .donut-center strong {
+      font-size: 2.15rem;
+      line-height: 1;
+    }
+
+    .donut-center span {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.76rem;
+      text-transform: uppercase;
+    }
+
+    .evaluation-total p {
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    .evaluation-items {
+      display: grid;
+      gap: 12px;
+    }
+
+    .evaluation-item {
+      display: grid;
+      grid-template-columns: 72px minmax(0, 1fr);
+      align-items: center;
+      gap: 17px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .evaluation-percentage {
+      font-size: 1.7rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+    }
+
+    .evaluation-item:nth-child(1) .evaluation-percentage {
+      color: var(--purple);
+    }
+
+    .evaluation-item:nth-child(2) .evaluation-percentage {
+      color: var(--blue);
+    }
+
+    .evaluation-item:nth-child(3) .evaluation-percentage {
+      color: var(--green);
+    }
+
+    .evaluation-item h3 {
+      font-size: 1rem;
+    }
+
+    .evaluation-item p {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.83rem;
+    }
+
+    .final-panel {
+      margin-top: 72px;
+      padding: 34px;
+      border-radius: var(--radius-lg);
+      background: var(--surface-dark);
+      color: #ffffff;
+      box-shadow: var(--shadow);
+    }
+
+    .final-panel .section-label {
+      color: #c3b6ec;
+    }
+
+    .final-panel h2 {
+      max-width: 920px;
+      font-size: clamp(1.75rem, 3.5vw, 2.9rem);
+      line-height: 1.12;
+      letter-spacing: -0.04em;
+    }
+
+    .final-panel p {
+      max-width: 860px;
+      margin-top: 13px;
+      color: #bfc2bc;
+      font-size: 0.92rem;
+    }
+
+    .final-rule {
+      margin-top: 24px;
+      padding: 17px 19px;
+      border: 1px solid rgba(195, 182, 236, 0.25);
+      border-radius: 14px;
+      background: rgba(93, 74, 146, 0.24);
+      color: #ebe7f6;
+      font-size: 0.94rem;
+      font-weight: 600;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      margin-top: 30px;
+      padding: 20px 4px 0;
+      color: var(--faint);
+      font-size: 0.75rem;
+    }
+
+    @media (max-width: 1050px) {
+      .hero-main,
+      .justification-layout,
+      .method-layout,
+      .evaluation-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-metrics,
+      .grid-4,
+      .requirements {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero-metric:nth-child(2) {
+        border-right: 0;
+      }
+
+      .hero-metric:nth-child(-n + 2) {
+        border-bottom: 1px solid var(--border);
+      }
+
+      .grid-3,
+      .metrics-layout {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .tool-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .journey-flow {
+        grid-template-columns: 1fr;
+        justify-content: stretch;
+      }
+
+      .journey-node {
+        min-width: 0;
+        min-height: auto;
+      }
+
+      .journey-arrow {
+        justify-self: center;
+        transform: rotate(90deg);
+      }
+
+      .content-block {
+        grid-template-columns: 220px minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        width: min(calc(100% - 22px), var(--max-width));
+        padding-top: 12px;
+      }
+
+      .hero-main {
+        padding: 31px 22px 25px;
+      }
+
+      .hero h1 {
+        font-size: 2.65rem;
+      }
+
+      .hero-metrics,
+      .grid-2,
+      .grid-3,
+      .grid-4,
+      .metrics-layout,
+      .tool-grid,
+      .requirements,
+      .hours {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-metric {
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .hero-metric:last-child {
+        border-bottom: 0;
+      }
+
+      .content-block,
+      .plan-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .content-side,
+      .plan-number {
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .plan-number {
+        min-height: 220px;
+      }
+
+      .plan-elements {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding-top: 55px;
+      }
+
+      .editorial-panel,
+      .journey,
+      .final-panel {
+        padding: 23px;
+      }
+
+      .objective {
+        min-height: 0;
+      }
+
+      .footer {
+        flex-direction: column;
+        gap: 7px;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .hero-lead {
+        font-size: 0.99rem;
+      }
+
+      .hero-side,
+      .content-side,
+      .content-main,
+      .card-body {
+        padding: 19px;
+      }
+
+      .plan-number strong {
+        font-size: 5rem;
+      }
+
+      .evaluation-item {
+        grid-template-columns: 62px minmax(0, 1fr);
+        gap: 11px;
+      }
+
+      .donut {
+        width: 165px;
+        height: 165px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <header class="hero">
+      <div class="hero-main">
+        <div>
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            Programa MIPYMES Digital
+          </div>
+
+          <h1>Marketing Digital para MIPYMES</h1>
+
+          <p class="hero-lead">
+            Estrategias, herramientas e inteligencia artificial para atraer
+            clientes, construir confianza, automatizar la comunicación y
+            convertir acciones digitales en resultados medibles.
+          </p>
+        </div>
+
+        <aside class="hero-side">
+          <div>
+            <h2>Marketing práctico para equipos pequeños.</h2>
+            <p>
+              El módulo utiliza herramientas accesibles, gratuitas o freemium
+              para llevar la estrategia a configuraciones, piezas y procesos reales.
+            </p>
+          </div>
+
+          <div class="hero-benefits">
+            <div class="hero-benefit">
+              <span>01</span>
+              Crear contenido con propósito
+            </div>
+
+            <div class="hero-benefit">
+              <span>02</span>
+              Construir mini-embudos de venta
+            </div>
+
+            <div class="hero-benefit">
+              <span>03</span>
+              Medir y ejecutar durante 30 días
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="hero-metrics">
+        <div class="hero-metric">
+          <div class="mini-label">Duración en clase</div>
+          <strong>6 horas</strong>
+        </div>
+
+        <div class="hero-metric">
+          <div class="mini-label">Trabajo autónomo</div>
+          <strong>3 horas</strong>
+        </div>
+
+        <div class="hero-metric">
+          <div class="mini-label">Resultados</div>
+          <strong>7 objetivos de aprendizaje</strong>
+        </div>
+
+        <div class="hero-metric">
+          <div class="mini-label">Entrega final</div>
+          <strong>Plan de acción de 30 días</strong>
+        </div>
+      </div>
+    </header>
+
+    <nav class="nav" aria-label="Navegación del módulo">
+      <a href="#justificacion">Justificación</a>
+      <a href="#objetivos">Objetivos</a>
+      <a href="#ruta">Ruta</a>
+      <a href="#contenidos">Contenidos</a>
+      <a href="#herramientas">Herramientas</a>
+      <a href="#metricas">Métricas</a>
+      <a href="#metodologia">Metodología</a>
+      <a href="#requisitos">Requisitos</a>
+      <a href="#evaluacion">Evaluación</a>
+    </nav>
+
+    <section class="section" id="justificacion">
+      <div class="section-head">
+        <div class="section-label">Justificación del módulo</div>
+
+        <h2 class="section-title">
+          Atraer clientes y comunicar mejor sin grandes inversiones
+        </h2>
+
+        <p class="section-description">
+          El marketing digital permite que una MIPYME construya visibilidad,
+          confianza y relaciones comerciales utilizando herramientas accesibles
+          y procesos que pueden ejecutarse con equipos pequeños.
+        </p>
+      </div>
+
+      <div class="justification-layout">
+        <article class="editorial-panel">
+          <p class="lead-line">
+            El valor no está en publicar más, sino en conectar contenido,
+            seguimiento, automatización y medición.
+          </p>
+
+          <p>
+            Las MIPYMES necesitan comunicar sus productos de forma clara,
+            directa y visual. La inteligencia artificial y las plataformas
+            digitales reducen las barreras para investigar mercados, crear
+            piezas, organizar campañas y responder a potenciales clientes.
+          </p>
+
+          <p>
+            El módulo prepara a facilitadores y empresas para diseñar contenido,
+            organizar campañas, automatizar mensajes, construir mini-embudos y
+            revisar resultados mediante métricas simples.
+          </p>
+
+          <p>
+            La formación está orientada a la acción. Cada empresa debe finalizar
+            con piezas creadas, configuraciones reales y un plan de ejecución inmediata.
+          </p>
+
+          <div class="callout">
+            <div class="callout-icon">✓</div>
+
+            <div>
+              <strong>Enfoque del módulo</strong>
+              <p>
+                Aprender haciendo: estrategia suficiente para tomar decisiones y
+                herramientas concretas para convertirlas en acciones.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <aside class="outcome-stack">
+          <div class="outcome-item">
+            <strong>Crear</strong>
+            <span>Contenido claro, atractivo y profesional.</span>
+          </div>
+
+          <div class="outcome-item">
+            <strong>Organizar</strong>
+            <span>Campañas y calendarios de publicación.</span>
+          </div>
+
+          <div class="outcome-item">
+            <strong>Automatizar</strong>
+            <span>Mensajes de bienvenida, ofertas y seguimiento.</span>
+          </div>
+
+          <div class="outcome-item">
+            <strong>Convertir</strong>
+            <span>Atención e interés en oportunidades de venta.</span>
+          </div>
+
+          <div class="outcome-item">
+            <strong>Medir</strong>
+            <span>Resultados con indicadores comprensibles.</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="objetivos">
+      <div class="section-head">
+        <div class="section-label">Objetivos de aprendizaje</div>
+
+        <h2 class="section-title">
+          Qué podrá hacer el participante al finalizar
+        </h2>
+
+        <p class="section-description">
+          Los resultados combinan estrategia, producción de contenido,
+          configuración de herramientas, automatización y análisis.
+        </p>
+      </div>
+
+      <div class="grid grid-4 objectives">
+        <article class="card objective">
+          <h3>
+            Comprender el rol actual del marketing digital en las pequeñas empresas.
+          </h3>
+        </article>
+
+        <article class="card objective">
+          <h3>
+            Utilizar ChatGPT y Gemini para investigación, ideación y creación de buyer personas.
+          </h3>
+        </article>
+
+        <article class="card objective">
+          <h3>
+            Diseñar un calendario de contenidos organizado con Canva, Trello o Notion.
+          </h3>
+        </article>
+
+        <article class="card objective">
+          <h3>
+            Construir un mini-embudo con Hostinger, Systeme.io o MailerLite.
+          </h3>
+        </article>
+
+        <article class="card objective">
+          <h3>
+            Automatizar mensajes con Manychat y configurar flujos básicos de email marketing.
+          </h3>
+        </article>
+
+        <article class="card objective">
+          <h3>
+            Interpretar métricas clave para revisar y mejorar resultados.
+          </h3>
+        </article>
+
+        <article class="card objective">
+          <h3>
+            Elaborar un plan de acción de 30 días para la MIPYME.
+          </h3>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="ruta">
+      <div class="section-head">
+        <div class="section-label">Ruta del módulo</div>
+
+        <h2 class="section-title">
+          De la estrategia a una ejecución medible
+        </h2>
+
+        <p class="section-description">
+          La formación sigue una secuencia simple: comprender al cliente, crear
+          contenido, construir el recorrido de venta, automatizar y medir.
+        </p>
+      </div>
+
+      <div class="journey">
+        <div class="section-label">Flujo de trabajo</div>
+
+        <h3>Una ruta práctica para generar oportunidades</h3>
+
+        <p>
+          Cada etapa prepara la siguiente. La automatización y la medición se
+          incorporan después de definir el público, el contenido y la oferta.
+        </p>
+
+        <div class="journey-flow">
+          <div class="journey-node">
+            <span>Paso 01</span>
+            <strong>Investigar</strong>
+            <small>Mercado y buyer persona</small>
+          </div>
+
+          <div class="journey-arrow">→</div>
+
+          <div class="journey-node">
+            <span>Paso 02</span>
+            <strong>Crear</strong>
+            <small>Contenido y piezas</small>
+          </div>
+
+          <div class="journey-arrow">→</div>
+
+          <div class="journey-node">
+            <span>Paso 03</span>
+            <strong>Atraer</strong>
+            <small>Canales y campañas</small>
+          </div>
+
+          <div class="journey-arrow">→</div>
+
+          <div class="journey-node">
+            <span>Paso 04</span>
+            <strong>Convertir</strong>
+            <small>Mini-embudo</small>
+          </div>
+
+          <div class="journey-arrow">→</div>
+
+          <div class="journey-node">
+            <span>Paso 05</span>
+            <strong>Medir</strong>
+            <small>Leads, CTR y engagement</small>
+          </div>
+
+          <div class="journey-arrow">→</div>
+
+          <div class="journey-node">
+            <span>Paso 06</span>
+            <strong>Mejorar</strong>
+            <small>Plan de acción</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contenidos">
+      <div class="section-head">
+        <div class="section-label">Contenidos principales</div>
+
+        <h2 class="section-title">
+          Cuatro bloques para activar el marketing digital
+        </h2>
+
+        <p class="section-description">
+          El contenido combina fundamentos, ejercicios y configuraciones que
+          pueden trasladarse directamente a la operación de una MIPYME.
+        </p>
+      </div>
+
+      <div class="content-stack">
+        <article class="content-block">
+          <div class="content-side">
+            <span class="step-number">BLOQUE 01</span>
+            <div class="tag tag-purple" style="margin-top:18px;">Estrategia</div>
+            <h3>Fundamentos e inteligencia artificial</h3>
+            <p>
+              Comprender el contexto, el cliente y el propósito antes de producir contenido.
+            </p>
+          </div>
+
+          <div class="content-main">
+            <ul class="feature-list">
+              <li>
+                <strong>Rol del marketing digital:</strong> función actual dentro de las MIPYMES.
+              </li>
+              <li>
+                <strong>Estrategia aliada con IA:</strong> ejemplos de uso con ChatGPT y Gemini.
+              </li>
+              <li>
+                <strong>Investigación:</strong> apoyo para comprender necesidades, intereses y contexto.
+              </li>
+              <li>
+                <strong>Ideación:</strong> generación y organización de temas de contenido.
+              </li>
+              <li>
+                <strong>Buyer persona:</strong> definición de un perfil de cliente con apoyo de IA.
+              </li>
+            </ul>
+
+            <div class="exercise">
+              <strong>Ejercicio práctico</strong>
+              <p>Crear un buyer persona utilizando inteligencia artificial.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="content-block">
+          <div class="content-side">
+            <span class="step-number">BLOQUE 02</span>
+            <div class="tag tag-blue" style="margin-top:18px;">Contenido</div>
+            <h3>Creación, organización y embudo digital</h3>
+            <p>
+              Convertir ideas en piezas organizadas dentro de un recorrido comercial sencillo.
+            </p>
+          </div>
+
+          <div class="content-main">
+            <ul class="feature-list">
+              <li>
+                <strong>Canva + IA:</strong> creación de contenido atractivo y profesional.
+              </li>
+              <li>
+                <strong>Calendario editorial:</strong> organización en Trello o Notion.
+              </li>
+              <li>
+                <strong>Embudo simplificado:</strong> atracción → confianza → ventas.
+              </li>
+              <li>
+                <strong>Herramientas:</strong> Systeme.io, MailerLite y Hostinger.
+              </li>
+              <li>
+                <strong>Presencia digital:</strong> estructura para captar y conducir al usuario.
+              </li>
+            </ul>
+
+            <div class="exercise">
+              <strong>Ejercicio práctico</strong>
+              <p>Diseñar un mini-embudo en Systeme.io o MailerLite.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="content-block">
+          <div class="content-side">
+            <span class="step-number">BLOQUE 03</span>
+            <div class="tag tag-green" style="margin-top:18px;">Automatización</div>
+            <h3>Bots, mensajes y email marketing</h3>
+            <p>
+              Crear respuestas y secuencias simples que acompañen al potencial cliente.
+            </p>
+          </div>
+
+          <div class="content-main">
+            <ul class="feature-list">
+              <li>
+                <strong>Manychat:</strong> automatización sencilla para Instagram.
+              </li>
+              <li>
+                <strong>Email marketing:</strong> flujos básicos en Systeme.io, Hostinger o MailerLite.
+              </li>
+              <li>
+                <strong>Mensaje de bienvenida:</strong> primer contacto automatizado.
+              </li>
+              <li>
+                <strong>Oferta:</strong> secuencia orientada a presentar una propuesta.
+              </li>
+              <li>
+                <strong>Seguimiento:</strong> continuidad de la comunicación con el usuario.
+              </li>
+            </ul>
+
+            <div class="exercise">
+              <strong>Ejercicio guiado</strong>
+              <p>Configurar una secuencia de bienvenida y oferta.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="content-block">
+          <div class="content-side">
+            <span class="step-number">BLOQUE 04</span>
+            <div class="tag tag-amber" style="margin-top:18px;">Medición</div>
+            <h3>Métricas, presencia y plan de acción</h3>
+            <p>
+              Revisar resultados y convertir lo aprendido en una ejecución inmediata.
+            </p>
+          </div>
+
+          <div class="content-main">
+            <ul class="feature-list">
+              <li>
+                <strong>Indicadores clave:</strong> leads, CTR y engagement.
+              </li>
+              <li>
+                <strong>Hosting:</strong> Hostinger como base técnica para la presencia digital.
+              </li>
+              <li>
+                <strong>Infoproductos:</strong> distribución y monetización mediante Hotmart.
+              </li>
+              <li>
+                <strong>Interpretación:</strong> lectura de resultados para realizar ajustes.
+              </li>
+              <li>
+                <strong>Ejecución:</strong> elaboración de un plan de acción de 30 días.
+              </li>
+            </ul>
+
+            <div class="exercise">
+              <strong>Cierre práctico</strong>
+              <p>Construir un plan de acción de 30 días para cada MIPYME.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="herramientas">
+      <div class="section-head">
+        <div class="section-label">Ecosistema de herramientas</div>
+
+        <h2 class="section-title">
+          Cada plataforma cumple una función específica
+        </h2>
+
+        <p class="section-description">
+          Las herramientas se organizan según su aporte a la investigación,
+          producción, gestión, conversión, automatización o distribución.
+        </p>
+      </div>
+
+      <div class="tool-grid">
+        <article class="tool-card">
+          <span>Inteligencia artificial</span>
+          <strong>ChatGPT</strong>
+          <p>Investigación, ideación y desarrollo de buyer personas.</p>
+        </article>
+
+        <article class="tool-card">
+          <span>Inteligencia artificial</span>
+          <strong>Gemini</strong>
+          <p>Apoyo para investigación y generación de ideas.</p>
+        </article>
+
+        <article class="tool-card">
+          <span>Diseño</span>
+          <strong>Canva</strong>
+          <p>Producción de piezas visuales y contenido profesional.</p>
+        </article>
+
+        <article class="tool-card">
+          <span>Organización</span>
+          <strong>Trello</strong>
+          <p>Planificación y seguimiento del calendario de contenidos.</p>
+        </article>
+
+        <article class="tool-card">
+          <span>Organización</span>
+          <strong>Notion</strong>
+          <p>Documentación y organización editorial.</p>
+        </article>
+
+        <article class="tool-card">
+          <span>Embudo</span>
+          <strong>Systeme.io</strong>
+          <p>Construcción de embudos y secuencias básicas.</p>
+        </article>
+
+        <article class="tool-card">
+          <span>Email marketing</span>
+          <strong>MailerLite</strong>
+          <p>Formularios, automatizaciones y campañas de correo.</p>
+        </article>
+
+        <article class="tool-card">
+          <span>Automatización</span>
+          <strong>Manychat</strong>
+          <p>Bots y automatizaciones simples para Instagram.</p>
+        </article>
+
+        <article class="tool-card">
+          <span>Presencia digital</span>
+          <strong>Hostinger</strong>
+          <p>Base técnica para hosting, páginas y flujos de email.</p>
+        </article>
+
+        <article class="tool-card">
+          <span>Monetización</span>
+          <strong>Hotmart</strong>
+          <p>Distribución y comercialización de infoproductos.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="metricas">
+      <div class="section-head">
+        <div class="section-label">Métricas esenciales</div>
+
+        <h2 class="section-title">
+          Medir lo suficiente para tomar mejores decisiones
+        </h2>
+
+        <p class="section-description">
+          El módulo trabaja con indicadores simples que ayudan a observar
+          atracción, respuesta y generación de oportunidades.
+        </p>
+      </div>
+
+      <div class="metrics-layout">
+        <article class="metric-card">
+          <span class="metric-code">MÉTRICA 01</span>
+          <h3>Leads</h3>
+          <p>
+            Personas que muestran interés y entregan información para continuar
+            una relación comercial.
+          </p>
+        </article>
+
+        <article class="metric-card">
+          <span class="metric-code">MÉTRICA 02</span>
+          <h3>CTR</h3>
+          <p>
+            Indicador utilizado para observar la respuesta obtenida por enlaces,
+            botones o llamados a la acción.
+          </p>
+        </article>
+
+        <article class="metric-card">
+          <span class="metric-code">MÉTRICA 03</span>
+          <h3>Engagement</h3>
+          <p>
+            Nivel de interacción generado por las piezas y publicaciones de la empresa.
+          </p>
+        </article>
+      </div>
+
+      <div class="plan-panel">
+        <div class="plan-number">
+          <strong>30</strong>
+          <span>Días de acción</span>
+        </div>
+
+        <div class="plan-content">
+          <div class="section-label">Entrega de cierre</div>
+
+          <h3>Un plan para llevar el módulo a la operación</h3>
+
+          <p>
+            Cada MIPYME debe finalizar con una ruta de ejecución inmediata que
+            reúna las decisiones, piezas y configuraciones desarrolladas durante
+            la formación.
+          </p>
+
+          <div class="plan-elements">
+            <div class="plan-element">Público y buyer persona definidos</div>
+            <div class="plan-element">Calendario de contenidos organizado</div>
+            <div class="plan-element">Mini-embudo diseñado</div>
+            <div class="plan-element">Mensajes o flujos configurados</div>
+            <div class="plan-element">Métricas seleccionadas</div>
+            <div class="plan-element">Acciones listas para ejecutar</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="metodologia">
+      <div class="section-head">
+        <div class="section-label">Metodología</div>
+
+        <h2 class="section-title">
+          Formación basada en participación y práctica
+        </h2>
+
+        <p class="section-description">
+          El aprendizaje combina el trabajo en clase con actividades autónomas
+          directamente relacionadas con las herramientas y ejercicios del módulo.
+        </p>
+      </div>
+
+      <div class="method-layout">
+        <div>
+          <div class="hours">
+            <article class="hour-card primary">
+              <span class="hour-number">6</span>
+              <strong>Horas de clase</strong>
+              <p>
+                Desarrollo de contenidos, ejercicios guiados y participación.
+              </p>
+            </article>
+
+            <article class="hour-card secondary">
+              <span class="hour-number">3</span>
+              <strong>Horas de trabajo autónomo</strong>
+              <p>
+                Prácticas relacionadas con la aplicación del módulo.
+              </p>
+            </article>
+          </div>
+
+          <div class="method-items">
+            <article class="method-item">
+              <span>01</span>
+              <div>
+                <strong>Participación en clase</strong>
+                <p>Interacción durante la explicación y el desarrollo de ejercicios.</p>
+              </div>
+            </article>
+
+            <article class="method-item">
+              <span>02</span>
+              <div>
+                <strong>Prácticas grupales</strong>
+                <p>Aplicación colaborativa de herramientas y conceptos.</p>
+              </div>
+            </article>
+
+            <article class="method-item">
+              <span>03</span>
+              <div>
+                <strong>Configuraciones reales</strong>
+                <p>Creación de piezas, flujos y estructuras utilizables.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <aside class="virtual-classroom">
+          <div class="tag tag-amber">Canal principal</div>
+
+          <h3>Aula Virtual</h3>
+
+          <p>
+            Es el medio principal de comunicación y el espacio utilizado para la
+            entrega de trabajos y tareas.
+          </p>
+
+          <div class="platform-box">
+            <div class="platform-icon">AV</div>
+
+            <div>
+              <strong>Comunicación y entregas</strong>
+              <span>Materiales, tareas, prácticas y seguimiento.</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="requisitos">
+      <div class="section-head">
+        <div class="section-label">Requisitos técnicos</div>
+
+        <h2 class="section-title">
+          Accesos necesarios para desarrollar las prácticas
+        </h2>
+
+        <p class="section-description">
+          El participante necesita conectividad, equipo y acceso previo a las
+          plataformas utilizadas durante el módulo.
+        </p>
+      </div>
+
+      <div class="requirements">
+        <article class="requirement">
+          <div class="requirement-icon">PC</div>
+          <strong>Laptop</strong>
+        </article>
+
+        <article class="requirement">
+          <div class="requirement-icon">NET</div>
+          <strong>Conexión a internet</strong>
+        </article>
+
+        <article class="requirement">
+          <div class="requirement-icon">ZM</div>
+          <strong>Cuenta de Zoom</strong>
+        </article>
+
+        <article class="requirement">
+          <div class="requirement-icon">APP</div>
+          <strong>Cuentas en plataformas del módulo</strong>
+        </article>
+      </div>
+
+      <div class="accounts-panel">
+        <h3>Cuentas requeridas</h3>
+
+        <div class="account-list">
+          <span class="account">Manychat</span>
+          <span class="account">Canva</span>
+          <span class="account">ChatGPT</span>
+          <span class="account">Gemini</span>
+          <span class="account">Trello</span>
+          <span class="account">Notion</span>
+          <span class="account">Systeme.io</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="evaluacion">
+      <div class="section-head">
+        <div class="section-label">Evaluación</div>
+
+        <h2 class="section-title">
+          Cómo se distribuye la calificación
+        </h2>
+
+        <p class="section-description">
+          La evaluación combina participación, comprobación de conocimientos y
+          aplicación práctica.
+        </p>
+      </div>
+
+      <div class="evaluation-layout">
+        <aside class="evaluation-total">
+          <div class="donut" aria-label="Distribución de la evaluación">
+            <div class="donut-center">
+              <strong>100%</strong>
+              <span>Evaluación</span>
+            </div>
+          </div>
+
+          <p>
+            Tres componentes para valorar conocimiento, participación y ejecución.
+          </p>
+        </aside>
+
+        <div class="evaluation-items">
+          <article class="evaluation-item">
+            <div class="evaluation-percentage">40%</div>
+
+            <div>
+              <h3>Asistencia y participación en clase</h3>
+              <p>
+                Presencia e involucramiento durante las actividades del módulo.
+              </p>
+            </div>
+          </article>
+
+          <article class="evaluation-item">
+            <div class="evaluation-percentage">40%</div>
+
+            <div>
+              <h3>Examen del módulo</h3>
+              <p>
+                Comprobación de los conceptos, herramientas y procesos revisados.
+              </p>
+            </div>
+          </article>
+
+          <article class="evaluation-item">
+            <div class="evaluation-percentage">20%</div>
+
+            <div>
+              <h3>Entrega de prácticas</h3>
+              <p>
+                Presentación de ejercicios, configuraciones y piezas desarrolladas.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <footer class="final-panel">
+      <div class="section-label">Resultado esperado</div>
+
+      <h2>
+        Una estrategia sencilla, herramientas conectadas y acciones listas para ejecutar.
+      </h2>
+
+      <p>
+        El módulo busca que cada MIPYME pueda investigar mejor a su público,
+        producir contenido con mayor claridad, acompañar a sus potenciales
+        clientes y medir resultados sin depender de grandes presupuestos.
+      </p>
+
+      <div class="final-rule">
+        El marketing digital no comienza con una publicación. Comienza con un
+        público definido, una oferta clara y un recorrido que pueda medirse y mejorarse.
+      </div>
+    </footer>
+
+    <div class="footer">
+      <span>Marketing Digital para MIPYMES</span>
+      <span>Programa MIPYMES Digital</span>
+    </div>
+  </main>
+</body>
+</html>
