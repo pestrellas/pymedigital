@@ -1,1 +1,2270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Seguridad Digital y Ciberseguridad para MIPYMES</title>
+
+  <meta
+    name="description"
+    content="Módulo práctico sobre seguridad digital, ciberseguridad, protección de datos personales, gobernanza y cumplimiento de la LOPDP para MIPYMES."
+  >
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #f4f6f5;
+      --surface: #ffffff;
+      --surface-soft: #fafbfa;
+      --surface-dark: #16201c;
+
+      --text: #18211d;
+      --muted: #647069;
+      --faint: #939c97;
+
+      --border: #e0e6e2;
+      --border-strong: #c7d1cb;
+
+      --green: #276c4d;
+      --green-soft: #e8f4ed;
+      --green-border: #bad9c7;
+
+      --blue: #245f8b;
+      --blue-soft: #e9f2f8;
+      --blue-border: #bad3e5;
+
+      --purple: #5c4c8d;
+      --purple-soft: #f0edfa;
+      --purple-border: #d0c8eb;
+
+      --amber: #875e18;
+      --amber-soft: #fbf1dd;
+      --amber-border: #e9cd94;
+
+      --coral: #934735;
+      --coral-soft: #faeae5;
+      --coral-border: #eab9aa;
+
+      --red: #9a3636;
+      --red-soft: #fae9e9;
+      --red-border: #e9b4b4;
+
+      --radius-sm: 12px;
+      --radius-md: 18px;
+      --radius-lg: 28px;
+
+      --shadow:
+        0 18px 48px rgba(24, 33, 29, 0.055),
+        0 2px 8px rgba(24, 33, 29, 0.025);
+
+      --max-width: 1180px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(
+          circle at 7% 0%,
+          rgba(39, 108, 77, 0.085),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 96% 10%,
+          rgba(36, 95, 139, 0.065),
+          transparent 24%
+        ),
+        var(--bg);
+      color: var(--text);
+      font-family: "DM Sans", sans-serif;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      width: min(calc(100% - 32px), var(--max-width));
+      margin: 0 auto;
+      padding: 24px 0 64px;
+    }
+
+    .eyebrow,
+    .section-label,
+    .tag,
+    .mini-label,
+    .number-label {
+      font-size: 0.71rem;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 7px 12px;
+      border: 1px solid var(--green-border);
+      border-radius: 999px;
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .eyebrow-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .hero {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.99),
+          rgba(247, 251, 249, 0.97)
+        );
+      box-shadow: var(--shadow);
+    }
+
+    .hero-main {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(310px, 0.65fr);
+      gap: 42px;
+      padding: 48px 44px 36px;
+    }
+
+    .hero h1 {
+      max-width: 860px;
+      margin-top: 18px;
+      font-size: clamp(2.5rem, 5.3vw, 4.8rem);
+      line-height: 0.98;
+      letter-spacing: -0.06em;
+    }
+
+    .hero-lead {
+      max-width: 810px;
+      margin-top: 23px;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .hero-side {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 23px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.76);
+    }
+
+    .hero-side h2 {
+      font-size: 1.24rem;
+      line-height: 1.28;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-side p {
+      margin-top: 9px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .hero-list {
+      display: grid;
+      gap: 9px;
+    }
+
+    .hero-list div {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 10px 11px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--surface-soft);
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    .hero-list span {
+      flex: 0 0 auto;
+      width: 24px;
+      height: 24px;
+      border-radius: 8px;
+      background: var(--green-soft);
+      color: var(--green);
+      font-family: "DM Mono", monospace;
+      font-size: 0.66rem;
+      line-height: 24px;
+      text-align: center;
+    }
+
+    .hero-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      border-top: 1px solid var(--border);
+      background: var(--surface-soft);
+    }
+
+    .hero-stat {
+      min-height: 112px;
+      padding: 21px 22px;
+      border-right: 1px solid var(--border);
+    }
+
+    .hero-stat:last-child {
+      border-right: 0;
+    }
+
+    .mini-label {
+      color: var(--faint);
+    }
+
+    .hero-stat strong {
+      display: block;
+      margin-top: 7px;
+      font-size: 1.03rem;
+      line-height: 1.28;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 18px;
+      padding: 11px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.84);
+      box-shadow: 0 9px 28px rgba(24, 33, 29, 0.035);
+    }
+
+    .nav a {
+      padding: 8px 11px;
+      border-radius: 10px;
+      color: var(--muted);
+      font-size: 0.81rem;
+      font-weight: 600;
+      transition:
+        color 0.2s ease,
+        background 0.2s ease;
+    }
+
+    .nav a:hover {
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .section {
+      padding-top: 72px;
+      scroll-margin-top: 20px;
+    }
+
+    .section-head {
+      max-width: 860px;
+      margin-bottom: 23px;
+    }
+
+    .section-label {
+      margin-bottom: 9px;
+      color: var(--green);
+    }
+
+    .section-title {
+      font-size: clamp(1.95rem, 3.6vw, 3.15rem);
+      line-height: 1.07;
+      letter-spacing: -0.04em;
+    }
+
+    .section-description {
+      margin-top: 13px;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .grid-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .card {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .card-body {
+      padding: 22px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 9px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+
+    .tag-green {
+      border-color: var(--green-border);
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .tag-blue {
+      border-color: var(--blue-border);
+      background: var(--blue-soft);
+      color: var(--blue);
+    }
+
+    .tag-purple {
+      border-color: var(--purple-border);
+      background: var(--purple-soft);
+      color: var(--purple);
+    }
+
+    .tag-amber {
+      border-color: var(--amber-border);
+      background: var(--amber-soft);
+      color: var(--amber);
+    }
+
+    .tag-coral {
+      border-color: var(--coral-border);
+      background: var(--coral-soft);
+      color: var(--coral);
+    }
+
+    .tag-red {
+      border-color: var(--red-border);
+      background: var(--red-soft);
+      color: var(--red);
+    }
+
+    .card h3 {
+      font-size: 1.18rem;
+      line-height: 1.28;
+      letter-spacing: -0.015em;
+    }
+
+    .card p {
+      margin-top: 9px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .justification-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.65fr);
+      gap: 18px;
+    }
+
+    .editorial-panel {
+      padding: 29px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .editorial-panel p {
+      color: var(--muted);
+    }
+
+    .editorial-panel p + p {
+      margin-top: 15px;
+    }
+
+    .editorial-panel .lead-line {
+      color: var(--text);
+      font-size: 1.15rem;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+
+    .risk-stack {
+      display: grid;
+      gap: 11px;
+    }
+
+    .risk-item {
+      padding: 17px;
+      border: 1px solid var(--red-border);
+      border-radius: 15px;
+      background: var(--red-soft);
+    }
+
+    .risk-item strong {
+      display: block;
+      color: var(--red);
+      font-size: 0.94rem;
+    }
+
+    .risk-item span {
+      display: block;
+      margin-top: 4px;
+      color: #795555;
+      font-size: 0.83rem;
+    }
+
+    .callout {
+      display: flex;
+      gap: 14px;
+      margin-top: 18px;
+      padding: 19px 20px;
+      border: 1px solid var(--green-border);
+      border-radius: var(--radius-md);
+      background: var(--green-soft);
+    }
+
+    .callout-icon {
+      flex: 0 0 auto;
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      background: var(--green);
+      color: #ffffff;
+      font-weight: 700;
+      line-height: 38px;
+      text-align: center;
+    }
+
+    .callout strong {
+      display: block;
+      color: var(--green);
+    }
+
+    .callout p {
+      margin-top: 3px;
+      color: #4e6c5c;
+      font-size: 0.88rem;
+    }
+
+    .objectives {
+      counter-reset: objective;
+    }
+
+    .objective {
+      min-height: 220px;
+      padding: 22px;
+    }
+
+    .objective::before {
+      counter-increment: objective;
+      content: counter(objective, decimal-leading-zero);
+      display: block;
+      margin-bottom: 30px;
+      color: var(--green);
+      font-family: "DM Mono", monospace;
+      font-size: 0.76rem;
+      font-weight: 500;
+    }
+
+    .objective h3 {
+      font-size: 1.02rem;
+      line-height: 1.42;
+    }
+
+    .security-model {
+      padding: 30px;
+      border-radius: var(--radius-lg);
+      background: var(--surface-dark);
+      color: #ffffff;
+      box-shadow: var(--shadow);
+    }
+
+    .security-model .section-label {
+      color: #9ed0b5;
+    }
+
+    .security-model h3 {
+      max-width: 850px;
+      font-size: 1.75rem;
+      line-height: 1.18;
+      letter-spacing: -0.03em;
+    }
+
+    .security-model > p {
+      max-width: 830px;
+      margin-top: 10px;
+      color: #bac5bf;
+      font-size: 0.91rem;
+    }
+
+    .layer-flow {
+      display: grid;
+      grid-template-columns: repeat(7, auto);
+      align-items: stretch;
+      justify-content: center;
+      gap: 11px;
+      margin-top: 29px;
+    }
+
+    .layer {
+      display: flex;
+      min-width: 160px;
+      min-height: 132px;
+      flex-direction: column;
+      justify-content: center;
+      padding: 17px;
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .layer span {
+      color: #93a69c;
+      font-family: "DM Mono", monospace;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+    }
+
+    .layer strong {
+      margin-top: 7px;
+      font-size: 0.96rem;
+      line-height: 1.25;
+    }
+
+    .layer small {
+      margin-top: 5px;
+      color: #bac5bf;
+      font-size: 0.72rem;
+    }
+
+    .layer-arrow {
+      align-self: center;
+      color: #7eb094;
+      font-size: 1.25rem;
+    }
+
+    .security-rule {
+      margin-top: 18px;
+      padding: 17px 19px;
+      border: 1px solid rgba(158, 208, 181, 0.25);
+      border-radius: 14px;
+      background: rgba(39, 108, 77, 0.22);
+      color: #e2eee7;
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    .content-stack {
+      display: grid;
+      gap: 16px;
+    }
+
+    .content-block {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .content-side {
+      padding: 27px;
+      border-right: 1px solid var(--border);
+      background: var(--surface-soft);
+    }
+
+    .number-label {
+      color: var(--faint);
+      font-family: "DM Mono", monospace;
+    }
+
+    .content-side h3 {
+      margin-top: 20px;
+      font-size: 1.4rem;
+      line-height: 1.18;
+      letter-spacing: -0.025em;
+    }
+
+    .content-side p {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.87rem;
+    }
+
+    .content-main {
+      padding: 27px;
+    }
+
+    .feature-list {
+      display: grid;
+      gap: 12px;
+      list-style: none;
+    }
+
+    .feature-list li {
+      position: relative;
+      padding-left: 22px;
+      color: var(--muted);
+      font-size: 0.91rem;
+    }
+
+    .feature-list li::before {
+      content: "";
+      position: absolute;
+      top: 0.62em;
+      left: 0;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+
+    .feature-list strong {
+      color: var(--text);
+    }
+
+    .focus-box {
+      margin-top: 19px;
+      padding: 16px 17px;
+      border: 1px solid var(--blue-border);
+      border-radius: 14px;
+      background: var(--blue-soft);
+    }
+
+    .focus-box strong {
+      display: block;
+      color: var(--blue);
+      font-size: 0.88rem;
+    }
+
+    .focus-box p {
+      margin-top: 5px;
+      color: #506d82;
+      font-size: 0.84rem;
+    }
+
+    .control-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .control {
+      min-height: 210px;
+      padding: 21px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .control span {
+      color: var(--faint);
+      font-family: "DM Mono", monospace;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+    }
+
+    .control h3 {
+      margin-top: 27px;
+      font-size: 1.2rem;
+      line-height: 1.18;
+    }
+
+    .control p {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.83rem;
+    }
+
+    .control:nth-child(1) h3 {
+      color: var(--green);
+    }
+
+    .control:nth-child(2) h3 {
+      color: var(--blue);
+    }
+
+    .control:nth-child(3) h3 {
+      color: var(--purple);
+    }
+
+    .control:nth-child(4) h3 {
+      color: var(--coral);
+    }
+
+    .data-lifecycle {
+      padding: 29px;
+      border-radius: var(--radius-lg);
+      background: var(--surface-dark);
+      color: #ffffff;
+      box-shadow: var(--shadow);
+    }
+
+    .data-lifecycle .section-label {
+      color: #9ed0b5;
+    }
+
+    .data-lifecycle h3 {
+      font-size: 1.65rem;
+      line-height: 1.2;
+      letter-spacing: -0.025em;
+    }
+
+    .data-lifecycle > p {
+      max-width: 820px;
+      margin-top: 9px;
+      color: #bac5bf;
+      font-size: 0.91rem;
+    }
+
+    .lifecycle-flow {
+      display: grid;
+      grid-template-columns: repeat(9, auto);
+      align-items: stretch;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .lifecycle-node {
+      display: flex;
+      min-width: 145px;
+      min-height: 122px;
+      flex-direction: column;
+      justify-content: center;
+      padding: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .lifecycle-node span {
+      color: #93a69c;
+      font-family: "DM Mono", monospace;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+    }
+
+    .lifecycle-node strong {
+      margin-top: 7px;
+      font-size: 0.94rem;
+    }
+
+    .lifecycle-node small {
+      margin-top: 5px;
+      color: #bac5bf;
+      font-size: 0.72rem;
+    }
+
+    .lifecycle-arrow {
+      align-self: center;
+      color: #7eb094;
+      font-size: 1.2rem;
+    }
+
+    .governance-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    .governance-card {
+      min-height: 260px;
+    }
+
+    .tool-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 17px;
+    }
+
+    .tool {
+      padding: 7px 10px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--surface-soft);
+      color: var(--muted);
+      font-size: 0.77rem;
+      font-weight: 600;
+    }
+
+    .ai-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .ai-main {
+      padding: 27px;
+      border: 1px solid var(--purple-border);
+      border-radius: var(--radius-md);
+      background: var(--purple-soft);
+    }
+
+    .ai-main h3 {
+      color: var(--purple);
+      font-size: 1.45rem;
+      line-height: 1.2;
+    }
+
+    .ai-main p {
+      margin-top: 10px;
+      color: #625a7d;
+    }
+
+    .ai-risks {
+      display: grid;
+      gap: 11px;
+    }
+
+    .ai-risk {
+      padding: 17px;
+      border: 1px solid var(--coral-border);
+      border-radius: 15px;
+      background: var(--coral-soft);
+    }
+
+    .ai-risk strong {
+      display: block;
+      color: var(--coral);
+      font-size: 0.91rem;
+    }
+
+    .ai-risk p {
+      margin-top: 4px;
+      color: #755b53;
+      font-size: 0.82rem;
+    }
+
+    .method-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(310px, 0.85fr);
+      gap: 18px;
+    }
+
+    .hours {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .hour-card {
+      min-height: 190px;
+      padding: 22px;
+      border-radius: var(--radius-md);
+    }
+
+    .hour-card.primary {
+      border: 1px solid var(--green-border);
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .hour-card.secondary {
+      border: 1px solid var(--blue-border);
+      background: var(--blue-soft);
+      color: var(--blue);
+    }
+
+    .hour-number {
+      display: block;
+      font-size: 3.7rem;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.07em;
+    }
+
+    .hour-card strong {
+      display: block;
+      margin-top: 12px;
+      font-size: 1rem;
+    }
+
+    .hour-card p {
+      margin-top: 7px;
+      font-size: 0.84rem;
+      opacity: 0.82;
+    }
+
+    .method-items {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .method-item {
+      display: flex;
+      gap: 13px;
+      padding: 15px 16px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--surface);
+    }
+
+    .method-item span {
+      flex: 0 0 auto;
+      width: 29px;
+      height: 29px;
+      border-radius: 9px;
+      background: var(--purple-soft);
+      color: var(--purple);
+      font-family: "DM Mono", monospace;
+      font-size: 0.68rem;
+      line-height: 29px;
+      text-align: center;
+    }
+
+    .method-item strong {
+      display: block;
+      font-size: 0.91rem;
+    }
+
+    .method-item p {
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 0.81rem;
+    }
+
+    .virtual-classroom {
+      padding: 25px;
+      border: 1px solid var(--amber-border);
+      border-radius: var(--radius-md);
+      background: var(--amber-soft);
+    }
+
+    .virtual-classroom h3 {
+      color: var(--amber);
+      font-size: 1.25rem;
+    }
+
+    .virtual-classroom p {
+      margin-top: 10px;
+      color: #755f3b;
+      font-size: 0.9rem;
+    }
+
+    .platform-box {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      margin-top: 23px;
+      padding: 16px;
+      border: 1px solid rgba(135, 94, 24, 0.18);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.52);
+    }
+
+    .platform-icon {
+      flex: 0 0 auto;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: var(--amber);
+      color: #ffffff;
+      font-weight: 700;
+      line-height: 42px;
+      text-align: center;
+    }
+
+    .platform-box strong {
+      display: block;
+      color: var(--text);
+    }
+
+    .platform-box span {
+      color: #755f3b;
+      font-size: 0.79rem;
+    }
+
+    .requirements {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .requirement {
+      display: flex;
+      min-height: 150px;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .requirement-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      font-family: "DM Mono", monospace;
+      font-size: 0.72rem;
+      font-weight: 500;
+      line-height: 42px;
+      text-align: center;
+    }
+
+    .requirement strong {
+      display: block;
+      margin-top: 22px;
+      font-size: 0.98rem;
+    }
+
+    .evaluation-layout {
+      display: grid;
+      grid-template-columns: 310px minmax(0, 1fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .evaluation-total {
+      display: flex;
+      min-height: 340px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 26px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .donut {
+      position: relative;
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      background:
+        conic-gradient(
+          var(--green) 0 40%,
+          var(--blue) 40% 80%,
+          var(--purple) 80% 100%
+        );
+    }
+
+    .donut::after {
+      content: "";
+      position: absolute;
+      inset: 29px;
+      border-radius: 50%;
+      background: var(--surface);
+    }
+
+    .donut-center {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      display: grid;
+      place-content: center;
+    }
+
+    .donut-center strong {
+      font-size: 2.15rem;
+      line-height: 1;
+    }
+
+    .donut-center span {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.76rem;
+      text-transform: uppercase;
+    }
+
+    .evaluation-total p {
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    .evaluation-items {
+      display: grid;
+      gap: 12px;
+    }
+
+    .evaluation-item {
+      display: grid;
+      grid-template-columns: 72px minmax(0, 1fr);
+      align-items: center;
+      gap: 17px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .evaluation-percentage {
+      font-size: 1.7rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+    }
+
+    .evaluation-item:nth-child(1) .evaluation-percentage {
+      color: var(--green);
+    }
+
+    .evaluation-item:nth-child(2) .evaluation-percentage {
+      color: var(--blue);
+    }
+
+    .evaluation-item:nth-child(3) .evaluation-percentage {
+      color: var(--purple);
+    }
+
+    .evaluation-item h3 {
+      font-size: 1rem;
+    }
+
+    .evaluation-item p {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.83rem;
+    }
+
+    .final-panel {
+      margin-top: 72px;
+      padding: 35px;
+      border-radius: var(--radius-lg);
+      background: var(--surface-dark);
+      color: #ffffff;
+      box-shadow: var(--shadow);
+    }
+
+    .final-panel .section-label {
+      color: #9ed0b5;
+    }
+
+    .final-panel h2 {
+      max-width: 940px;
+      font-size: clamp(1.75rem, 3.5vw, 2.9rem);
+      line-height: 1.12;
+      letter-spacing: -0.04em;
+    }
+
+    .final-panel p {
+      max-width: 870px;
+      margin-top: 13px;
+      color: #bac5bf;
+      font-size: 0.92rem;
+    }
+
+    .final-rule {
+      margin-top: 24px;
+      padding: 17px 19px;
+      border: 1px solid rgba(158, 208, 181, 0.25);
+      border-radius: 14px;
+      background: rgba(39, 108, 77, 0.24);
+      color: #e4efe8;
+      font-size: 0.94rem;
+      font-weight: 600;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      margin-top: 30px;
+      padding: 20px 4px 0;
+      color: var(--faint);
+      font-size: 0.75rem;
+    }
+
+    @media (max-width: 1060px) {
+      .hero-main,
+      .justification-layout,
+      .method-layout,
+      .evaluation-layout,
+      .ai-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-strip,
+      .control-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .governance-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .layer-flow,
+      .lifecycle-flow {
+        grid-template-columns: 1fr;
+        justify-content: stretch;
+      }
+
+      .layer,
+      .lifecycle-node {
+        min-width: 0;
+        min-height: auto;
+      }
+
+      .layer-arrow,
+      .lifecycle-arrow {
+        justify-self: center;
+        transform: rotate(90deg);
+      }
+
+      .content-block {
+        grid-template-columns: 220px minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        width: min(calc(100% - 22px), var(--max-width));
+        padding-top: 12px;
+      }
+
+      .hero-main {
+        padding: 31px 22px 25px;
+      }
+
+      .hero h1 {
+        font-size: 2.4rem;
+      }
+
+      .hero-lead {
+        font-size: 0.99rem;
+      }
+
+      .hero-strip,
+      .grid-2,
+      .grid-3,
+      .grid-4,
+      .control-grid,
+      .governance-grid,
+      .hours,
+      .requirements {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-stat {
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .hero-stat:last-child {
+        border-bottom: 0;
+      }
+
+      .content-block {
+        grid-template-columns: 1fr;
+      }
+
+      .content-side {
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .section {
+        padding-top: 55px;
+      }
+
+      .editorial-panel,
+      .security-model,
+      .data-lifecycle,
+      .final-panel {
+        padding: 23px;
+      }
+
+      .objective {
+        min-height: 0;
+      }
+
+      .footer {
+        flex-direction: column;
+        gap: 7px;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .hero h1 {
+        font-size: 2.08rem;
+      }
+
+      .hero-side,
+      .content-side,
+      .content-main,
+      .card-body {
+        padding: 19px;
+      }
+
+      .evaluation-item {
+        grid-template-columns: 62px minmax(0, 1fr);
+        gap: 11px;
+      }
+
+      .donut {
+        width: 165px;
+        height: 165px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <header class="hero">
+      <div class="hero-main">
+        <div>
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            Programa MIPYME Digital
+          </div>
+
+          <h1>Seguridad Digital y Ciberseguridad</h1>
+
+          <p class="hero-lead">
+            Controles técnicos, protección de datos, gobernanza y prácticas
+            inmediatas para reducir riesgos y fortalecer la continuidad de las
+            MIPYMES.
+          </p>
+        </div>
+
+        <aside class="hero-side">
+          <div>
+            <h2>La seguridad digital es parte de la operación.</h2>
+            <p>
+              No se limita a instalar herramientas. Requiere combinar tecnología,
+              personas, procesos y cumplimiento.
+            </p>
+          </div>
+
+          <div class="hero-list">
+            <div>
+              <span>01</span>
+              Proteger accesos, correo y dispositivos
+            </div>
+
+            <div>
+              <span>02</span>
+              Gestionar datos personales
+            </div>
+
+            <div>
+              <span>03</span>
+              Prepararse para incidentes y brechas
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="hero-strip">
+        <div class="hero-stat">
+          <div class="mini-label">Duración en clase</div>
+          <strong>6 horas</strong>
+        </div>
+
+        <div class="hero-stat">
+          <div class="mini-label">Trabajo autónomo</div>
+          <strong>2 horas</strong>
+        </div>
+
+        <div class="hero-stat">
+          <div class="mini-label">Marco regulatorio</div>
+          <strong>LOPDP</strong>
+        </div>
+
+        <div class="hero-stat">
+          <div class="mini-label">Enfoque</div>
+          <strong>Controles simples y efectivos</strong>
+        </div>
+      </div>
+    </header>
+
+    <nav class="nav" aria-label="Navegación del módulo">
+      <a href="#justificacion">Justificación</a>
+      <a href="#objetivos">Objetivos</a>
+      <a href="#modelo">Modelo de seguridad</a>
+      <a href="#contenidos">Contenidos</a>
+      <a href="#controles">Controles</a>
+      <a href="#datos">Datos</a>
+      <a href="#gobernanza">Gobernanza</a>
+      <a href="#metodologia">Metodología</a>
+      <a href="#requisitos">Requisitos</a>
+      <a href="#evaluacion">Evaluación</a>
+    </nav>
+
+    <section class="section" id="justificacion">
+      <div class="section-head">
+        <div class="section-label">Justificación del módulo</div>
+
+        <h2 class="section-title">
+          La vulnerabilidad digital también es un riesgo operativo
+        </h2>
+
+        <p class="section-description">
+          Las MIPYMES enfrentan amenazas relacionadas con ataques, pérdida de
+          información, brechas web, accesos deficientes y tratamiento incorrecto
+          de datos personales.
+        </p>
+      </div>
+
+      <div class="justification-layout">
+        <article class="editorial-panel">
+          <p class="lead-line">
+            La seguridad digital protege la información, la confianza y la continuidad de la empresa.
+          </p>
+
+          <p>
+            Muchas MIPYMES operan sin políticas de seguridad, controles mínimos
+            de acceso, mecanismos de protección de datos o procesos claros para
+            responder ante incidentes.
+          </p>
+
+          <p>
+            La Ley Orgánica de Protección de Datos Personales establece
+            obligaciones técnicas y organizacionales que deben incorporarse a la
+            operación empresarial.
+          </p>
+
+          <p>
+            El módulo combina seguridad técnica básica, gobernanza, gestión de
+            datos personales, cumplimiento regulatorio y herramientas accesibles.
+          </p>
+
+          <div class="callout">
+            <div class="callout-icon">✓</div>
+
+            <div>
+              <strong>Enfoque práctico</strong>
+              <p>
+                Traducir conceptos complejos en controles simples, inmediatos y
+                aplicables desde el primer día.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <aside class="risk-stack">
+          <div class="risk-item">
+            <strong>Ciberataques</strong>
+            <span>Phishing, malware e ingeniería social.</span>
+          </div>
+
+          <div class="risk-item">
+            <strong>Pérdida de información</strong>
+            <span>Ausencia de respaldos y controles de almacenamiento.</span>
+          </div>
+
+          <div class="risk-item">
+            <strong>Accesos inseguros</strong>
+            <span>Contraseñas compartidas y privilegios excesivos.</span>
+          </div>
+
+          <div class="risk-item">
+            <strong>Brechas web</strong>
+            <span>Plugins desactualizados y protección perimetral insuficiente.</span>
+          </div>
+
+          <div class="risk-item">
+            <strong>Datos personales</strong>
+            <span>Tratamiento sin inventario, consentimiento o controles.</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="objetivos">
+      <div class="section-head">
+        <div class="section-label">Objetivos de aprendizaje</div>
+
+        <h2 class="section-title">
+          Qué podrá hacer el participante al finalizar
+        </h2>
+
+        <p class="section-description">
+          Los resultados combinan identificación de riesgos, configuración de
+          controles, cumplimiento y capacidad de respuesta.
+        </p>
+      </div>
+
+      <div class="grid grid-3 objectives">
+        <article class="card objective">
+          <h3>
+            Identificar activos digitales críticos y riesgos comunes de ciberataques.
+          </h3>
+        </article>
+
+        <article class="card objective">
+          <h3>
+            Aplicar medidas esenciales en correo, web, accesos, dispositivos y redes.
+          </h3>
+        </article>
+
+        <article class="card objective">
+          <h3>
+            Implementar inventario, consentimiento, políticas y controles mínimos de la LOPDP.
+          </h3>
+        </article>
+
+        <article class="card objective">
+          <h3>
+            Configurar 2FA, gestores de contraseñas, antivirus o EDR y copias de seguridad.
+          </h3>
+        </article>
+
+        <article class="card objective">
+          <h3>
+            Evaluar riesgos relacionados con proveedores y cadena de suministro.
+          </h3>
+        </article>
+
+        <article class="card objective">
+          <h3>
+            Diseñar procesos de retención, eliminación, gestión de brechas y notificación.
+          </h3>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="modelo">
+      <div class="section-head">
+        <div class="section-label">Modelo de protección</div>
+
+        <h2 class="section-title">
+          Seguridad = técnica + personas + gobernanza
+        </h2>
+
+        <p class="section-description">
+          La protección real aparece cuando los controles tecnológicos se
+          combinan con responsabilidades, documentación y decisiones organizacionales.
+        </p>
+      </div>
+
+      <div class="security-model">
+        <div class="section-label">Capas de seguridad</div>
+
+        <h3>
+          Una defensa básica debe cubrir accesos, sistemas, información y gestión
+        </h3>
+
+        <p>
+          Cada capa reduce un tipo de riesgo. Ninguna herramienta individual
+          reemplaza al resto de controles.
+        </p>
+
+        <div class="layer-flow" aria-label="Capas de seguridad">
+          <div class="layer">
+            <span>Capa 01</span>
+            <strong>Personas</strong>
+            <small>Conciencia e ingeniería social</small>
+          </div>
+
+          <div class="layer-arrow">+</div>
+
+          <div class="layer">
+            <span>Capa 02</span>
+            <strong>Tecnología</strong>
+            <small>Correo, web, dispositivos y redes</small>
+          </div>
+
+          <div class="layer-arrow">+</div>
+
+          <div class="layer">
+            <span>Capa 03</span>
+            <strong>Datos</strong>
+            <small>Protección y ciclo de vida</small>
+          </div>
+
+          <div class="layer-arrow">+</div>
+
+          <div class="layer">
+            <span>Capa 04</span>
+            <strong>Gobernanza</strong>
+            <small>Responsables, políticas y cumplimiento</small>
+          </div>
+        </div>
+
+        <div class="security-rule">
+          La seguridad no es un producto. Es un sistema de controles, responsabilidades y decisiones.
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contenidos">
+      <div class="section-head">
+        <div class="section-label">Contenidos principales</div>
+
+        <h2 class="section-title">
+          Tres bloques para proteger y gobernar la operación digital
+        </h2>
+
+        <p class="section-description">
+          El módulo avanza desde los riesgos y controles esenciales hasta el
+          cumplimiento, la ética y la gestión organizacional.
+        </p>
+      </div>
+
+      <div class="content-stack">
+        <article class="content-block">
+          <div class="content-side">
+            <div class="number-label">BLOQUE 01</div>
+            <div class="tag tag-green" style="margin-top:18px;">Fundamentos</div>
+            <h3>Seguridad y protección de datos</h3>
+            <p>
+              Reconocer amenazas y establecer las primeras defensas técnicas y organizacionales.
+            </p>
+          </div>
+
+          <div class="content-main">
+            <ul class="feature-list">
+              <li>
+                <strong>Amenazas comunes:</strong> phishing, malware e ingeniería social.
+              </li>
+              <li>
+                <strong>Activo crítico:</strong> identificación de datos personales.
+              </li>
+              <li>
+                <strong>LOPDP:</strong> introducción práctica y principios obligatorios.
+              </li>
+              <li>
+                <strong>Cumplimiento mínimo:</strong> tres obligaciones técnicas para MIPYMES.
+              </li>
+              <li>
+                <strong>Seguridad del correo:</strong> SPF, DKIM y DMARC.
+              </li>
+              <li>
+                <strong>Protección del dispositivo:</strong> antivirus o EDR.
+              </li>
+              <li>
+                <strong>Mantenimiento:</strong> actualización de sistemas.
+              </li>
+              <li>
+                <strong>Respaldo:</strong> copias de seguridad mediante la regla 3-2-1.
+              </li>
+            </ul>
+
+            <div class="focus-box">
+              <strong>Pregunta del bloque</strong>
+              <p>
+                ¿Qué activos, datos y sistemas causarían mayor impacto si fueran
+                robados, alterados o eliminados?
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <article class="content-block">
+          <div class="content-side">
+            <div class="number-label">BLOQUE 02</div>
+            <div class="tag tag-blue" style="margin-top:18px;">Protección operativa</div>
+            <h3>Acceso, seguridad web y ciclo del dato</h3>
+            <p>
+              Controlar quién accede, cómo se protegen las plataformas y qué ocurre con la información.
+            </p>
+          </div>
+
+          <div class="content-main">
+            <ul class="feature-list">
+              <li>
+                <strong>Contraseñas compartidas:</strong> eliminación de prácticas inseguras.
+              </li>
+              <li>
+                <strong>Autenticación:</strong> implementación de 2FA o MFA.
+              </li>
+              <li>
+                <strong>Accesos:</strong> aplicación del principio de menor privilegio.
+              </li>
+              <li>
+                <strong>WordPress:</strong> riesgos relacionados con plugins desactualizados.
+              </li>
+              <li>
+                <strong>Defensa perimetral:</strong> uso de WAF.
+              </li>
+              <li>
+                <strong>Terceros:</strong> riesgos en proveedores y cadena de suministro.
+              </li>
+              <li>
+                <strong>Datos:</strong> almacenamiento, retención y eliminación.
+              </li>
+              <li>
+                <strong>Brechas:</strong> detección y procesos de notificación.
+              </li>
+            </ul>
+
+            <div class="focus-box">
+              <strong>Principio operativo</strong>
+              <p>
+                Cada persona y proveedor debe acceder únicamente a la información
+                necesaria para cumplir su función.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <article class="content-block">
+          <div class="content-side">
+            <div class="number-label">BLOQUE 03</div>
+            <div class="tag tag-purple" style="margin-top:18px;">Gobernanza</div>
+            <h3>Ética de IA y cumplimiento avanzado</h3>
+            <p>
+              Asignar responsabilidades, documentar decisiones y evaluar riesgos.
+            </p>
+          </div>
+
+          <div class="content-main">
+            <ul class="feature-list">
+              <li>
+                <strong>Modelo integral:</strong> técnica, personas y gobernanza.
+              </li>
+              <li>
+                <strong>Responsable de Tratamiento:</strong> rol dentro de la LOPDP.
+              </li>
+              <li>
+                <strong>Inteligencia artificial:</strong> chatbots y scoring con supervisión humana.
+              </li>
+              <li>
+                <strong>Sesgo:</strong> riesgos relacionados con sistemas de caja negra.
+              </li>
+              <li>
+                <strong>Documentación:</strong> cuatro políticas esenciales.
+              </li>
+              <li>
+                <strong>Registro:</strong> Registro de Actividades de Tratamiento.
+              </li>
+              <li>
+                <strong>Análisis de riesgos:</strong> aplicación práctica vinculada al Acuerdo Ministerial 006-2021.
+              </li>
+              <li>
+                <strong>Consecuencias legales:</strong> análisis del caso Diego R.
+              </li>
+            </ul>
+
+            <div class="focus-box">
+              <strong>Criterio de gobernanza</strong>
+              <p>
+                Las decisiones automatizadas que afectan a personas requieren
+                control, documentación y supervisión.
+              </p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="controles">
+      <div class="section-head">
+        <div class="section-label">Controles inmediatos</div>
+
+        <h2 class="section-title">
+          La base mínima que toda MIPYME debe implementar
+        </h2>
+
+        <p class="section-description">
+          El módulo prioriza controles accesibles que reducen riesgos frecuentes
+          sin exigir una infraestructura compleja.
+        </p>
+      </div>
+
+      <div class="control-grid">
+        <article class="control">
+          <span>Control 01</span>
+          <h3>2FA o MFA</h3>
+          <p>
+            Agrega una segunda verificación para proteger cuentas y accesos.
+          </p>
+        </article>
+
+        <article class="control">
+          <span>Control 02</span>
+          <h3>Gestor de contraseñas</h3>
+          <p>
+            Evita claves compartidas y facilita el uso de credenciales únicas.
+          </p>
+        </article>
+
+        <article class="control">
+          <span>Control 03</span>
+          <h3>Antivirus o EDR</h3>
+          <p>
+            Apoya la detección y respuesta ante amenazas en dispositivos.
+          </p>
+        </article>
+
+        <article class="control">
+          <span>Control 04</span>
+          <h3>Backups</h3>
+          <p>
+            Protege la continuidad mediante copias organizadas y verificables.
+          </p>
+        </article>
+      </div>
+
+      <div class="grid grid-3" style="margin-top:16px;">
+        <article class="card">
+          <div class="card-body">
+            <div class="tag tag-blue">Correo</div>
+            <h3>SPF, DKIM y DMARC</h3>
+            <p>
+              Controles orientados a fortalecer la seguridad y autenticidad del correo.
+            </p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-body">
+            <div class="tag tag-green">Sistemas</div>
+            <h3>Actualizaciones</h3>
+            <p>
+              Mantener plataformas, dispositivos y componentes en versiones actualizadas.
+            </p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-body">
+            <div class="tag tag-coral">Web</div>
+            <h3>Plugins y WAF</h3>
+            <p>
+              Reducir riesgos en plataformas web y fortalecer la defensa perimetral.
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="datos">
+      <div class="section-head">
+        <div class="section-label">Ciclo de vida del dato</div>
+
+        <h2 class="section-title">
+          La protección continúa desde la captura hasta la eliminación
+        </h2>
+
+        <p class="section-description">
+          La información personal debe gestionarse durante todo su recorrido y no
+          únicamente mientras se encuentra almacenada.
+        </p>
+      </div>
+
+      <div class="data-lifecycle">
+        <div class="section-label">Proceso de referencia</div>
+
+        <h3>Inventariar, proteger, retener y eliminar</h3>
+
+        <p>
+          El ciclo de vida debe definir cómo se obtiene el dato, quién puede
+          utilizarlo, cuánto tiempo se conserva y qué ocurre ante una brecha.
+        </p>
+
+        <div class="lifecycle-flow" aria-label="Ciclo de vida del dato">
+          <div class="lifecycle-node">
+            <span>Etapa 01</span>
+            <strong>Inventario</strong>
+            <small>Identificar datos y sistemas</small>
+          </div>
+
+          <div class="lifecycle-arrow">→</div>
+
+          <div class="lifecycle-node">
+            <span>Etapa 02</span>
+            <strong>Consentimiento</strong>
+            <small>Gestionar autorización</small>
+          </div>
+
+          <div class="lifecycle-arrow">→</div>
+
+          <div class="lifecycle-node">
+            <span>Etapa 03</span>
+            <strong>Almacenamiento</strong>
+            <small>Proteger y controlar</small>
+          </div>
+
+          <div class="lifecycle-arrow">→</div>
+
+          <div class="lifecycle-node">
+            <span>Etapa 04</span>
+            <strong>Retención</strong>
+            <small>Definir tiempos</small>
+          </div>
+
+          <div class="lifecycle-arrow">→</div>
+
+          <div class="lifecycle-node">
+            <span>Etapa 05</span>
+            <strong>Eliminación</strong>
+            <small>Aplicar el cierre del ciclo</small>
+          </div>
+        </div>
+
+        <div class="security-rule">
+          El derecho al olvido y la gestión de brechas forman parte del ciclo de vida del dato.
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="gobernanza">
+      <div class="section-head">
+        <div class="section-label">Gobernanza y cumplimiento</div>
+
+        <h2 class="section-title">
+          La seguridad necesita responsables y evidencia
+        </h2>
+
+        <p class="section-description">
+          Las herramientas reducen riesgos, pero el cumplimiento requiere roles,
+          políticas, registros y análisis documentados.
+        </p>
+      </div>
+
+      <div class="governance-grid">
+        <article class="card governance-card">
+          <div class="card-body">
+            <div class="tag tag-green">Responsabilidad</div>
+            <h3>Responsable de Tratamiento</h3>
+            <p>
+              Rol relacionado con la gestión de datos personales y el cumplimiento
+              de las obligaciones aplicables.
+            </p>
+          </div>
+        </article>
+
+        <article class="card governance-card">
+          <div class="card-body">
+            <div class="tag tag-blue">Documentación</div>
+            <h3>Políticas esenciales</h3>
+            <p>
+              El módulo aborda cuatro políticas obligatorias como base documental.
+            </p>
+          </div>
+        </article>
+
+        <article class="card governance-card">
+          <div class="card-body">
+            <div class="tag tag-purple">Registro</div>
+            <h3>RAT</h3>
+            <p>
+              El Registro de Actividades de Tratamiento documenta cómo se gestionan
+              los datos dentro de la organización.
+            </p>
+          </div>
+        </article>
+
+        <article class="card governance-card">
+          <div class="card-body">
+            <div class="tag tag-amber">Riesgo</div>
+            <h3>Análisis práctico</h3>
+            <p>
+              Evaluación de amenazas, vulnerabilidades e impactos dentro del
+              contexto de la MIPYME.
+            </p>
+          </div>
+        </article>
+
+        <article class="card governance-card">
+          <div class="card-body">
+            <div class="tag tag-coral">Terceros</div>
+            <h3>Cadena de suministro</h3>
+            <p>
+              Revisión de riesgos generados por proveedores, servicios y accesos externos.
+            </p>
+          </div>
+        </article>
+
+        <article class="card governance-card">
+          <div class="card-body">
+            <div class="tag tag-red">Incidentes</div>
+            <h3>Brechas y notificación</h3>
+            <p>
+              Procesos para detectar, gestionar, documentar y comunicar incidentes.
+            </p>
+          </div>
+        </article>
+      </div>
+
+      <div class="ai-panel">
+        <article class="ai-main">
+          <div class="tag tag-purple">Ética de la IA</div>
+          <h3>Automatizar decisiones exige supervisión</h3>
+
+          <p>
+            El uso de chatbots, sistemas de scoring y otros mecanismos
+            automatizados debe considerar sus efectos sobre las personas y evitar
+            operar sin control humano.
+          </p>
+
+          <div class="tool-cloud">
+            <span class="tool">Chatbots</span>
+            <span class="tool">Scoring</span>
+            <span class="tool">Supervisión humana</span>
+            <span class="tool">Documentación</span>
+          </div>
+        </article>
+
+        <aside class="ai-risks">
+          <div class="ai-risk">
+            <strong>Sesgo</strong>
+            <p>
+              Las decisiones pueden producir resultados injustos o inconsistentes.
+            </p>
+          </div>
+
+          <div class="ai-risk">
+            <strong>Caja negra</strong>
+            <p>
+              El sistema puede dificultar la explicación de cómo llegó a una decisión.
+            </p>
+          </div>
+
+          <div class="ai-risk">
+            <strong>Ausencia de supervisión</strong>
+            <p>
+              Automatizar sin revisión aumenta riesgos operativos y de cumplimiento.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="metodologia">
+      <div class="section-head">
+        <div class="section-label">Metodología</div>
+
+        <h2 class="section-title">
+          Comprender, aplicar y practicar en grupo
+        </h2>
+
+        <p class="section-description">
+          El curso combina sesiones de clase con trabajo autónomo orientado a
+          prácticas relacionadas con el módulo.
+        </p>
+      </div>
+
+      <div class="method-layout">
+        <div>
+          <div class="hours">
+            <article class="hour-card primary">
+              <span class="hour-number">6</span>
+              <strong>Horas de clase</strong>
+              <p>
+                Desarrollo de contenidos, participación y actividades guiadas.
+              </p>
+            </article>
+
+            <article class="hour-card secondary">
+              <span class="hour-number">2</span>
+              <strong>Horas de trabajo autónomo</strong>
+              <p>
+                Prácticas aplicadas a los controles y conceptos del módulo.
+              </p>
+            </article>
+          </div>
+
+          <div class="method-items">
+            <article class="method-item">
+              <span>01</span>
+              <div>
+                <strong>Participación en clase</strong>
+                <p>Interacción durante explicaciones y análisis.</p>
+              </div>
+            </article>
+
+            <article class="method-item">
+              <span>02</span>
+              <div>
+                <strong>Prácticas grupales</strong>
+                <p>Aplicación colaborativa de medidas y criterios de seguridad.</p>
+              </div>
+            </article>
+
+            <article class="method-item">
+              <span>03</span>
+              <div>
+                <strong>Acciones aplicables</strong>
+                <p>Controles que pueden incorporarse desde el primer día.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <aside class="virtual-classroom">
+          <div class="tag tag-amber">Canal principal</div>
+
+          <h3>Aula Virtual</h3>
+
+          <p>
+            Es el principal medio de comunicación y el espacio utilizado para
+            entregar trabajos y tareas.
+          </p>
+
+          <div class="platform-box">
+            <div class="platform-icon">AV</div>
+
+            <div>
+              <strong>Comunicación y entregas</strong>
+              <span>Materiales, prácticas, tareas y seguimiento.</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="requisitos">
+      <div class="section-head">
+        <div class="section-label">Requisitos técnicos</div>
+
+        <h2 class="section-title">
+          Lo necesario para participar
+        </h2>
+
+        <p class="section-description">
+          El acceso al módulo requiere equipo, conectividad y una cuenta para las sesiones virtuales.
+        </p>
+      </div>
+
+      <div class="requirements">
+        <article class="requirement">
+          <div class="requirement-icon">PC</div>
+          <strong>Laptop</strong>
+        </article>
+
+        <article class="requirement">
+          <div class="requirement-icon">NET</div>
+          <strong>Conexión a internet</strong>
+        </article>
+
+        <article class="requirement">
+          <div class="requirement-icon">ZM</div>
+          <strong>Cuenta de Zoom</strong>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="evaluacion">
+      <div class="section-head">
+        <div class="section-label">Evaluación</div>
+
+        <h2 class="section-title">
+          Cómo se distribuye la calificación
+        </h2>
+
+        <p class="section-description">
+          La evaluación combina participación, comprensión de conceptos y aplicación práctica.
+        </p>
+      </div>
+
+      <div class="evaluation-layout">
+        <aside class="evaluation-total">
+          <div class="donut" aria-label="Distribución de la evaluación">
+            <div class="donut-center">
+              <strong>100%</strong>
+              <span>Evaluación</span>
+            </div>
+          </div>
+
+          <p>
+            Tres componentes para valorar conocimiento, participación y ejecución.
+          </p>
+        </aside>
+
+        <div class="evaluation-items">
+          <article class="evaluation-item">
+            <div class="evaluation-percentage">40%</div>
+
+            <div>
+              <h3>Asistencia y participación en clase</h3>
+              <p>
+                Presencia e involucramiento durante el desarrollo del módulo.
+              </p>
+            </div>
+          </article>
+
+          <article class="evaluation-item">
+            <div class="evaluation-percentage">40%</div>
+
+            <div>
+              <h3>Examen del módulo</h3>
+              <p>
+                Evaluación de los conceptos, riesgos, controles y criterios revisados.
+              </p>
+            </div>
+          </article>
+
+          <article class="evaluation-item">
+            <div class="evaluation-percentage">20%</div>
+
+            <div>
+              <h3>Entrega de prácticas</h3>
+              <p>
+                Aplicación de los contenidos mediante los ejercicios asignados.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <footer class="final-panel">
+      <div class="section-label">Resultado esperado</div>
+
+      <h2>
+        Una MIPYME capaz de identificar sus riesgos, proteger sus activos y responder con mayor orden.
+      </h2>
+
+      <p>
+        El módulo busca que facilitadores y empresas conviertan la seguridad
+        digital en una práctica operativa, incorporando controles técnicos,
+        responsabilidades, protección de datos y procesos de cumplimiento.
+      </p>
+
+      <div class="final-rule">
+        La seguridad no comienza con una herramienta. Comienza identificando qué
+        se debe proteger, quién es responsable y qué control reduce el riesgo.
+      </div>
+    </footer>
+
+    <div class="footer">
+      <span>Seguridad Digital y Ciberseguridad</span>
+      <span>Programa MIPYME Digital</span>
+    </div>
+  </main>
+</body>
+</html>
