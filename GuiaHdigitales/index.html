@@ -1,1 +1,2268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Herramientas digitales para MIPYMES — Guía práctica para el facilitador</title>
+
+  <meta
+    name="description"
+    content="Guía práctica para comprender y estructurar el ecosistema digital mínimo de una MIPYME: CRM, WhatsApp Business API, automatización, colaboración, gestión de TI, LMS y certificación digital."
+  >
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #f5f6f4;
+      --surface: #ffffff;
+      --surface-soft: #fafbf9;
+      --surface-dark: #17211c;
+
+      --text: #17211c;
+      --muted: #647069;
+      --faint: #909a94;
+
+      --border: #e1e6e2;
+      --border-strong: #c9d2cc;
+
+      --green: #276b4d;
+      --green-soft: #e8f3ed;
+      --green-border: #bfd9ca;
+
+      --blue: #28638f;
+      --blue-soft: #eaf3f9;
+      --blue-border: #bdd6e8;
+
+      --purple: #5c4b8d;
+      --purple-soft: #f0edfa;
+      --purple-border: #d2c9eb;
+
+      --amber: #8a6119;
+      --amber-soft: #fbf2df;
+      --amber-border: #e9cf99;
+
+      --coral: #934b37;
+      --coral-soft: #faece7;
+      --coral-border: #e9c0b3;
+
+      --radius-sm: 12px;
+      --radius-md: 18px;
+      --radius-lg: 28px;
+
+      --shadow:
+        0 18px 48px rgba(23, 33, 28, 0.055),
+        0 2px 8px rgba(23, 33, 28, 0.025);
+
+      --max-width: 1180px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(
+          circle at 8% 0%,
+          rgba(39, 107, 77, 0.08),
+          transparent 28%
+        ),
+        var(--bg);
+      color: var(--text);
+      font-family: "DM Sans", sans-serif;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    .page {
+      width: min(calc(100% - 32px), var(--max-width));
+      margin: 0 auto;
+      padding: 24px 0 64px;
+    }
+
+    .eyebrow,
+    .section-label,
+    .tag,
+    .mini-label {
+      font-size: 0.71rem;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 7px 12px;
+      border: 1px solid var(--green-border);
+      border-radius: 999px;
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .eyebrow-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .hero {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.99),
+          rgba(248, 251, 249, 0.96)
+        );
+      box-shadow: var(--shadow);
+    }
+
+    .hero-main {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(310px, 0.65fr);
+      gap: 40px;
+      padding: 48px 44px 36px;
+    }
+
+    .hero h1 {
+      max-width: 820px;
+      margin-top: 18px;
+      font-size: clamp(2.5rem, 5.3vw, 4.8rem);
+      line-height: 0.98;
+      letter-spacing: -0.058em;
+    }
+
+    .hero-lead {
+      max-width: 790px;
+      margin-top: 23px;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .hero-side {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 23px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .hero-side h2 {
+      font-size: 1.28rem;
+      line-height: 1.26;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-side p {
+      margin-top: 9px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .principles {
+      display: grid;
+      gap: 9px;
+    }
+
+    .principle {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 10px 11px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--surface-soft);
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    .principle span {
+      flex: 0 0 auto;
+      width: 24px;
+      height: 24px;
+      border-radius: 8px;
+      background: var(--green-soft);
+      color: var(--green);
+      font-family: "DM Mono", monospace;
+      font-size: 0.68rem;
+      line-height: 24px;
+      text-align: center;
+    }
+
+    .hero-strip {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      border-top: 1px solid var(--border);
+      background: var(--surface-soft);
+    }
+
+    .hero-stat {
+      min-height: 112px;
+      padding: 21px 22px;
+      border-right: 1px solid var(--border);
+    }
+
+    .hero-stat:last-child {
+      border-right: 0;
+    }
+
+    .mini-label {
+      color: var(--faint);
+    }
+
+    .hero-stat strong {
+      display: block;
+      margin-top: 7px;
+      font-size: 1rem;
+      line-height: 1.3;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 18px;
+      padding: 11px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.82);
+      box-shadow: 0 9px 28px rgba(23, 33, 28, 0.035);
+    }
+
+    .nav a {
+      padding: 8px 11px;
+      border-radius: 10px;
+      color: var(--muted);
+      font-size: 0.81rem;
+      font-weight: 600;
+      transition:
+        background 0.2s ease,
+        color 0.2s ease;
+    }
+
+    .nav a:hover {
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .section {
+      padding-top: 72px;
+      scroll-margin-top: 20px;
+    }
+
+    .section-head {
+      max-width: 850px;
+      margin-bottom: 23px;
+    }
+
+    .section-label {
+      margin-bottom: 9px;
+      color: var(--green);
+    }
+
+    .section-title {
+      font-size: clamp(1.95rem, 3.6vw, 3.15rem);
+      line-height: 1.07;
+      letter-spacing: -0.04em;
+    }
+
+    .section-description {
+      margin-top: 13px;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .grid-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .card {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .card-body {
+      padding: 22px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 9px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+
+    .tag-green {
+      border-color: var(--green-border);
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .tag-blue {
+      border-color: var(--blue-border);
+      background: var(--blue-soft);
+      color: var(--blue);
+    }
+
+    .tag-purple {
+      border-color: var(--purple-border);
+      background: var(--purple-soft);
+      color: var(--purple);
+    }
+
+    .tag-amber {
+      border-color: var(--amber-border);
+      background: var(--amber-soft);
+      color: var(--amber);
+    }
+
+    .tag-coral {
+      border-color: var(--coral-border);
+      background: var(--coral-soft);
+      color: var(--coral);
+    }
+
+    .card h3 {
+      font-size: 1.18rem;
+      line-height: 1.28;
+      letter-spacing: -0.015em;
+    }
+
+    .card p {
+      margin-top: 9px;
+      color: var(--muted);
+      font-size: 0.89rem;
+    }
+
+    .overview {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+      gap: 18px;
+    }
+
+    .editorial-panel {
+      padding: 29px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .editorial-panel p {
+      color: var(--muted);
+    }
+
+    .editorial-panel p + p {
+      margin-top: 15px;
+    }
+
+    .editorial-panel .lead-line {
+      color: var(--text);
+      font-size: 1.16rem;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+
+    .verb-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 9px;
+      margin-top: 23px;
+    }
+
+    .verb {
+      padding: 13px 8px;
+      border: 1px solid var(--green-border);
+      border-radius: 12px;
+      background: var(--green-soft);
+      color: var(--green);
+      font-size: 0.81rem;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .ecosystem-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .ecosystem-item {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      padding: 13px 14px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: var(--surface-soft);
+    }
+
+    .ecosystem-item span {
+      flex: 0 0 auto;
+      width: 30px;
+      height: 30px;
+      border-radius: 9px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      font-family: "DM Mono", monospace;
+      font-size: 0.67rem;
+      line-height: 30px;
+      text-align: center;
+    }
+
+    .ecosystem-item strong {
+      font-size: 0.9rem;
+    }
+
+    .callout {
+      display: flex;
+      gap: 14px;
+      margin-top: 18px;
+      padding: 19px 20px;
+      border: 1px solid var(--green-border);
+      border-radius: var(--radius-md);
+      background: var(--green-soft);
+    }
+
+    .callout-icon {
+      flex: 0 0 auto;
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      background: var(--green);
+      color: #ffffff;
+      font-weight: 700;
+      line-height: 38px;
+      text-align: center;
+    }
+
+    .callout strong {
+      display: block;
+      color: var(--green);
+    }
+
+    .callout p {
+      margin-top: 3px;
+      color: #496758;
+      font-size: 0.88rem;
+    }
+
+    .axis-card {
+      display: grid;
+      grid-template-columns: 250px minmax(0, 1fr);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .axis-side {
+      padding: 27px;
+      border-right: 1px solid var(--border);
+      background: var(--surface-soft);
+    }
+
+    .axis-number {
+      color: var(--faint);
+      font-family: "DM Mono", monospace;
+      font-size: 0.75rem;
+    }
+
+    .axis-side h3 {
+      margin-top: 20px;
+      font-size: 1.45rem;
+      line-height: 1.18;
+      letter-spacing: -0.025em;
+    }
+
+    .axis-side p {
+      margin-top: 11px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .axis-content {
+      padding: 27px;
+    }
+
+    .feature-list {
+      display: grid;
+      gap: 12px;
+      list-style: none;
+    }
+
+    .feature-list li {
+      position: relative;
+      padding-left: 22px;
+      color: var(--muted);
+      font-size: 0.91rem;
+    }
+
+    .feature-list li::before {
+      content: "";
+      position: absolute;
+      top: 0.62em;
+      left: 0;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+
+    .feature-list strong {
+      color: var(--text);
+    }
+
+    .quote {
+      margin-top: 20px;
+      padding: 17px 18px;
+      border-left: 3px solid var(--green);
+      border-radius: 0 13px 13px 0;
+      background: var(--green-soft);
+      color: #426352;
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    .architecture {
+      margin-top: 18px;
+      padding: 29px;
+      border-radius: var(--radius-lg);
+      background: var(--surface-dark);
+      color: #ffffff;
+      box-shadow: var(--shadow);
+    }
+
+    .architecture .section-label {
+      color: #9ad0b5;
+    }
+
+    .architecture h3 {
+      font-size: 1.65rem;
+      line-height: 1.2;
+      letter-spacing: -0.025em;
+    }
+
+    .architecture > p {
+      max-width: 800px;
+      margin-top: 9px;
+      color: #b8c4bd;
+      font-size: 0.91rem;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(7, auto);
+      align-items: stretch;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .flow-node {
+      display: flex;
+      min-width: 140px;
+      min-height: 120px;
+      flex-direction: column;
+      justify-content: center;
+      padding: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.065);
+    }
+
+    .flow-node span {
+      color: #93a79c;
+      font-family: "DM Mono", monospace;
+      font-size: 0.66rem;
+      text-transform: uppercase;
+    }
+
+    .flow-node strong {
+      margin-top: 7px;
+      font-size: 0.96rem;
+      line-height: 1.25;
+    }
+
+    .flow-node small {
+      margin-top: 5px;
+      color: #b8c4bd;
+      font-size: 0.73rem;
+    }
+
+    .flow-arrow {
+      align-self: center;
+      color: #7eaf95;
+      font-size: 1.25rem;
+    }
+
+    .automation-compare {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .automation-type {
+      padding: 21px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--surface);
+    }
+
+    .automation-type h4 {
+      font-size: 1rem;
+    }
+
+    .automation-type code {
+      display: block;
+      margin-top: 13px;
+      padding: 13px 14px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--surface-soft);
+      color: var(--text);
+      font-family: "DM Mono", monospace;
+      font-size: 0.77rem;
+      white-space: normal;
+    }
+
+    .automation-type p {
+      margin-top: 11px;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .pillar {
+      min-height: 210px;
+    }
+
+    .pillar-number {
+      display: block;
+      margin-bottom: 27px;
+      color: var(--green);
+      font-family: "DM Mono", monospace;
+      font-size: 0.75rem;
+    }
+
+    .tool-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .tool {
+      padding: 7px 10px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--surface-soft);
+      color: var(--muted);
+      font-size: 0.77rem;
+      font-weight: 600;
+    }
+
+    .maturity {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 11px;
+      margin-top: 20px;
+    }
+
+    .maturity-step {
+      min-height: 150px;
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: var(--surface);
+    }
+
+    .maturity-step span {
+      color: var(--faint);
+      font-family: "DM Mono", monospace;
+      font-size: 0.7rem;
+    }
+
+    .maturity-step strong {
+      display: block;
+      margin-top: 21px;
+      font-size: 0.95rem;
+    }
+
+    .maturity-step p {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 0.79rem;
+    }
+
+    .badge-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .badge-visual {
+      display: grid;
+      place-content: center;
+      min-height: 360px;
+      padding: 25px;
+      border-radius: var(--radius-md);
+      background:
+        radial-gradient(
+          circle at center,
+          rgba(92, 75, 141, 0.18),
+          transparent 55%
+        ),
+        var(--purple-soft);
+      border: 1px solid var(--purple-border);
+      text-align: center;
+    }
+
+    .digital-badge {
+      display: grid;
+      place-content: center;
+      width: 190px;
+      height: 190px;
+      margin: 0 auto;
+      border: 2px solid var(--purple);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.74);
+      box-shadow:
+        0 0 0 12px rgba(92, 75, 141, 0.07),
+        0 18px 35px rgba(92, 75, 141, 0.14);
+    }
+
+    .digital-badge span {
+      color: var(--purple);
+      font-family: "DM Mono", monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .digital-badge strong {
+      display: block;
+      max-width: 130px;
+      margin-top: 7px;
+      color: var(--purple);
+      font-size: 1.15rem;
+      line-height: 1.15;
+    }
+
+    .badge-visual p {
+      max-width: 240px;
+      margin-top: 25px;
+      color: #695f88;
+      font-size: 0.84rem;
+    }
+
+    .cases {
+      counter-reset: case;
+    }
+
+    .case-card {
+      min-height: 300px;
+    }
+
+    .case-card::before {
+      counter-increment: case;
+      content: "CASO " counter(case, decimal-leading-zero);
+      display: block;
+      padding: 16px 21px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface-soft);
+      color: var(--faint);
+      font-family: "DM Mono", monospace;
+      font-size: 0.69rem;
+    }
+
+    .case-flow {
+      margin-top: 16px;
+      color: var(--green);
+      font-family: "DM Mono", monospace;
+      font-size: 0.77rem;
+      line-height: 1.7;
+    }
+
+    .result {
+      margin-top: 17px;
+      padding-top: 15px;
+      border-top: 1px solid var(--border);
+    }
+
+    .result strong {
+      color: var(--green);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+    }
+
+    .result p {
+      margin-top: 5px;
+    }
+
+    .faq {
+      display: grid;
+      gap: 11px;
+    }
+
+    details {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: var(--surface);
+      box-shadow: 0 7px 24px rgba(23, 33, 28, 0.03);
+    }
+
+    summary {
+      position: relative;
+      padding: 18px 52px 18px 19px;
+      cursor: pointer;
+      list-style: none;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: "+";
+      position: absolute;
+      top: 50%;
+      right: 18px;
+      width: 27px;
+      height: 27px;
+      transform: translateY(-50%);
+      border-radius: 8px;
+      background: var(--green-soft);
+      color: var(--green);
+      font-size: 1.1rem;
+      line-height: 27px;
+      text-align: center;
+    }
+
+    details[open] summary::after {
+      content: "−";
+    }
+
+    .answer {
+      padding: 0 19px 19px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .exam-layout {
+      display: grid;
+      grid-template-columns: 300px minmax(0, 1fr);
+      gap: 18px;
+    }
+
+    .exam-summary {
+      padding: 28px;
+      border-radius: var(--radius-md);
+      background: var(--surface-dark);
+      color: #ffffff;
+    }
+
+    .exam-summary span {
+      color: #9ad0b5;
+      font-family: "DM Mono", monospace;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+    }
+
+    .exam-summary strong {
+      display: block;
+      margin-top: 15px;
+      font-size: 4.3rem;
+      line-height: 1;
+      letter-spacing: -0.07em;
+    }
+
+    .exam-summary h3 {
+      margin-top: 8px;
+      font-size: 1.2rem;
+    }
+
+    .exam-summary p {
+      margin-top: 13px;
+      color: #b8c4bd;
+      font-size: 0.86rem;
+    }
+
+    .exam-topics {
+      display: grid;
+      gap: 10px;
+    }
+
+    .exam-topic {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 50px;
+      align-items: center;
+      gap: 15px;
+      padding: 15px 17px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: var(--surface);
+    }
+
+    .exam-topic strong {
+      font-size: 0.9rem;
+    }
+
+    .exam-topic span {
+      display: grid;
+      place-content: center;
+      width: 42px;
+      height: 34px;
+      border-radius: 10px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      font-family: "DM Mono", monospace;
+      font-size: 0.77rem;
+      font-weight: 500;
+    }
+
+    .exam-focus {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .focus-item {
+      padding: 17px;
+      border: 1px solid var(--amber-border);
+      border-radius: 14px;
+      background: var(--amber-soft);
+    }
+
+    .focus-item strong {
+      display: block;
+      color: var(--amber);
+      font-size: 0.89rem;
+    }
+
+    .focus-item p {
+      margin-top: 5px;
+      color: #755e38;
+      font-size: 0.8rem;
+    }
+
+    .conclusions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 13px;
+    }
+
+    .conclusion {
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: var(--surface);
+    }
+
+    .conclusion span {
+      color: var(--green);
+      font-family: "DM Mono", monospace;
+      font-size: 0.7rem;
+    }
+
+    .conclusion strong {
+      display: block;
+      margin-top: 16px;
+      font-size: 0.98rem;
+      line-height: 1.35;
+    }
+
+    .final-message {
+      margin-top: 18px;
+      padding: 33px;
+      border-radius: var(--radius-lg);
+      background: var(--surface-dark);
+      color: #ffffff;
+      box-shadow: var(--shadow);
+    }
+
+    .final-message .section-label {
+      color: #9ad0b5;
+    }
+
+    .final-message h3 {
+      max-width: 900px;
+      font-size: clamp(1.7rem, 3.4vw, 2.8rem);
+      line-height: 1.12;
+      letter-spacing: -0.04em;
+    }
+
+    .final-message p {
+      max-width: 850px;
+      margin-top: 13px;
+      color: #b8c4bd;
+    }
+
+    .final-rule {
+      margin-top: 25px;
+      padding: 17px 19px;
+      border: 1px solid rgba(154, 208, 181, 0.28);
+      border-radius: 14px;
+      background: rgba(39, 107, 77, 0.22);
+      color: #deece4;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      margin-top: 30px;
+      padding: 20px 4px 0;
+      color: var(--faint);
+      font-size: 0.75rem;
+    }
+
+    @media (max-width: 1040px) {
+      .hero-main,
+      .overview,
+      .badge-panel,
+      .exam-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-strip {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero-stat {
+        border-bottom: 1px solid var(--border);
+      }
+
+      .hero-stat:nth-child(even) {
+        border-right: 0;
+      }
+
+      .hero-stat:last-child {
+        grid-column: 1 / -1;
+        border-bottom: 0;
+      }
+
+      .axis-card {
+        grid-template-columns: 220px minmax(0, 1fr);
+      }
+
+      .grid-4,
+      .maturity {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .grid-3,
+      .conclusions {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .flow {
+        grid-template-columns: 1fr;
+        justify-content: stretch;
+      }
+
+      .flow-node {
+        min-width: 0;
+        min-height: auto;
+      }
+
+      .flow-arrow {
+        justify-self: center;
+        transform: rotate(90deg);
+      }
+    }
+
+    @media (max-width: 720px) {
+      .page {
+        width: min(calc(100% - 22px), var(--max-width));
+        padding-top: 12px;
+      }
+
+      .hero-main {
+        padding: 31px 22px 25px;
+      }
+
+      .hero h1 {
+        font-size: 2.65rem;
+      }
+
+      .hero-strip,
+      .grid-2,
+      .grid-3,
+      .grid-4,
+      .conclusions,
+      .maturity,
+      .automation-compare,
+      .exam-focus {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-stat,
+      .hero-stat:last-child {
+        grid-column: auto;
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .hero-stat:last-child {
+        border-bottom: 0;
+      }
+
+      .verb-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .verb:last-child {
+        grid-column: 1 / -1;
+      }
+
+      .axis-card {
+        grid-template-columns: 1fr;
+      }
+
+      .axis-side {
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .section {
+        padding-top: 55px;
+      }
+
+      .editorial-panel,
+      .architecture,
+      .final-message {
+        padding: 23px;
+      }
+
+      .case-card {
+        min-height: 0;
+      }
+
+      .footer {
+        flex-direction: column;
+        gap: 7px;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .hero-lead {
+        font-size: 0.99rem;
+      }
+
+      .hero-side,
+      .axis-side,
+      .axis-content,
+      .card-body {
+        padding: 19px;
+      }
+
+      .verb-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .verb:last-child {
+        grid-column: auto;
+      }
+
+      .exam-topic {
+        grid-template-columns: minmax(0, 1fr) 42px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <header class="hero">
+      <div class="hero-main">
+        <div>
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            Guía práctica para el facilitador
+          </div>
+
+          <h1>Herramientas digitales para MIPYMES</h1>
+
+          <p class="hero-lead">
+            Una guía para comprender, explicar y estructurar el ecosistema mínimo
+            que una pequeña o mediana empresa necesita para operar de manera
+            profesional, integrada y escalable.
+          </p>
+        </div>
+
+        <aside class="hero-side">
+          <div>
+            <h2>El objetivo no es tener más aplicaciones.</h2>
+            <p>
+              El objetivo es diseñar una arquitectura digital coherente que
+              conecte estrategia, operación, información y control.
+            </p>
+          </div>
+
+          <div class="principles">
+            <div class="principle">
+              <span>01</span>
+              Pasar de herramientas aisladas a sistemas conectados
+            </div>
+
+            <div class="principle">
+              <span>02</span>
+              Definir procesos antes de automatizarlos
+            </div>
+
+            <div class="principle">
+              <span>03</span>
+              Utilizar la IA como capa de optimización
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="hero-strip">
+        <div class="hero-stat">
+          <div class="mini-label">Eje comercial</div>
+          <strong>CRM + WhatsApp Business API</strong>
+        </div>
+
+        <div class="hero-stat">
+          <div class="mini-label">Captación</div>
+          <strong>Sitio web y canales digitales</strong>
+        </div>
+
+        <div class="hero-stat">
+          <div class="mini-label">Operación</div>
+          <strong>Automatización y orquestación</strong>
+        </div>
+
+        <div class="hero-stat">
+          <div class="mini-label">Base interna</div>
+          <strong>Colaboración y gestión de TI</strong>
+        </div>
+
+        <div class="hero-stat">
+          <div class="mini-label">Escalabilidad</div>
+          <strong>Formación y certificación digital</strong>
+        </div>
+      </div>
+    </header>
+
+    <nav class="nav" aria-label="Navegación de la guía">
+      <a href="#proposito">Propósito</a>
+      <a href="#crm">CRM y WhatsApp</a>
+      <a href="#canales">Canales</a>
+      <a href="#automatizacion">Automatización</a>
+      <a href="#colaboracion">Colaboración</a>
+      <a href="#profesionalizacion">Escalabilidad</a>
+      <a href="#badges">Open Badges</a>
+      <a href="#casos">Casos</a>
+      <a href="#faq">Preguntas</a>
+      <a href="#examen">Examen</a>
+    </nav>
+
+    <section class="section" id="proposito">
+      <div class="section-head">
+        <div class="section-label">Propósito del módulo</div>
+
+        <h2 class="section-title">
+          Pasar de usar herramientas a diseñar sistemas
+        </h2>
+
+        <p class="section-description">
+          El módulo adopta un enfoque estratégico-operativo: entender cómo se
+          conectan las herramientas y qué función cumple cada una dentro de la
+          arquitectura digital de una empresa.
+        </p>
+      </div>
+
+      <div class="overview">
+        <article class="editorial-panel">
+          <p class="lead-line">
+            Una empresa digitalmente madura no es la que tiene más herramientas,
+            sino la que opera con coherencia.
+          </p>
+
+          <p>
+            En módulos previos se revisaron fundamentos de modelo de negocio e
+            inteligencia artificial. Esta guía da el siguiente paso: organizar
+            las herramientas como un sistema que permita captar clientes,
+            gestionar información, coordinar equipos, reducir riesgos y escalar.
+          </p>
+
+          <p>
+            El facilitador debe ayudar a la PYME a evitar la acumulación de
+            aplicaciones desconectadas y orientar la construcción de una base
+            digital integrada.
+          </p>
+
+          <div class="verb-grid" aria-label="Capacidades principales">
+            <div class="verb">Integrar</div>
+            <div class="verb">Ordenar</div>
+            <div class="verb">Documentar</div>
+            <div class="verb">Medir</div>
+            <div class="verb">Profesionalizar</div>
+          </div>
+        </article>
+
+        <aside class="editorial-panel">
+          <div class="tag tag-blue">Ecosistema mínimo</div>
+
+          <div class="ecosystem-list">
+            <div class="ecosystem-item">
+              <span>01</span>
+              <strong>CRM</strong>
+            </div>
+
+            <div class="ecosystem-item">
+              <span>02</span>
+              <strong>WhatsApp Business API</strong>
+            </div>
+
+            <div class="ecosystem-item">
+              <span>03</span>
+              <strong>Sitio web</strong>
+            </div>
+
+            <div class="ecosystem-item">
+              <span>04</span>
+              <strong>Automatización</strong>
+            </div>
+
+            <div class="ecosystem-item">
+              <span>05</span>
+              <strong>Herramientas colaborativas</strong>
+            </div>
+
+            <div class="ecosystem-item">
+              <span>06</span>
+              <strong>Gestión de TI y seguridad</strong>
+            </div>
+
+            <div class="ecosystem-item">
+              <span>07</span>
+              <strong>Formación interna</strong>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="callout">
+        <div class="callout-icon">→</div>
+
+        <div>
+          <strong>Criterio para el facilitador</strong>
+          <p>
+            No recomendar una aplicación por separado. Primero identificar el
+            proceso, los responsables, la información involucrada y la conexión
+            necesaria con el resto del sistema.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="crm">
+      <div class="section-head">
+        <div class="section-label">Eje comercial</div>
+
+        <h2 class="section-title">
+          CRM y WhatsApp como centro de la trazabilidad
+        </h2>
+
+        <p class="section-description">
+          Este bloque estructura la relación con los clientes, el seguimiento de
+          oportunidades y la atención comercial mediante un sistema central.
+        </p>
+      </div>
+
+      <article class="axis-card">
+        <div class="axis-side">
+          <span class="axis-number">BLOQUE 01</span>
+          <h3>El CRM gestiona el ciclo comercial</h3>
+          <p>
+            No es únicamente una base de datos. Es estrategia y software
+            trabajando sobre un proceso comercial definido.
+          </p>
+        </div>
+
+        <div class="axis-content">
+          <ul class="feature-list">
+            <li><strong>Gestionar leads:</strong> registrar contactos y su origen.</li>
+            <li><strong>Organizar oportunidades:</strong> identificar negocios potenciales.</li>
+            <li><strong>Estructurar el pipeline:</strong> visualizar las etapas comerciales.</li>
+            <li><strong>Hacer seguimiento:</strong> documentar actividades y próximos pasos.</li>
+            <li><strong>Medir desempeño:</strong> evaluar el funcionamiento del proceso.</li>
+            <li><strong>Tipos:</strong> CRM operativo, analítico y colaborativo.</li>
+            <li><strong>Modelos:</strong> SaaS y código abierto.</li>
+            <li><strong>Prioridades:</strong> entender la diferencia entre CRM y ERP.</li>
+          </ul>
+        </div>
+      </article>
+
+      <div class="grid grid-2" style="margin-top:16px;">
+        <article class="card">
+          <div class="card-body">
+            <div class="tag tag-green">WhatsApp convencional</div>
+            <h3>Útil para contacto básico</h3>
+            <p>
+              Permite conversar con clientes, pero presenta limitaciones cuando
+              varias personas deben atender, registrar y supervisar las
+              interacciones.
+            </p>
+
+            <div class="tool-cloud">
+              <span class="tool">Atención básica</span>
+              <span class="tool">Uso individual</span>
+              <span class="tool">Seguimiento manual</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-body">
+            <div class="tag tag-blue">WhatsApp Business API</div>
+            <h3>Diseñada para una operación profesional</h3>
+            <p>
+              Permite multiagente, integración con sistemas, control de la
+              operación y una gestión comercial con mayor trazabilidad.
+            </p>
+
+            <div class="tool-cloud">
+              <span class="tool">Multiagente</span>
+              <span class="tool">Integración</span>
+              <span class="tool">Control</span>
+              <span class="tool">Verificación en Meta</span>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="quote">
+        WhatsApp sin CRM es conversación. WhatsApp con CRM es trazabilidad.
+      </div>
+    </section>
+
+    <section class="section" id="canales">
+      <div class="section-head">
+        <div class="section-label">Canales digitales</div>
+
+        <h2 class="section-title">
+          Captar, comunicar y conectar con un propósito
+        </h2>
+
+        <p class="section-description">
+          La multicanalidad solo genera valor cuando los canales alimentan un
+          sistema central y cumplen una función definida.
+        </p>
+      </div>
+
+      <div class="grid grid-3">
+        <article class="card">
+          <div class="card-body">
+            <div class="tag tag-green">Captación</div>
+            <h3>WordPress como plataforma base</h3>
+            <p>
+              El sitio web funciona como punto de captura, no únicamente como
+              espacio informativo.
+            </p>
+
+            <ul class="feature-list" style="margin-top:16px;">
+              <li>Estructura mínima para una PYME.</li>
+              <li>Formularios como activos de captación.</li>
+              <li>Plugins de seguridad, contacto y analítica.</li>
+              <li>Conexión conceptual con CRM y WhatsApp.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-body">
+            <div class="tag tag-blue">Comunicación</div>
+            <h3>Canales con funciones distintas</h3>
+
+            <ul class="feature-list" style="margin-top:16px;">
+              <li><strong>Email:</strong> comunicación formal, nurturing y notificaciones.</li>
+              <li><strong>Telefonía:</strong> coordinación sincrónica y confirmación.</li>
+              <li><strong>Facebook e Instagram:</strong> branding y captación.</li>
+              <li><strong>Telegram:</strong> canal complementario según la operación.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-body">
+            <div class="tag tag-amber">Criterio</div>
+            <h3>Sincrónico y asincrónico</h3>
+            <p>
+              La telefonía facilita interacción inmediata. WhatsApp, email y
+              redes permiten conservar evidencia, historial y seguimiento.
+            </p>
+
+            <div class="callout" style="margin-top:17px;">
+              <div class="callout-icon">!</div>
+              <div>
+                <strong>Regla práctica</strong>
+                <p>
+                  Comenzar con pocos canales bien conectados antes de ampliar la operación.
+                </p>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="architecture">
+        <div class="section-label">Arquitectura básica</div>
+
+        <h3>Una web conectada puede convertirse en generación de negocio</h3>
+
+        <p>
+          La información captada en el sitio debe entrar al sistema comercial y
+          activar un proceso de contacto y seguimiento.
+        </p>
+
+        <div class="flow" aria-label="Flujo de captación comercial">
+          <div class="flow-node">
+            <span>Captación</span>
+            <strong>WordPress</strong>
+            <small>Formulario web</small>
+          </div>
+
+          <div class="flow-arrow">→</div>
+
+          <div class="flow-node">
+            <span>Registro</span>
+            <strong>CRM</strong>
+            <small>Lead y oportunidad</small>
+          </div>
+
+          <div class="flow-arrow">→</div>
+
+          <div class="flow-node">
+            <span>Contacto</span>
+            <strong>WhatsApp API</strong>
+            <small>Atención estructurada</small>
+          </div>
+
+          <div class="flow-arrow">→</div>
+
+          <div class="flow-node">
+            <span>Continuidad</span>
+            <strong>Seguimiento</strong>
+            <small>Actividades y medición</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="quote">
+        Una web sin integración es información. Una web conectada es generación de negocio.
+      </div>
+    </section>
+
+    <section class="section" id="automatizacion">
+      <div class="section-head">
+        <div class="section-label">Automatización y orquestación</div>
+
+        <h2 class="section-title">
+          Conectar sistemas que no fueron diseñados para trabajar juntos
+        </h2>
+
+        <p class="section-description">
+          Las APIs proporcionan acceso controlado a funciones y datos. Los
+          orquestadores utilizan esos accesos para mover información y ejecutar
+          tareas entre distintas plataformas.
+        </p>
+      </div>
+
+      <div class="grid grid-3">
+        <article class="card pillar">
+          <div class="card-body">
+            <span class="pillar-number">01 — ACCESO</span>
+            <h3>APIs</h3>
+            <p>
+              Permiten acceder de manera controlada a funciones y datos de una
+              solución, con criterios de seguridad y escalabilidad.
+            </p>
+          </div>
+        </article>
+
+        <article class="card pillar">
+          <div class="card-body">
+            <span class="pillar-number">02 — CONEXIÓN</span>
+            <h3>Orquestadores</h3>
+            <p>
+              Zapier, Make y n8n conectan plataformas y coordinan acciones dentro
+              de un mismo flujo.
+            </p>
+
+            <div class="tool-cloud">
+              <span class="tool">Zapier</span>
+              <span class="tool">Make</span>
+              <span class="tool">n8n</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card pillar">
+          <div class="card-body">
+            <span class="pillar-number">03 — PROCESO</span>
+            <h3>Automatización</h3>
+            <p>
+              Ejecuta tareas repetitivas a partir de eventos, reglas y decisiones
+              previamente definidas.
+            </p>
+          </div>
+        </article>
+      </div>
+
+      <div class="automation-compare">
+        <article class="automation-type">
+          <div class="tag tag-blue">Determinística</div>
+          <h4>Reglas y respuestas fijas</h4>
+          <code>Evento → acción definida</code>
+          <p>
+            El mismo evento activa siempre la misma secuencia de acciones.
+          </p>
+        </article>
+
+        <article class="automation-type">
+          <div class="tag tag-purple">Con inteligencia artificial</div>
+          <h4>Análisis y decisión adaptable</h4>
+          <code>Evento → análisis → decisión → acción</code>
+          <p>
+            La IA interpreta información antes de seleccionar o adaptar una acción.
+          </p>
+        </article>
+      </div>
+
+      <div class="callout">
+        <div class="callout-icon">IA</div>
+
+        <div>
+          <strong>La IA es una capa de optimización</strong>
+          <p>
+            No reemplaza el proceso. Primero se define el flujo, sus responsables
+            y sus reglas; después se incorpora inteligencia para mejorar su ejecución.
+          </p>
+        </div>
+      </div>
+
+      <div class="quote">
+        Multicanalidad sin sistema es dispersión. Multicanalidad con CRM y
+        orquestación es estrategia.
+      </div>
+    </section>
+
+    <section class="section" id="colaboracion">
+      <div class="section-head">
+        <div class="section-label">Colaboración y gestión de TI</div>
+
+        <h2 class="section-title">
+          La transformación digital también necesita una base interna
+        </h2>
+
+        <p class="section-description">
+          La operación comercial no puede sostenerse si la información, los
+          accesos, los activos y el soporte interno permanecen desordenados.
+        </p>
+      </div>
+
+      <div class="grid grid-3">
+        <article class="card">
+          <div class="card-body">
+            <div class="tag tag-green">Infraestructura ofimática</div>
+            <h3>Google Workspace y Microsoft 365</h3>
+
+            <ul class="feature-list" style="margin-top:16px;">
+              <li>Correo corporativo como identidad profesional.</li>
+              <li>Calendarios compartidos.</li>
+              <li>Almacenamiento centralizado.</li>
+              <li>Control de accesos.</li>
+              <li>Trabajo colaborativo en tiempo real.</li>
+              <li>Trazabilidad documental.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-body">
+            <div class="tag tag-purple">Asistencia ofimática</div>
+            <h3>IA para aumentar productividad</h3>
+
+            <ul class="feature-list" style="margin-top:16px;">
+              <li>Redactar borradores estructurados.</li>
+              <li>Resumir documentos extensos.</li>
+              <li>Organizar información.</li>
+              <li>Realizar análisis preliminares.</li>
+            </ul>
+
+            <div class="quote">
+              Primero se necesita orden. Luego se potencia con inteligencia.
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-body">
+            <div class="tag tag-coral">Higiene básica</div>
+            <h3>Gestión profesional de TI</h3>
+
+            <ul class="feature-list" style="margin-top:16px;">
+              <li>Helpdesk o canal formal de soporte.</li>
+              <li>Inventario de activos tecnológicos.</li>
+              <li>Gestión de usuarios y permisos.</li>
+              <li>Respaldos automáticos y verificados.</li>
+              <li>Auditoría básica de actividad.</li>
+              <li>Monitoreo preventivo.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+
+      <div class="callout">
+        <div class="callout-icon">!</div>
+
+        <div>
+          <strong>La ausencia de controles no produce ahorro</strong>
+          <p>
+            Produce riesgo acumulado, dependencia de personas específicas,
+            pérdida de información y menor continuidad operativa.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="profesionalizacion">
+      <div class="section-head">
+        <div class="section-label">Profesionalización y escalabilidad</div>
+
+        <h2 class="section-title">
+          Organizar la ejecución y documentar el conocimiento
+        </h2>
+
+        <p class="section-description">
+          El crecimiento sostenible requiere responsabilidades claras, procesos
+          documentados, formación estructurada y mecanismos de seguimiento.
+        </p>
+      </div>
+
+      <div class="grid grid-2">
+        <article class="card">
+          <div class="card-body">
+            <div class="tag tag-blue">Gestión de proyectos</div>
+            <h3>Las tareas deben salir de los chats informales</h3>
+
+            <p>
+              Las herramientas de gestión permiten convertir compromisos en
+              trabajo visible y asignado.
+            </p>
+
+            <ul class="feature-list" style="margin-top:16px;">
+              <li>Asignar responsabilidades claras.</li>
+              <li>Establecer fechas límite.</li>
+              <li>Visualizar avances.</li>
+              <li>Reducir la dependencia de la memoria.</li>
+            </ul>
+
+            <div class="tool-cloud">
+              <span class="tool">Trello</span>
+              <span class="tool">Microsoft Planner</span>
+              <span class="tool">ClickUp</span>
+              <span class="tool">Notion</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-body">
+            <div class="tag tag-purple">Formación interna</div>
+            <h3>Un LMS convierte procesos en aprendizaje estructurado</h3>
+
+            <ul class="feature-list" style="margin-top:16px;">
+              <li>Documentar procesos internos.</li>
+              <li>Estandarizar capacitación.</li>
+              <li>Evaluar competencias.</li>
+              <li>Crear rutas de formación.</li>
+            </ul>
+
+            <div class="tool-cloud">
+              <span class="tool">Moodle</span>
+              <span class="tool">Canvas</span>
+              <span class="tool">LMS en WordPress</span>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="maturity" aria-label="Elementos de profesionalización">
+        <div class="maturity-step">
+          <span>01</span>
+          <strong>Definir</strong>
+          <p>Procesos y resultados esperados.</p>
+        </div>
+
+        <div class="maturity-step">
+          <span>02</span>
+          <strong>Asignar</strong>
+          <p>Responsables y niveles de acceso.</p>
+        </div>
+
+        <div class="maturity-step">
+          <span>03</span>
+          <strong>Documentar</strong>
+          <p>Procedimientos y conocimiento interno.</p>
+        </div>
+
+        <div class="maturity-step">
+          <span>04</span>
+          <strong>Medir</strong>
+          <p>Desempeño, avances e incidencias.</p>
+        </div>
+
+        <div class="maturity-step">
+          <span>05</span>
+          <strong>Mejorar</strong>
+          <p>Procesos y herramientas de forma continua.</p>
+        </div>
+      </div>
+
+      <div class="quote">
+        Delegar sin procesos documentados es transferir incertidumbre.
+        Documentar permite escalar.
+      </div>
+    </section>
+
+    <section class="section" id="badges">
+      <div class="section-head">
+        <div class="section-label">Certificación digital</div>
+
+        <h2 class="section-title">
+          Convertir la formación en un activo verificable
+        </h2>
+
+        <p class="section-description">
+          Las credenciales digitales permiten validar competencias, reconocer el
+          aprendizaje y dar trazabilidad a los procesos de formación.
+        </p>
+      </div>
+
+      <div class="badge-panel">
+        <article class="editorial-panel">
+          <div class="tag tag-purple">Open Badges</div>
+
+          <p class="lead-line">
+            Una credencial digital no es simplemente una imagen.
+          </p>
+
+          <p>
+            Las credenciales basadas en Open Badges incorporan metadatos que
+            permiten verificar quién emitió la certificación, qué competencia se
+            evaluó, la fecha de emisión y los criterios de aprobación.
+          </p>
+
+          <ul class="feature-list" style="margin-top:20px;">
+            <li>Validar habilidades adquiridas.</li>
+            <li>Dar trazabilidad a la formación.</li>
+            <li>Compartir logros en perfiles y portafolios.</li>
+            <li>Fortalecer la reputación institucional.</li>
+            <li>Motivar la capacitación continua.</li>
+            <li>Formalizar rutas de aprendizaje.</li>
+          </ul>
+
+          <div class="quote">
+            La certificación digital forma parte de la arquitectura de profesionalización.
+          </div>
+        </article>
+
+        <aside class="badge-visual">
+          <div class="digital-badge">
+            <div>
+              <span>Credencial</span>
+              <strong>Competencia verificada</strong>
+            </div>
+          </div>
+
+          <p>
+            Emisor, competencia, fecha y criterios integrados en una credencial verificable.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="casos">
+      <div class="section-head">
+        <div class="section-label">Casos aplicables</div>
+
+        <h2 class="section-title">
+          Cómo se traduce la arquitectura en procesos reales
+        </h2>
+
+        <p class="section-description">
+          Cada caso conecta herramientas, responsables e información para
+          resolver un problema operativo concreto.
+        </p>
+      </div>
+
+      <div class="grid grid-4 cases">
+        <article class="card case-card">
+          <div class="card-body">
+            <div class="tag tag-green">Captación comercial</div>
+            <h3>Leads con trazabilidad</h3>
+
+            <div class="case-flow">
+              Formulario web → CRM → WhatsApp API → seguimiento automático
+            </div>
+
+            <div class="result">
+              <strong>Resultado</strong>
+              <p>
+                Se reduce la pérdida de leads y se puede medir el proceso comercial.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <article class="card case-card">
+          <div class="card-body">
+            <div class="tag tag-blue">Preventa técnica</div>
+            <h3>Ventas y equipo técnico coordinados</h3>
+
+            <div class="case-flow">
+              Lead en CRM → orquestador → Trello o Planner → propuesta
+            </div>
+
+            <div class="result">
+              <strong>Resultado</strong>
+              <p>
+                Se establece una coordinación real entre preventa y ventas.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <article class="card case-card">
+          <div class="card-body">
+            <div class="tag tag-coral">Soporte</div>
+            <h3>Atención técnica estructurada</h3>
+
+            <div class="case-flow">
+              Email → orquestador → validación → alerta interna → registro
+            </div>
+
+            <div class="result">
+              <strong>Resultado</strong>
+              <p>
+                Mejores tiempos de respuesta y trazabilidad de las solicitudes.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <article class="card case-card">
+          <div class="card-body">
+            <div class="tag tag-purple">Onboarding</div>
+            <h3>Formación interna estandarizada</h3>
+
+            <div class="case-flow">
+              Nuevo colaborador → LMS → evaluación → certificación
+            </div>
+
+            <div class="result">
+              <strong>Resultado</strong>
+              <p>
+                Menor dependencia de personas clave y una delegación más consistente.
+              </p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="section-head">
+        <div class="section-label">Preguntas y respuestas</div>
+
+        <h2 class="section-title">
+          Decisiones frecuentes durante el acompañamiento
+        </h2>
+
+        <p class="section-description">
+          Respuestas orientadas a establecer prioridades y evitar decisiones
+          basadas únicamente en tendencias o disponibilidad de aplicaciones.
+        </p>
+      </div>
+
+      <div class="faq">
+        <details open>
+          <summary>¿WhatsApp Business normal es suficiente?</summary>
+          <div class="answer">
+            Depende del tamaño del equipo y de la necesidad de trazabilidad. Si
+            más de una persona atiende clientes, la API se vuelve relevante para
+            multiagente, integración y control.
+          </div>
+        </details>
+
+        <details>
+          <summary>¿Es obligatorio utilizar un CRM?</summary>
+          <div class="answer">
+            No es obligatorio, pero sin un CRM no existe trazabilidad ni un
+            seguimiento comercial consistente. El CRM organiza la operación.
+          </div>
+        </details>
+
+        <details>
+          <summary>¿Omnicanalidad o especialización?</summary>
+          <div class="answer">
+            Especialización primero: pocos canales, bien conectados. La
+            omnicanalidad debe incorporarse cuando ya existen sistema, roles y medición.
+          </div>
+        </details>
+
+        <details>
+          <summary>¿Se debe automatizar desde el inicio?</summary>
+          <div class="answer">
+            No. Primero se define el proceso y se asignan responsables. Después
+            se automatizan las tareas repetitivas de mayor impacto.
+          </div>
+        </details>
+
+        <details>
+          <summary>¿La seguridad es solo para empresas grandes?</summary>
+          <div class="answer">
+            No. Muchas fallas en PYMES se relacionan con controles básicos:
+            ausencia de MFA, cuentas compartidas, accesos no revocados, falta de
+            respaldos o sistemas desactualizados.
+          </div>
+        </details>
+      </div>
+
+      <div class="callout">
+        <div class="callout-icon">✓</div>
+
+        <div>
+          <strong>Cierre para el facilitador</strong>
+          <p>
+            Este módulo no trata únicamente de herramientas. Trata de
+            arquitectura. Un facilitador digital no se limita a recomendar
+            aplicaciones: diseña sistemas.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="examen">
+      <div class="section-head">
+        <div class="section-label">Estructura del examen</div>
+
+        <h2 class="section-title">
+          Evaluar comprensión, criterio e integración
+        </h2>
+
+        <p class="section-description">
+          El examen está compuesto por diez preguntas de selección múltiple,
+          todas con una sola respuesta correcta y el mismo valor.
+        </p>
+      </div>
+
+      <div class="exam-layout">
+        <aside class="exam-summary">
+          <span>Módulo</span>
+          <strong>10</strong>
+          <h3>preguntas</h3>
+          <p>
+            La evaluación busca comprobar que el participante comprende cómo se
+            conectan las herramientas dentro de una arquitectura digital coherente.
+          </p>
+        </aside>
+
+        <div class="exam-topics">
+          <div class="exam-topic">
+            <strong>Fundamentos de CRM</strong>
+            <span>1</span>
+          </div>
+
+          <div class="exam-topic">
+            <strong>WhatsApp Business y API</strong>
+            <span>1</span>
+          </div>
+
+          <div class="exam-topic">
+            <strong>Canales digitales y arquitectura</strong>
+            <span>1</span>
+          </div>
+
+          <div class="exam-topic">
+            <strong>Automatización y orquestadores</strong>
+            <span>2</span>
+          </div>
+
+          <div class="exam-topic">
+            <strong>Colaboración y LMS</strong>
+            <span>1</span>
+          </div>
+
+          <div class="exam-topic">
+            <strong>Gestión de TI y seguridad</strong>
+            <span>1</span>
+          </div>
+
+          <div class="exam-topic">
+            <strong>Madurez digital</strong>
+            <span>1</span>
+          </div>
+
+          <div class="exam-topic">
+            <strong>Casos aplicados</strong>
+            <span>2</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exam-focus">
+        <article class="focus-item">
+          <strong>Comprensión estructural</strong>
+          <p>Entender cómo se conectan los sistemas.</p>
+        </article>
+
+        <article class="focus-item">
+          <strong>Criterio estratégico</strong>
+          <p>Elegir prioridades según la operación.</p>
+        </article>
+
+        <article class="focus-item">
+          <strong>Análisis aplicado</strong>
+          <p>Resolver situaciones reales de una PYME.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="conclusiones">
+      <div class="section-head">
+        <div class="section-label">Conclusiones</div>
+
+        <h2 class="section-title">
+          La transformación digital comienza con orden estructural
+        </h2>
+      </div>
+
+      <div class="conclusions">
+        <article class="conclusion">
+          <span>01</span>
+          <strong>Los procesos deben existir antes de automatizarlos.</strong>
+        </article>
+
+        <article class="conclusion">
+          <span>02</span>
+          <strong>La IA amplifica sistemas organizados, no corrige el desorden.</strong>
+        </article>
+
+        <article class="conclusion">
+          <span>03</span>
+          <strong>La colaboración estructurada sostiene la madurez empresarial.</strong>
+        </article>
+
+        <article class="conclusion">
+          <span>04</span>
+          <strong>La gestión de TI protege información y continuidad.</strong>
+        </article>
+
+        <article class="conclusion">
+          <span>05</span>
+          <strong>La documentación y la formación interna permiten escalar.</strong>
+        </article>
+
+        <article class="conclusion">
+          <span>06</span>
+          <strong>La coherencia operativa importa más que la cantidad de herramientas.</strong>
+        </article>
+      </div>
+
+      <div class="final-message">
+        <div class="section-label">Conclusión central</div>
+
+        <h3>
+          Digitalizar significa diseñar una arquitectura que conecte estrategia,
+          operación y control.
+        </h3>
+
+        <p>
+          Una PYME preparada para crecer integra sus sistemas, documenta sus
+          procesos, mide su desempeño, controla sus riesgos y mejora de manera continua.
+        </p>
+
+        <div class="final-rule">
+          El facilitador no debe comenzar preguntando qué aplicación comprar,
+          sino qué proceso necesita ordenar la empresa.
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>Herramientas digitales para MIPYMES</span>
+      <span>Guía práctica para el facilitador</span>
+    </footer>
+  </main>
+</body>
+</html>
