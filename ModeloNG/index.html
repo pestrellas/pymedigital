@@ -1,1 +1,1815 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <meta
+    name="description"
+    content="Módulo 2: Dirección Estratégica del Modelo de Negocio. Contenidos, objetivos, metodología y evaluación para MIPYMEs."
+  >
+
+  <title>Módulo 2 · Dirección Estratégica del Modelo de Negocio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --background: #f5f4f0;
+      --surface: #ffffff;
+      --surface-soft: #faf9f6;
+      --surface-dark: #191918;
+
+      --text: #1d1c1a;
+      --text-soft: #65615a;
+      --text-faint: #918c83;
+
+      --border: #e5e1d8;
+      --border-strong: #cec7ba;
+
+      --purple: #514097;
+      --purple-soft: #eeebfa;
+      --purple-border: #d0c8f1;
+
+      --blue: #23659c;
+      --blue-soft: #e8f2fa;
+      --blue-border: #bad8ec;
+
+      --green: #38651f;
+      --green-soft: #eaf4e4;
+      --green-border: #c9dfbb;
+
+      --amber: #875915;
+      --amber-soft: #fcf0d9;
+      --amber-border: #edcf98;
+
+      --coral: #91432e;
+      --coral-soft: #f9eae5;
+      --coral-border: #edb9aa;
+
+      --shadow: 0 16px 42px rgba(28, 26, 22, 0.055);
+      --radius-sm: 12px;
+      --radius-md: 18px;
+      --radius-lg: 26px;
+      --max-width: 1160px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      padding: 28px 18px 64px;
+      background:
+        radial-gradient(circle at 8% 0%, rgba(81, 64, 151, 0.07), transparent 26%),
+        radial-gradient(circle at 96% 8%, rgba(35, 101, 156, 0.06), transparent 24%),
+        var(--background);
+      color: var(--text);
+      font-family: "DM Sans", sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      width: min(100%, var(--max-width));
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border: 1px solid var(--purple-border);
+      border-radius: 999px;
+      background: var(--purple-soft);
+      color: var(--purple);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .hero {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-main {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(310px, 0.65fr);
+      gap: 38px;
+      padding: 48px 44px 34px;
+    }
+
+    .hero h1 {
+      max-width: 800px;
+      margin-top: 18px;
+      font-size: clamp(38px, 5vw, 62px);
+      line-height: 1.03;
+      letter-spacing: -0.05em;
+    }
+
+    .hero h1 span {
+      color: var(--purple);
+    }
+
+    .hero-lead {
+      max-width: 790px;
+      margin-top: 22px;
+      color: var(--text-soft);
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    .hero-summary {
+      align-self: center;
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: var(--surface-soft);
+    }
+
+    .hero-summary-label {
+      margin-bottom: 14px;
+      color: var(--text-faint);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero-summary p {
+      color: var(--text-soft);
+      font-size: 14px;
+    }
+
+    .hero-summary strong {
+      color: var(--text);
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--border);
+      background: var(--surface-soft);
+    }
+
+    .stat {
+      min-height: 108px;
+      padding: 22px 24px;
+      border-right: 1px solid var(--border);
+    }
+
+    .stat:last-child {
+      border-right: 0;
+    }
+
+    .stat-value {
+      color: var(--text);
+      font-family: "DM Mono", monospace;
+      font-size: 27px;
+      font-weight: 500;
+      line-height: 1;
+    }
+
+    .stat-label {
+      margin-top: 9px;
+      color: var(--text-soft);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .quick-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(12px);
+    }
+
+    .quick-nav a {
+      padding: 8px 12px;
+      border-radius: 10px;
+      color: var(--text-soft);
+      font-size: 13px;
+      font-weight: 600;
+      transition:
+        background 0.2s ease,
+        color 0.2s ease;
+    }
+
+    .quick-nav a:hover,
+    .quick-nav a:focus-visible {
+      background: var(--surface);
+      color: var(--purple);
+      outline: none;
+    }
+
+    .section {
+      scroll-margin-top: 24px;
+      margin-top: 58px;
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(300px, 0.65fr);
+      gap: 30px;
+      align-items: end;
+      margin-bottom: 22px;
+    }
+
+    .section-number {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--text-faint);
+      font-family: "DM Mono", monospace;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+    }
+
+    .section-title {
+      font-size: clamp(29px, 4vw, 40px);
+      line-height: 1.12;
+      letter-spacing: -0.035em;
+    }
+
+    .section-description {
+      color: var(--text-soft);
+      font-size: 15px;
+    }
+
+    .panel {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .justification {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(260px, 0.6fr);
+      gap: 18px;
+    }
+
+    .justification-copy {
+      padding: 30px;
+    }
+
+    .justification-copy p {
+      color: var(--text-soft);
+      font-size: 16px;
+    }
+
+    .justification-copy p + p {
+      margin-top: 16px;
+    }
+
+    .problem-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 23px;
+    }
+
+    .problem {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 13px 15px;
+      border: 1px solid var(--coral-border);
+      border-radius: var(--radius-sm);
+      background: var(--coral-soft);
+      color: var(--coral);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .problem-icon,
+    .check-icon {
+      display: grid;
+      flex: 0 0 24px;
+      width: 24px;
+      height: 24px;
+      place-items: center;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.65);
+      font-size: 12px;
+    }
+
+    .value-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 30px;
+      border: 1px solid var(--purple-border);
+      border-radius: var(--radius-md);
+      background: var(--purple-soft);
+    }
+
+    .value-card-label {
+      color: var(--purple);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .value-card h3 {
+      margin-top: 12px;
+      font-size: 25px;
+      line-height: 1.18;
+      letter-spacing: -0.025em;
+    }
+
+    .value-card p {
+      margin-top: 14px;
+      color: var(--purple);
+      font-size: 14px;
+    }
+
+    .value-card-footer {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--purple-border);
+      color: var(--purple);
+      font-family: "DM Mono", monospace;
+      font-size: 12px;
+    }
+
+    .objectives-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 14px;
+    }
+
+    .objective-card {
+      position: relative;
+      grid-column: span 2;
+      min-height: 235px;
+      padding: 23px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .objective-card:nth-child(4),
+    .objective-card:nth-child(5) {
+      grid-column: span 3;
+    }
+
+    .objective-number {
+      display: inline-grid;
+      width: 38px;
+      height: 38px;
+      margin-bottom: 28px;
+      place-items: center;
+      border-radius: 12px;
+      background: var(--purple-soft);
+      color: var(--purple);
+      font-family: "DM Mono", monospace;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .objective-card h3 {
+      margin-bottom: 10px;
+      font-size: 19px;
+      line-height: 1.25;
+      letter-spacing: -0.018em;
+    }
+
+    .objective-card p {
+      color: var(--text-soft);
+      font-size: 14px;
+    }
+
+    .objective-card::after {
+      position: absolute;
+      right: -34px;
+      bottom: -42px;
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: var(--purple-soft);
+      content: "";
+      opacity: 0.55;
+    }
+
+    .learning-path {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .content-block {
+      position: relative;
+      min-height: 100%;
+      padding: 25px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .content-block:nth-child(1) {
+      border-top: 4px solid var(--purple);
+    }
+
+    .content-block:nth-child(2) {
+      border-top: 4px solid var(--blue);
+    }
+
+    .content-block:nth-child(3) {
+      border-top: 4px solid var(--green);
+    }
+
+    .block-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .block-number {
+      color: var(--text-faint);
+      font-family: "DM Mono", monospace;
+      font-size: 12px;
+    }
+
+    .block-tag {
+      display: inline-flex;
+      padding: 5px 9px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .tag-purple {
+      border: 1px solid var(--purple-border);
+      background: var(--purple-soft);
+      color: var(--purple);
+    }
+
+    .tag-blue {
+      border: 1px solid var(--blue-border);
+      background: var(--blue-soft);
+      color: var(--blue);
+    }
+
+    .tag-green {
+      border: 1px solid var(--green-border);
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .content-block h3 {
+      margin-top: 22px;
+      font-size: 23px;
+      line-height: 1.18;
+      letter-spacing: -0.025em;
+    }
+
+    .content-block > p {
+      margin-top: 10px;
+      color: var(--text-soft);
+      font-size: 14px;
+    }
+
+    .topic-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 21px;
+    }
+
+    .topic {
+      position: relative;
+      padding-left: 18px;
+      color: var(--text-soft);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .topic::before {
+      position: absolute;
+      top: 8px;
+      left: 0;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--border-strong);
+      content: "";
+    }
+
+    .topic strong {
+      color: var(--text);
+    }
+
+    .strategic-map {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(290px, 0.75fr);
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .map-panel {
+      padding: 26px;
+    }
+
+    .map-panel h3,
+    .validation-panel h3 {
+      font-size: 22px;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    .map-panel > p,
+    .validation-panel > p {
+      margin-top: 8px;
+      color: var(--text-soft);
+      font-size: 14px;
+    }
+
+    .model-flow {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 9px;
+      margin-top: 24px;
+    }
+
+    .model-node {
+      position: relative;
+      min-height: 130px;
+      padding: 17px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: var(--surface-soft);
+    }
+
+    .model-node::after {
+      position: absolute;
+      top: 50%;
+      right: -9px;
+      z-index: 2;
+      width: 17px;
+      color: var(--text-faint);
+      content: "→";
+      font-family: "DM Mono", monospace;
+      transform: translateY(-50%);
+    }
+
+    .model-node:last-child::after {
+      display: none;
+    }
+
+    .node-label {
+      color: var(--text-faint);
+      font-family: "DM Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .model-node strong {
+      display: block;
+      margin-top: 12px;
+      font-size: 15px;
+      line-height: 1.25;
+    }
+
+    .validation-panel {
+      padding: 26px;
+      border-color: var(--blue-border);
+      background: var(--blue-soft);
+    }
+
+    .validation-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .validation-box {
+      padding: 18px 14px;
+      border: 1px solid rgba(35, 101, 156, 0.2);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.63);
+      text-align: center;
+    }
+
+    .validation-box strong {
+      display: block;
+      color: var(--blue);
+      font-family: "DM Mono", monospace;
+      font-size: 21px;
+    }
+
+    .validation-box span {
+      display: block;
+      margin-top: 6px;
+      color: var(--text-soft);
+      font-size: 12px;
+    }
+
+    .validation-note {
+      margin-top: 13px;
+      padding: 14px;
+      border-radius: 13px;
+      background: rgba(255, 255, 255, 0.58);
+      color: var(--blue);
+      font-size: 13px;
+    }
+
+    .outcome-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      margin-top: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--border);
+    }
+
+    .outcome {
+      min-height: 150px;
+      padding: 22px;
+      background: var(--surface);
+    }
+
+    .outcome-icon {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      margin-bottom: 18px;
+      place-items: center;
+      border-radius: 10px;
+      background: var(--green-soft);
+      color: var(--green);
+      font-size: 15px;
+    }
+
+    .outcome h4 {
+      font-size: 16px;
+      line-height: 1.25;
+    }
+
+    .outcome p {
+      margin-top: 7px;
+      color: var(--text-soft);
+      font-size: 13px;
+    }
+
+    .method-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+      gap: 16px;
+    }
+
+    .method-panel {
+      padding: 28px;
+    }
+
+    .hours {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .hour-card {
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: var(--surface-soft);
+    }
+
+    .hour-card strong {
+      display: block;
+      font-family: "DM Mono", monospace;
+      font-size: 29px;
+      line-height: 1;
+    }
+
+    .hour-card span {
+      display: block;
+      margin-top: 9px;
+      color: var(--text-soft);
+      font-size: 13px;
+    }
+
+    .activity-timeline {
+      display: grid;
+      gap: 14px;
+      margin-top: 25px;
+    }
+
+    .activity {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 13px;
+      align-items: start;
+    }
+
+    .activity-marker {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border: 1px solid var(--purple-border);
+      border-radius: 11px;
+      background: var(--purple-soft);
+      color: var(--purple);
+      font-family: "DM Mono", monospace;
+      font-size: 11px;
+    }
+
+    .activity h4 {
+      font-size: 15px;
+    }
+
+    .activity p {
+      margin-top: 3px;
+      color: var(--text-soft);
+      font-size: 13px;
+    }
+
+    .logistics {
+      display: grid;
+      gap: 14px;
+    }
+
+    .logistics-card {
+      padding: 23px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .logistics-card h3 {
+      font-size: 19px;
+    }
+
+    .logistics-card p {
+      margin-top: 7px;
+      color: var(--text-soft);
+      font-size: 14px;
+    }
+
+    .requirements {
+      display: grid;
+      gap: 10px;
+      margin-top: 17px;
+    }
+
+    .requirement {
+      display: flex;
+      gap: 11px;
+      align-items: center;
+      padding: 12px;
+      border-radius: 12px;
+      background: var(--surface-soft);
+      color: var(--text-soft);
+      font-size: 14px;
+    }
+
+    .requirement-icon {
+      display: grid;
+      width: 28px;
+      height: 28px;
+      place-items: center;
+      border-radius: 9px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      font-size: 13px;
+    }
+
+    .evaluation-layout {
+      display: grid;
+      grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1.28fr);
+      gap: 16px;
+    }
+
+    .evaluation-visual {
+      display: grid;
+      padding: 32px;
+      place-items: center;
+      text-align: center;
+    }
+
+    .donut {
+      position: relative;
+      display: grid;
+      width: 210px;
+      height: 210px;
+      place-items: center;
+      border-radius: 50%;
+      background:
+        conic-gradient(
+          var(--purple) 0 40%,
+          var(--blue) 40% 80%,
+          var(--green) 80% 100%
+        );
+    }
+
+    .donut::before {
+      position: absolute;
+      width: 132px;
+      height: 132px;
+      border-radius: 50%;
+      background: var(--surface);
+      content: "";
+    }
+
+    .donut-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .donut-content strong {
+      display: block;
+      font-family: "DM Mono", monospace;
+      font-size: 32px;
+      line-height: 1;
+    }
+
+    .donut-content span {
+      display: block;
+      margin-top: 7px;
+      color: var(--text-soft);
+      font-size: 12px;
+    }
+
+    .evaluation-visual p {
+      max-width: 310px;
+      margin-top: 22px;
+      color: var(--text-soft);
+      font-size: 14px;
+    }
+
+    .evaluation-cards {
+      display: grid;
+      gap: 12px;
+    }
+
+    .evaluation-card {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 18px;
+      align-items: center;
+      min-height: 126px;
+      padding: 21px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .percentage {
+      display: grid;
+      width: 72px;
+      height: 72px;
+      place-items: center;
+      border-radius: 18px;
+      font-family: "DM Mono", monospace;
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    .percentage-purple {
+      border: 1px solid var(--purple-border);
+      background: var(--purple-soft);
+      color: var(--purple);
+    }
+
+    .percentage-blue {
+      border: 1px solid var(--blue-border);
+      background: var(--blue-soft);
+      color: var(--blue);
+    }
+
+    .percentage-green {
+      border: 1px solid var(--green-border);
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .evaluation-card h3 {
+      font-size: 18px;
+      line-height: 1.2;
+    }
+
+    .evaluation-card p {
+      margin-top: 6px;
+      color: var(--text-soft);
+      font-size: 13px;
+    }
+
+    .closing {
+      margin-top: 58px;
+      padding: 38px;
+      overflow: hidden;
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 90% 20%, rgba(255, 255, 255, 0.09), transparent 25%),
+        var(--surface-dark);
+      color: #f5f2eb;
+    }
+
+    .closing-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+      gap: 36px;
+      align-items: end;
+    }
+
+    .closing-label {
+      color: #aaa49a;
+      font-family: "DM Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .closing h2 {
+      max-width: 780px;
+      margin-top: 13px;
+      font-size: clamp(30px, 4vw, 43px);
+      line-height: 1.12;
+      letter-spacing: -0.035em;
+    }
+
+    .closing p {
+      margin-top: 15px;
+      color: #cfc9bf;
+      font-size: 15px;
+    }
+
+    .closing-points {
+      display: grid;
+      gap: 12px;
+    }
+
+    .closing-point {
+      display: flex;
+      gap: 11px;
+      align-items: flex-start;
+      padding: 13px 15px;
+      border: 1px solid rgba(255, 255, 255, 0.11);
+      border-radius: 13px;
+      background: rgba(255, 255, 255, 0.045);
+      color: #ded8ce;
+      font-size: 13px;
+    }
+
+    .closing-point span:first-child {
+      color: #a99ce1;
+      font-weight: 700;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      margin-top: 18px;
+      padding: 0 5px;
+      color: var(--text-faint);
+      font-family: "DM Mono", monospace;
+      font-size: 11px;
+    }
+
+    @media (max-width: 1020px) {
+      .hero-main,
+      .section-heading,
+      .justification,
+      .strategic-map,
+      .method-layout,
+      .evaluation-layout,
+      .closing-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-summary {
+        align-self: auto;
+      }
+
+      .hero-stats,
+      .outcome-strip {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .stat:nth-child(2) {
+        border-right: 0;
+      }
+
+      .stat:nth-child(-n + 2) {
+        border-bottom: 1px solid var(--border);
+      }
+
+      .learning-path {
+        grid-template-columns: 1fr;
+      }
+
+      .objectives-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .objective-card,
+      .objective-card:nth-child(4),
+      .objective-card:nth-child(5) {
+        grid-column: auto;
+      }
+
+      .model-flow {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .model-node:nth-child(2)::after,
+      .model-node:last-child::after {
+        display: none;
+      }
+    }
+
+    @media (max-width: 680px) {
+      body {
+        padding: 14px 11px 40px;
+      }
+
+      .hero-main {
+        padding: 30px 20px 25px;
+      }
+
+      .hero h1 {
+        font-size: 37px;
+      }
+
+      .hero-lead {
+        font-size: 16px;
+      }
+
+      .hero-stats,
+      .objectives-grid,
+      .outcome-strip,
+      .hours,
+      .model-flow,
+      .validation-pair {
+        grid-template-columns: 1fr;
+      }
+
+      .stat {
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .stat:last-child {
+        border-bottom: 0;
+      }
+
+      .model-node::after {
+        top: auto;
+        right: 50%;
+        bottom: -13px;
+        content: "↓";
+        transform: translateX(50%);
+      }
+
+      .model-node:nth-child(2)::after {
+        display: block;
+      }
+
+      .model-node:last-child::after {
+        display: none;
+      }
+
+      .evaluation-card {
+        grid-template-columns: 58px 1fr;
+        gap: 13px;
+      }
+
+      .percentage {
+        width: 58px;
+        height: 58px;
+        border-radius: 15px;
+        font-size: 15px;
+      }
+
+      .justification-copy,
+      .value-card,
+      .map-panel,
+      .validation-panel,
+      .method-panel,
+      .evaluation-visual,
+      .closing {
+        padding: 23px 19px;
+      }
+
+      .quick-nav {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .footer {
+        flex-direction: column;
+        gap: 5px;
+      }
+    }
+
+    @media print {
+      body {
+        padding: 0;
+        background: #ffffff;
+      }
+
+      .page {
+        max-width: none;
+      }
+
+      .hero,
+      .panel,
+      .objective-card,
+      .content-block,
+      .logistics-card,
+      .evaluation-card {
+        box-shadow: none;
+      }
+
+      .quick-nav {
+        display: none;
+      }
+
+      .section,
+      .closing {
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+
+    <header class="hero">
+      <div class="hero-main">
+        <div>
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            Formación para MIPYMEs · Módulo 2
+          </div>
+
+          <h1>
+            Dirección Estratégica del
+            <span>Modelo de Negocio</span>
+          </h1>
+
+          <p class="hero-lead">
+            Un enfoque aplicado para comprender, diagnosticar y optimizar el
+            modelo de negocio, conectando estrategia, operación, recursos,
+            visibilidad digital y medición del desempeño.
+          </p>
+        </div>
+
+        <aside class="hero-summary">
+          <div class="hero-summary-label">Propósito central</div>
+
+          <p>
+            Ayudar a facilitadores y MIPYMEs a pasar de un modelo
+            <strong>implícito o incompleto</strong> a un sistema coherente,
+            sostenible, medible y alineado con sus prioridades de crecimiento.
+          </p>
+        </aside>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-value">6 h</div>
+          <div class="stat-label">Duración de las sesiones de clase</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-value">1 h</div>
+          <div class="stat-label">Trabajo práctico fuera de clase</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-value">5</div>
+          <div class="stat-label">Objetivos de aprendizaje</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-value">3</div>
+          <div class="stat-label">Bloques principales de contenido</div>
+        </div>
+      </div>
+    </header>
+
+    <nav class="quick-nav" aria-label="Navegación del módulo">
+      <a href="#justificacion">Justificación</a>
+      <a href="#objetivos">Objetivos</a>
+      <a href="#contenidos">Contenidos</a>
+      <a href="#metodologia">Metodología</a>
+      <a href="#evaluacion">Evaluación</a>
+    </nav>
+
+    <section class="section" id="justificacion">
+      <div class="section-heading">
+        <div>
+          <span class="section-number">01 · CONTEXTO</span>
+          <h2 class="section-title">Por qué este módulo es necesario</h2>
+        </div>
+
+        <p class="section-description">
+          Un buen producto no garantiza el crecimiento. La empresa necesita
+          entender cómo crea valor, cómo lo entrega, cuánto le cuesta y qué
+          resultados debe medir.
+        </p>
+      </div>
+
+      <div class="justification">
+        <article class="panel justification-copy">
+          <p>
+            Para crecer, una MIPYME requiere mucho más que un buen producto:
+            necesita un modelo de negocio coherente, sostenible y medible.
+            Sin embargo, muchas empresas operan con modelos implícitos,
+            incompletos o desalineados.
+          </p>
+
+          <p>
+            Este módulo propone un enfoque estratégico y aplicado para
+            entender, analizar y optimizar el modelo, integrando decisiones
+            estratégicas, prioridades operativas y medición real.
+          </p>
+
+          <div class="problem-list">
+            <div class="problem">
+              <span class="problem-icon">!</span>
+              <span>Ineficiencias y duplicidad de esfuerzos.</span>
+            </div>
+
+            <div class="problem">
+              <span class="problem-icon">!</span>
+              <span>Pérdida de clientes y gastos innecesarios.</span>
+            </div>
+
+            <div class="problem">
+              <span class="problem-icon">!</span>
+              <span>Decisiones tomadas principalmente por intuición.</span>
+            </div>
+          </div>
+        </article>
+
+        <aside class="value-card">
+          <div>
+            <div class="value-card-label">Valor diferencial</div>
+
+            <h3>Validar el modelo con estrategia, datos e inteligencia artificial</h3>
+
+            <p>
+              Se incorporan herramientas modernas de IA para GEO/SEO y análisis
+              de KPIs, fortaleciendo el diagnóstico y la validación de
+              hipótesis del modelo de negocio.
+            </p>
+          </div>
+
+          <div class="value-card-footer">
+            ESTRATEGIA → OPERACIÓN → MEDICIÓN
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="objetivos">
+      <div class="section-heading">
+        <div>
+          <span class="section-number">02 · RESULTADOS</span>
+          <h2 class="section-title">Qué podrá hacer el participante</h2>
+        </div>
+
+        <p class="section-description">
+          Los resultados avanzan desde la comprensión del modelo hasta su
+          traducción en actividades, prioridades e indicadores concretos.
+        </p>
+      </div>
+
+      <div class="objectives-grid">
+        <article class="objective-card">
+          <div class="objective-number">01</div>
+
+          <h3>Comprender la estructura del modelo</h3>
+
+          <p>
+            Reconocer sus componentes estratégicos y cómo influyen en la
+            operación, la propuesta de valor y el crecimiento sostenible.
+          </p>
+        </article>
+
+        <article class="objective-card">
+          <div class="objective-number">02</div>
+
+          <h3>Diagnosticar el modelo actual</h3>
+
+          <p>
+            Identificar incoherencias, duplicidades, brechas y oportunidades
+            mediante criterios de coherencia estratégica.
+          </p>
+        </article>
+
+        <article class="objective-card">
+          <div class="objective-number">03</div>
+
+          <h3>Formular un modelo optimizado</h3>
+
+          <p>
+            Alinear prioridades estratégicas, asignación eficiente de recursos
+            y metas de crecimiento.
+          </p>
+        </article>
+
+        <article class="objective-card">
+          <div class="objective-number">04</div>
+
+          <h3>Convertir la estrategia en un sistema operativo</h3>
+
+          <p>
+            Definir prioridades, actividades clave e indicadores estratégicos
+            que permitan medir y mejorar el desempeño.
+          </p>
+        </article>
+
+        <article class="objective-card">
+          <div class="objective-number">05</div>
+
+          <h3>Aplicar inteligencia artificial</h3>
+
+          <p>
+            Fortalecer el análisis del modelo, optimizar la visibilidad digital,
+            validar supuestos y automatizar la evaluación de KPIs.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="contenidos">
+      <div class="section-heading">
+        <div>
+          <span class="section-number">03 · RUTA FORMATIVA</span>
+          <h2 class="section-title">Tres bloques para dirigir el modelo</h2>
+        </div>
+
+        <p class="section-description">
+          El recorrido conecta el diseño estratégico con la operación y
+          termina en un sistema de ejecución, medición y priorización.
+        </p>
+      </div>
+
+      <div class="learning-path">
+        <article class="content-block">
+          <div class="block-top">
+            <span class="block-number">BLOQUE 01</span>
+            <span class="block-tag tag-purple">Estrategia</span>
+          </div>
+
+          <h3>Fundamentos y mapeo estratégico</h3>
+
+          <p>
+            Comprender la lógica central del negocio y las relaciones que
+            determinan su capacidad para crear y capturar valor.
+          </p>
+
+          <div class="topic-list">
+            <div class="topic">
+              <strong>Definición:</strong> qué es un modelo de negocio.
+            </div>
+
+            <div class="topic">
+              Diferencias entre <strong>modelo, plan y estrategia</strong>.
+            </div>
+
+            <div class="topic">
+              Relación entre segmentos, propuesta de valor, canales e ingresos.
+            </div>
+
+            <div class="topic">
+              Detección de incoherencias estructurales que frenan el crecimiento.
+            </div>
+
+            <div class="topic">
+              Introducción a GEO y SEO para validar el encaje entre cliente,
+              canal y propuesta.
+            </div>
+          </div>
+        </article>
+
+        <article class="content-block">
+          <div class="block-top">
+            <span class="block-number">BLOQUE 02</span>
+            <span class="block-tag tag-blue">Operación</span>
+          </div>
+
+          <h3>Operación, recursos y costos</h3>
+
+          <p>
+            Analizar qué necesita la empresa para entregar su propuesta y dónde
+            aparecen restricciones estructurales.
+          </p>
+
+          <div class="topic-list">
+            <div class="topic">
+              Recursos clave necesarios para sostener la propuesta.
+            </div>
+
+            <div class="topic">
+              Actividades clave y su impacto en la operación.
+            </div>
+
+            <div class="topic">
+              Socios clave y su aporte estratégico.
+            </div>
+
+            <div class="topic">
+              Coherencia entre la estructura de costos y el valor entregado.
+            </div>
+
+            <div class="topic">
+              Identificación de cuellos de botella estructurales.
+            </div>
+          </div>
+        </article>
+
+        <article class="content-block">
+          <div class="block-top">
+            <span class="block-number">BLOQUE 03</span>
+            <span class="block-tag tag-green">Ejecución</span>
+          </div>
+
+          <h3>Métricas, priorización e IA para KPIs</h3>
+
+          <p>
+            Traducir el modelo en un flujo operativo y en un sistema de
+            seguimiento que permita decidir y mejorar.
+          </p>
+
+          <div class="topic-list">
+            <div class="topic">
+              Cómo el modelo define aquello que debe medirse.
+            </div>
+
+            <div class="topic">
+              Diseño del modelo operativo y del flujo del negocio.
+            </div>
+
+            <div class="topic">
+              Identificación de KPIs estratégicos.
+            </div>
+
+            <div class="topic">
+              Herramientas de IA para evaluar y automatizar KPIs.
+            </div>
+
+            <div class="topic">
+              Conversión del modelo en prioridades trimestrales.
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="strategic-map">
+        <article class="panel map-panel">
+          <h3>Relación estratégica del modelo</h3>
+
+          <p>
+            La coherencia aparece cuando cada componente responde al anterior y
+            puede sostener al siguiente.
+          </p>
+
+          <div class="model-flow">
+            <div class="model-node">
+              <div class="node-label">Componente 01</div>
+              <strong>Segmentos de clientes</strong>
+            </div>
+
+            <div class="model-node">
+              <div class="node-label">Componente 02</div>
+              <strong>Propuesta de valor</strong>
+            </div>
+
+            <div class="model-node">
+              <div class="node-label">Componente 03</div>
+              <strong>Canales</strong>
+            </div>
+
+            <div class="model-node">
+              <div class="node-label">Componente 04</div>
+              <strong>Flujos de ingresos</strong>
+            </div>
+          </div>
+        </article>
+
+        <aside class="panel validation-panel">
+          <h3>Validación digital</h3>
+
+          <p>
+            GEO y SEO se incorporan como parte del análisis del encaje entre el
+            cliente, el canal utilizado y la propuesta ofrecida.
+          </p>
+
+          <div class="validation-pair">
+            <div class="validation-box">
+              <strong>GEO</strong>
+              <span>Visibilidad y validación</span>
+            </div>
+
+            <div class="validation-box">
+              <strong>SEO</strong>
+              <span>Visibilidad y validación</span>
+            </div>
+          </div>
+
+          <div class="validation-note">
+            El propósito no es medir por medir, sino utilizar la información
+            digital para contrastar hipótesis estratégicas del modelo.
+          </div>
+        </aside>
+      </div>
+
+      <div class="outcome-strip">
+        <div class="outcome">
+          <div class="outcome-icon">✓</div>
+          <h4>Modelo diagnosticado</h4>
+          <p>Brechas e incoherencias visibles.</p>
+        </div>
+
+        <div class="outcome">
+          <div class="outcome-icon">✓</div>
+          <h4>Operación conectada</h4>
+          <p>Recursos y actividades alineados.</p>
+        </div>
+
+        <div class="outcome">
+          <div class="outcome-icon">✓</div>
+          <h4>Indicadores definidos</h4>
+          <p>KPIs derivados del modelo.</p>
+        </div>
+
+        <div class="outcome">
+          <div class="outcome-icon">✓</div>
+          <h4>Prioridades establecidas</h4>
+          <p>Acciones traducidas al trimestre.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="metodologia">
+      <div class="section-heading">
+        <div>
+          <span class="section-number">04 · EXPERIENCIA DE APRENDIZAJE</span>
+          <h2 class="section-title">Metodología y dinámica del curso</h2>
+        </div>
+
+        <p class="section-description">
+          La propuesta combina participación, análisis aplicado y prácticas
+          grupales para llevar los conceptos a situaciones empresariales.
+        </p>
+      </div>
+
+      <div class="method-layout">
+        <article class="panel method-panel">
+          <h3>Distribución del trabajo</h3>
+
+          <div class="hours">
+            <div class="hour-card">
+              <strong>6 horas</strong>
+              <span>Formación y participación durante las clases.</span>
+            </div>
+
+            <div class="hour-card">
+              <strong>1 hora</strong>
+              <span>Prácticas relacionadas con el módulo fuera de clase.</span>
+            </div>
+          </div>
+
+          <div class="activity-timeline">
+            <div class="activity">
+              <div class="activity-marker">01</div>
+
+              <div>
+                <h4>Participación en clase</h4>
+                <p>
+                  Interacción activa durante el desarrollo de los conceptos y
+                  ejercicios.
+                </p>
+              </div>
+            </div>
+
+            <div class="activity">
+              <div class="activity-marker">02</div>
+
+              <div>
+                <h4>Prácticas grupales</h4>
+                <p>
+                  Aplicación colaborativa de los contenidos principales del
+                  módulo.
+                </p>
+              </div>
+            </div>
+
+            <div class="activity">
+              <div class="activity-marker">03</div>
+
+              <div>
+                <h4>Trabajo autónomo</h4>
+                <p>
+                  Desarrollo de actividades prácticas adicionales fuera de las
+                  horas de clase.
+                </p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <aside class="logistics">
+          <article class="logistics-card">
+            <h3>Aula Virtual</h3>
+
+            <p>
+              Es el principal medio de comunicación y la plataforma utilizada
+              para entregar trabajos y tareas del curso.
+            </p>
+          </article>
+
+          <article class="logistics-card">
+            <h3>Requisitos técnicos</h3>
+
+            <div class="requirements">
+              <div class="requirement">
+                <span class="requirement-icon">▣</span>
+                <span>Laptop</span>
+              </div>
+
+              <div class="requirement">
+                <span class="requirement-icon">⌁</span>
+                <span>Conexión a internet</span>
+              </div>
+
+              <div class="requirement">
+                <span class="requirement-icon">◉</span>
+                <span>Cuenta de Zoom</span>
+              </div>
+            </div>
+          </article>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="evaluacion">
+      <div class="section-heading">
+        <div>
+          <span class="section-number">05 · EVALUACIÓN</span>
+          <h2 class="section-title">Cómo se distribuye la calificación</h2>
+        </div>
+
+        <p class="section-description">
+          La evaluación equilibra la participación durante el proceso, el
+          dominio conceptual y la aplicación mediante prácticas.
+        </p>
+      </div>
+
+      <div class="evaluation-layout">
+        <article class="panel evaluation-visual">
+          <div class="donut" aria-label="Evaluación total del módulo: 100%">
+            <div class="donut-content">
+              <strong>100%</strong>
+              <span>Evaluación total</span>
+            </div>
+          </div>
+
+          <p>
+            Dos componentes concentran el 80% de la evaluación: participación
+            en clase y examen del módulo.
+          </p>
+        </article>
+
+        <div class="evaluation-cards">
+          <article class="evaluation-card">
+            <div class="percentage percentage-purple">40%</div>
+
+            <div>
+              <h3>Asistencia y participación en clase</h3>
+              <p>
+                Considera la presencia y la participación activa durante las
+                actividades del módulo.
+              </p>
+            </div>
+          </article>
+
+          <article class="evaluation-card">
+            <div class="percentage percentage-blue">40%</div>
+
+            <div>
+              <h3>Examen del módulo</h3>
+              <p>
+                Evalúa la comprensión de los contenidos estratégicos,
+                operativos y de medición.
+              </p>
+            </div>
+          </article>
+
+          <article class="evaluation-card">
+            <div class="percentage percentage-green">20%</div>
+
+            <div>
+              <h3>Entrega de prácticas</h3>
+              <p>
+                Valora el desarrollo y presentación de las actividades
+                prácticas asignadas.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing">
+      <div class="closing-grid">
+        <div>
+          <div class="closing-label">Resultado esperado del módulo</div>
+
+          <h2>
+            Del modelo implícito a un sistema estratégico, operativo y medible
+          </h2>
+
+          <p>
+            El participante podrá conectar la propuesta de valor con los
+            clientes, canales, recursos, costos, actividades, ingresos,
+            indicadores y prioridades de ejecución.
+          </p>
+        </div>
+
+        <div class="closing-points">
+          <div class="closing-point">
+            <span>01</span>
+            <span>Comprender y mapear el modelo actual.</span>
+          </div>
+
+          <div class="closing-point">
+            <span>02</span>
+            <span>Detectar brechas y optimizar su coherencia.</span>
+          </div>
+
+          <div class="closing-point">
+            <span>03</span>
+            <span>Traducirlo en operación, KPIs y prioridades.</span>
+          </div>
+
+          <div class="closing-point">
+            <span>04</span>
+            <span>Apoyar el análisis con inteligencia artificial.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>Módulo 2 · Dirección Estratégica del Modelo de Negocio</span>
+      <span>Material formativo para MIPYMEs</span>
+    </footer>
+
+  </main>
+</body>
+</html>
